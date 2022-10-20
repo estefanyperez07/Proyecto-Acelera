@@ -18,7 +18,7 @@ var ArticuloModel = require('../models/articulo-model'),
 		else
 		{
 			let locals = {
-				title : 'Lista de Articulos',
+				title : 'Lista de Películas',
 				data : rows
 			}
 			res.status(200).send(rows.rows)
@@ -46,7 +46,7 @@ ArticuloController.getOne = (req, res, next) => {
 		else
 		{
 			let locals = {
-				title : 'Editar Articulo',
+				title : 'Editar Película',
 				data : rows
 			}
 			res.status(200).send(rows.rows)

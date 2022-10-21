@@ -6,6 +6,8 @@ var CategoriaController = require("../controllers/categoria-controller"),
   ArticuloController = require("../controllers/articulo-controller"),
   CentroCostoController = require("../controllers/centro_costo-controller"),
   CorrelativoController = require("../controllers/correlativo-controller"),
+  MetodoPagoController = require("../controllers/metodo_pago-controller"),
+  ModoPedidoController = require("../controllers/modo_pedido-controller"),
   express = require("express"),
   router = express.Router();
 
@@ -35,13 +37,23 @@ router
   //****CENTRO COSTO****
   .get("/centro_costo/getall", CentroCostoController.getAll)
   .get("/centro_costo/getone/:id_centro_costo", CentroCostoController.getOne)
-  .put("/centro_costo/actualizar_insertar/:id_centro_costo", CentroCostoController.save)
+  .put("/centro_costo/actualizar-insertar/:id_centro_costo", CentroCostoController.save)
   .delete("/centro_costo/eliminar/:id_centro_costo", CentroCostoController.delete)
   //****CORRELATIVO****
   .get("/correlativo/getall", CorrelativoController.getAll)
   .get("/correlativo/getone/:id_correlativo", CorrelativoController.getOne)
   .put("/correlativo/actualizar-insertar/:id_correlativo", CorrelativoController.save)
   .delete("/correlativo/eliminar/:id_correlativo", CorrelativoController.delete)
+  //****METODO PAGO****
+  .get("/metodo_pago/getall", MetodoPagoController.getAll)
+  .get("/metodo_pago/getone/:id_metodo_pago", MetodoPagoController.getOne)
+  .put("/metodo_pago/actualizar-insertar/:id_metodo_pago", MetodoPagoController.save)
+  .delete("/metodo_pago/eliminar/:id_metodo_pago", MetodoPagoController.delete)
+  //****MODO PEDIDO****
+  .get("/modo_pedido/getall", ModoPedidoController.getAll)
+  .get("/modo_pedido/getone/:id_modo_pedido", ModoPedidoController.getOne)
+  .put("/modo_pedido/actualizar-insertar/:id_modo_pedido", ModoPedidoController.save)
+  .delete("/modo_pedido/eliminar/:id_modo_pedido", ModoPedidoController.delete)
   .use(CategoriaController.error404);
 
 module.exports = router;

@@ -10,6 +10,7 @@ var express = require('express'),
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
 	port = (process.env.PORT || 3001),
+    	cors = require('cors'),
 	app = express()
 
 app

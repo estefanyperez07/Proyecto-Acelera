@@ -26,6 +26,7 @@ app
 	.use( morgan('dev') )
 	.use(publicDir)
 	.use(routes)
+	.use(cors())
 	
 
 module.exports = app

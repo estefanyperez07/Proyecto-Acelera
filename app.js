@@ -6,18 +6,18 @@ var express = require('express'),
 	morgan = require('morgan'),
 	restFul = require('express-method-override')('_method'),
 	routes = require('./routes/router'),
+    	cors = require('cors'),
 	faviconURL = `${__dirname}/public/img/node-favicon.png`,
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
 	port = (process.env.PORT || 3001),
-    	cors = require('cors'),
-	app = express()
+    	app = express()
 
 app
 	.set('views', viewDir)
 	.set('view engine', 'jade')
 	.set('port', port)
-
+	.use(cors())
 	.use( favicon(faviconURL) )
 	// parse application/json
 	.use( bodyParser.json() )
@@ -27,7 +27,7 @@ app
 	.use( morgan('dev') )
 	.use(publicDir)
 	.use(routes)
-	.use(cors())
+	
 	
 
 module.exports = app

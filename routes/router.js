@@ -12,6 +12,7 @@ var CategoriaController = require("../controllers/categoria-controller"),
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
+  PreguntasController = require("../controllers/modulo_seguridad/preguntas-controller"),
   
   express = require("express"),
   router = express.Router();
@@ -71,7 +72,12 @@ router
   .get("/ms_estado/getone/:id", EstadoController.getOne)
   .put("/ms_estado/actualizar-insertar/:id", EstadoController.save)
   .delete("/ms_estado/eliminar/:id", EstadoController.delete)
- 
+  //Preguntas
+  .get("/ms_pregunta/getall", PreguntasController.getAll)
+  .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
+  .put("/ms_pregunta/actualizar-insertar/:id_pregunta", PreguntasController.save)
+  .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
+
   .use(CategoriaController.error404);
  
 module.exports = router;

@@ -21,8 +21,9 @@ UsuarioModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "SELECT seguridad.ft_actualizar_usuario($1,$2,$3,$4,$5,$6)",
+              "SELECT seguridad.ft_actualizar_usuario($1,$2,$3,$4,$5,$6,$7)",
               [
+                data.id_usuario,
                 data.nombre_usuario,
                 data.estado_usuario,
                 data.id_rol,

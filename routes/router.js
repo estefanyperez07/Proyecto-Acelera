@@ -8,6 +8,7 @@ var CategoriaController = require("../controllers/categoria-controller"),
   CorrelativoController = require("../controllers/correlativo-controller"),
   MetodoPagoController = require("../controllers/metodo_pago-controller"),
   ModoPedidoController = require("../controllers/modo_pedido-controller"),
+  UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   express = require("express"),
   router = express.Router();
 
@@ -54,6 +55,15 @@ router
   .get("/modo_pedido/getone/:id_modo_pedido", ModoPedidoController.getOne)
   .put("/modo_pedido/actualizar-insertar/:id_modo_pedido", ModoPedidoController.save)
   .delete("/modo_pedido/eliminar/:id_modo_pedido", ModoPedidoController.delete)
+   //Seguridad_Registro
+   .get("/ms_registro/getall", UsuarioController.getAll)
+   .get("/ms_registro/getone/:id_usuario", UsuarioController.getOne)
+   .put("/ms_registro/actualizar-insertar/:id_usuario", UsuarioController.save)
+   .delete("/ms_registro/eliminar/:id_usuario", UsuarioController.delete)
+
+
+
   .use(CategoriaController.error404);
+ 
 
 module.exports = router;

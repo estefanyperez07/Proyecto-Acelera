@@ -16,6 +16,7 @@ var CategoriaController = require("../controllers/categoria-controller"),
   PreguntasUsuarioController = require("../controllers/modulo_seguridad/preg_usuario-controller"),
   RolController = require("../controllers/modulo_seguridad/rol-controller"),
   PermisosController = require("../controllers/modulo_seguridad/permisos-controller"),
+  ObjetoController = require("../controllers/modulo_seguridad/objeto-controller"),
   
   express = require("express"),
   router = express.Router();
@@ -95,6 +96,11 @@ router
   .get("/ms_permisos/getone/:id_permiso", PermisosController.getOne)
   .put("/ms_permisos/actualizar-insertar/:id_permiso", PermisosController.save)
   .delete("/ms_permisos/eliminar/:id_permiso", PermisosController.delete)  
+  //Objetos
+  .get("/ms_objetos/getall", ObjetoController.getAll)
+  .get("/ms_objetos/getone/:id_objeto", ObjetoController.getOne)
+  .put("/ms_objetos/actualizar-insertar/:id_objeto", ObjetoController.save)
+  .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)  
 
   .use(CategoriaController.error404);
  

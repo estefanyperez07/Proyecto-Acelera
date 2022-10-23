@@ -13,6 +13,7 @@ var CategoriaController = require("../controllers/categoria-controller"),
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
   PreguntasController = require("../controllers/modulo_seguridad/preguntas-controller"),
+  PreguntasUsuarioController = require("../controllers/modulo_seguridad/preg_usuario-controller"),
   RolController = require("../controllers/modulo_seguridad/rol-controller"),
   PermisosController = require("../controllers/modulo_seguridad/permisos-controller"),
   
@@ -79,16 +80,22 @@ router
   .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
   .put("/ms_pregunta/actualizar-insertar/:id_pregunta", PreguntasController.save)
   .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
+  //Preguntas Usuario
+  .get("/ms_pregunta_usuario/getall", PreguntasUsuarioController.getAll)
+  .get("/ms_pregunta_usuario/getone/:id_preguntas_usuario", PreguntasUsuarioController.getOne)
+  .put("/ms_pregunta_usuario/actualizar-insertar/:id_preguntas_usuario", PreguntasUsuarioController.save)
+  .delete("/ms_pregunta_usuario/eliminar/:id_preguntas_usuario", PreguntasUsuarioController.delete)
   //Rol
   .get("/ms_rol/getall", RolController.getAll)
   .get("/ms_rol/getone/:id_rol", RolController.getOne)
   .put("/ms_rol/actualizar-insertar/:id_rol", RolController.save)
   .delete("/ms_rol/eliminar/:id_rol", RolController.delete)  
-   //Permisos
-   .get("/ms_permisos/getall", PermisosController.getAll)
-   .get("/ms_permisos/getone/:id_permiso", PermisosController.getOne)
-   .put("/ms_permisos/actualizar-insertar/:id_permiso", PermisosController.save)
-   .delete("/ms_permisos/eliminar/:id_permiso", PermisosController.delete)  
+  //Permisos
+  .get("/ms_permisos/getall", PermisosController.getAll)
+  .get("/ms_permisos/getone/:id_permiso", PermisosController.getOne)
+  .put("/ms_permisos/actualizar-insertar/:id_permiso", PermisosController.save)
+  .delete("/ms_permisos/eliminar/:id_permiso", PermisosController.delete)  
+
   .use(CategoriaController.error404);
  
 module.exports = router;

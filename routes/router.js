@@ -14,7 +14,7 @@ var CategoriaController = require("../controllers/categoria-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
   PreguntasController = require("../controllers/modulo_seguridad/preguntas-controller"),
   RolController = require("../controllers/modulo_seguridad/rol-controller"),
-
+  PermisosController = require("../controllers/modulo_seguridad/permisos-controller"),
   
   express = require("express"),
   router = express.Router();
@@ -84,7 +84,11 @@ router
   .get("/ms_rol/getone/:id_rol", RolController.getOne)
   .put("/ms_rol/actualizar-insertar/:id_rol", RolController.save)
   .delete("/ms_rol/eliminar/:id_rol", RolController.delete)  
- 
+   //Permisos
+   .get("/ms_permisos/getall", PermisosController.getAll)
+   .get("/ms_permisos/getone/:id_permiso", PermisosController.getOne)
+   .put("/ms_permisos/actualizar-insertar/:id_permiso", PermisosController.save)
+   .delete("/ms_permisos/eliminar/:id_permiso", PermisosController.delete)  
   .use(CategoriaController.error404);
  
 module.exports = router;

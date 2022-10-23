@@ -32,9 +32,8 @@ EstadoModel.save = (data, cb) => {
               cb
             )
           : conn.query(
-            "SELECT seguridad.sp_insert_estado_usuario($1,$2)",
+            "SELECT seguridad.sp_insert_estado_usuario($1)",
               [
-                data.id,
                 data.descripcion
               ],
               cb

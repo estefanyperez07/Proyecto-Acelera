@@ -27,15 +27,15 @@ var PreguntasUsuarioModel = require('../../models/modulo_seguridad/preg_usuario-
 }
 
 PreguntasUsuarioController.getOne = (req, res, next) => {
-	let  id_preguntas_usuario = req.params. id_preguntas_usuario
-	console.log( id_preguntas_usuario)
+	let  id_preguntas_usuario = req.params.id_preguntas_usuario
+	console.log(id_preguntas_usuario)
 
-	PreguntasUsuarioModel.getOne( id_preguntas_usuario, (err, rows) => {
+	PreguntasUsuarioModel.getOne(id_preguntas_usuario, (err, rows) => {
 		console.log(err, '---', rows)
 		if(err)
 		{
 			let locals = {
-				title : `Error al buscar el registro con el id: ${ id_preguntas_usuario}`,
+				title : `Error al buscar el registro con el id: ${id_preguntas_usuario}`,
 				description : "Error de Sintaxis SQL",
 				error : err
 			}
@@ -56,7 +56,7 @@ PreguntasUsuarioController.getOne = (req, res, next) => {
 
 PreguntasUsuarioController.save = (req, res, next) => {
 	let pregunta_usuario = {
-         id_preguntas_usuario : req.body. id_preguntas_usuario,
+         id_preguntas_usuario : req.body.id_preguntas_usuario,
          id_usuario : req.body.id_usuario,
 		 id_pregunta : req.body.id_pregunta,
 		 respuesta : req.body.respuesta
@@ -69,7 +69,7 @@ PreguntasUsuarioController.save = (req, res, next) => {
 		if(err)
 		{
 			let locals = {
-				title : `Error al salvar el registro con el id: ${pregunta_usuario. id_preguntas_usuario}`,
+				title : `Error al salvar el registro con el id: ${pregunta_usuario.id_preguntas_usuario}`,
 				description : "Error de Sintaxis SQL",
 				error : err
 			}
@@ -85,15 +85,15 @@ PreguntasUsuarioController.save = (req, res, next) => {
 }
 
 PreguntasUsuarioController.delete = (req, res, next) => {
-	let  id_preguntas_usuario = req.params. id_preguntas_usuario
+	let id_preguntas_usuario = req.params.id_preguntas_usuario
 	console.log( id_preguntas_usuario)
 
-	PreguntasUsuarioModel.delete( id_preguntas_usuario, (err, rows) => {
+	PreguntasUsuarioModel.delete(id_preguntas_usuario, (err, rows) => {
 		console.log(err, '---', rows)
 		if(err)
 		{
 			let locals = {
-				title : `Error al eliminar el registro con el id: ${ id_preguntas_usuario}`,
+				title : `Error al eliminar el registro con el id: ${id_preguntas_usuario}`,
 				description : "Error de Sintaxis SQL",
 				error : err
 			}

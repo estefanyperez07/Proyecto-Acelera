@@ -1,17 +1,17 @@
 "use strict";
 
 var conn = require("../db-connection"),
-  UsuarioModel = () => {};
+  PreguntasUsuarioModel = () => {};
 
-UsuarioModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.tbl_ms_preguntas_usuario", cb);
+PreguntasUsuarioModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.tbl_ms_preguntas_usuario", cb);
 
-UsuarioModel.getOne = (id, cb) =>
+PreguntasUsuarioModel.getOne = (id, cb) =>
   conn.query("SELECT * FROM seguridad.tbl_ms_preguntas_usuario WHERE id_preguntas_usuario = $1", [id], cb);
 
-UsuarioModel.save = (data, cb) => {
+PreguntasUsuarioModel.save = (data, cb) => {
   conn.query(
     "SELECT * FROM seguridad.tbl_ms_preguntas_usuario WHERE id_preguntas_usuario = $1",
-    [data. id_preguntas_usuario],
+    [data.id_preguntas_usuario],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
@@ -41,7 +41,7 @@ UsuarioModel.save = (data, cb) => {
   );
 };
 
-UsuarioModel.delete = (id, cb) =>
+PreguntasUsuarioModel.delete = (id, cb) =>
   conn.query("SELECT seguridad.d_delete_preguntas_usuario($1)", [id], cb);
 
-module.exports = UsuarioModel;
+module.exports = PreguntasUsuarioModel;

@@ -13,6 +13,7 @@ var CategoriaController = require("../controllers/categoria-controller"),
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
   PreguntasController = require("../controllers/modulo_seguridad/preguntas-controller"),
+  PreguntasUsuarioController = require("../controllers/modulo_seguridad/preg_usuario-controller"),
   
   express = require("express"),
   router = express.Router();

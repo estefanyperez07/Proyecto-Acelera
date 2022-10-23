@@ -12,7 +12,9 @@ var CategoriaController = require("../controllers/categoria-controller"),
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
+  PreguntasController = require("../controllers/modulo_seguridad/preguntas-controller"),
   RolController = require("../controllers/modulo_seguridad/rol-controller"),
+
   
   express = require("express"),
   router = express.Router();
@@ -72,12 +74,17 @@ router
   .get("/ms_estado/getone/:id", EstadoController.getOne)
   .put("/ms_estado/actualizar-insertar/:id", EstadoController.save)
   .delete("/ms_estado/eliminar/:id", EstadoController.delete)
-   //Rol
-   .get("/ms_rol/getall", RolController.getAll)
-   .get("/ms_rol/getone/:id_rol", RolController.getOne)
-   .put("/ms_rol/actualizar-insertar/:id_rol", RolController.save)
-   .delete("/ms_rol/eliminar/:id_rol", RolController.delete)
-
+  //Preguntas
+  .get("/ms_pregunta/getall", PreguntasController.getAll)
+  .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
+  .put("/ms_pregunta/actualizar-insertar/:id_pregunta", PreguntasController.save)
+  .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
+  //Rol
+  .get("/ms_rol/getall", RolController.getAll)
+  .get("/ms_rol/getone/:id_rol", RolController.getOne)
+  .put("/ms_rol/actualizar-insertar/:id_rol", RolController.save)
+  .delete("/ms_rol/eliminar/:id_rol", RolController.delete)  
+ 
   .use(CategoriaController.error404);
  
 module.exports = router;

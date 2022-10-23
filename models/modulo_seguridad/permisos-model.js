@@ -38,6 +38,7 @@ PermisosModel.save = (data, cb) => {
           : conn.query(
             "SELECT seguridad.sp_insert_permisos($1,$2,$3,$4,$5,$6,$7)",
               [
+                
                 data.permiso_insercion,
                 data.permiso_eliminacion,
                 data.permiso_actualizacion,

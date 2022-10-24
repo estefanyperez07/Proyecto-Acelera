@@ -63,13 +63,6 @@ UsuarioModel.autoregistro = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "SELECT seguridad.()",
-              [
-                
-              ],
-              cb
-            )
-          : conn.query(
             "SELECT seguridad.sp_insert_autoregistro($1,$2,$3)",
               [
                 data.nombre_usuario,
@@ -78,6 +71,14 @@ UsuarioModel.autoregistro = (data, cb) => {
                 
               ],
               cb
+            )
+          : 
+              conn.query(
+                "SELECT seguridad.()",
+                [
+                  
+                ],
+                cb
             );
       }
     }

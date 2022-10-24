@@ -71,15 +71,15 @@ UsuarioModel.autoregistro = (data, cb) => {
             )
           : 
               
-                conn.query(
-                  "SELECT seguridad.ft_insert_autoregistro($1,$2,$3)",
-                    [
-                      data.nombre_usuario,
-                      data.correo_electronico,
-                      data.contrasena,
+            conn.query(
+              "SELECT seguridad.ft_insert_autoregistro($1,$2,$3)",
+                [
+                data.nombre_usuario,
+                data.correo_electronico,
+                data.contrasena,
                       
-                    ],
-                    cb
+                ],
+                cb
             );
       }
     }

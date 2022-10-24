@@ -29,7 +29,7 @@ LoginModel.login = (data, cb) => {
             conn.query(
               "SELECT seguridad.ft_login($1,$2)",
                 [
-                data.user,
+                data.usuario,
                 data.pass,
                       
                 ],

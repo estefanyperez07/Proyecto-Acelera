@@ -69,11 +69,11 @@ router
   
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login
-  //.get("/ms_login/login", LoginController.login)
-  //.get("/ms_login/getone/:id_usuario", LoginController.getOne)
-  //.post("/ms_login/login", LoginController.login)
-  //.post("/ms_login/getone/:id_usuario", LoginController.getOne)
-  .get("/ms_login/login", function(req, res){
+  .get("/ms_login/login", LoginController.login)
+  .get("/ms_login/getone/:id_usuario", LoginController.getOne)
+  .post("/ms_login/login", LoginController.login)
+  .post("/ms_login/getone/:id_usuario", LoginController.getOne)
+  /*.get("/ms_login/login", function(req, res){
     LoginController.login
    })
   .get("/ms_login/getone/:id_usuario", function(req, res){
@@ -84,7 +84,7 @@ router
    })
   .post("/ms_login/getone/:id_usuario", function(req, res){
     LoginController.getOne
-   })
+   })*/
   //Registro
   .get("/ms_registro/getall", UsuarioController.getAll)
   .get("/ms_registro/getone/:id_usuario", UsuarioController.getOne)

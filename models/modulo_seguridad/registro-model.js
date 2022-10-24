@@ -37,11 +37,11 @@ UsuarioModel.save = (data, cb) => {
             "SELECT seguridad.sp_insert_usuario($1,$2,$3,$4,$5,$6)",
               [
                 data.nombre_usuario,
-                data.estado_usuario,
+                data.estado_usuario,    //Por default 1
                 data.contrasena,
-                data.id_rol,
+                data.id_rol,            //Por default 6
                 data.correo_electronico,
-                data.creado_por
+                data.creado_por         //Por default "nombre_usuario"
               ],
               cb
             );

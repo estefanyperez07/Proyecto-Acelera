@@ -74,8 +74,8 @@ router
   //Registro
   .get("/ms_registro/getall", UsuarioController.getAll)
   .get("/ms_registro/getone/:id_usuario", UsuarioController.getOne)
-  .put("/ms_registro/actualizar-insertar/:id_usuario", UsuarioController.save)
-  .delete("/ms_registro/eliminar/:id_usuario", UsuarioController.delete)
+  .post("/ms_registro/actualizar-insertar", UsuarioController.save)
+  //.delete("/ms_registro/eliminar/:id_usuario", UsuarioController.delete)
   //Estado
   .get("/ms_estado/getall", EstadoController.getAll)
   .get("/ms_estado/getone/:id", EstadoController.getOne)

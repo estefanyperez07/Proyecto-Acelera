@@ -52,8 +52,8 @@ UsuarioModel.save = (data, cb) => {
 
 UsuarioModel.autoregistro = (data, cb) => {
   conn.query(
-    "SELECT * FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1",
-    [data.id_usuario],
+    "SELECT * FROM seguridad.tbl_ms_usuario WHERE nombre_usuario= $1",
+    [data.nombre_usuario],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
@@ -63,22 +63,23 @@ UsuarioModel.autoregistro = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-            "SELECT seguridad.sp_insert_autoregistro($1,$2,$3)",
-              [
-                data.nombre_usuario,
-                data.correo_electronico,
-                data.contrasena,
-                
-              ],
-              cb
+            "SELECT seguridad.()",
+            [
+              
+            ],
+            cb
             )
           : 
-              conn.query(
-                "SELECT seguridad.()",
-                [
-                  
-                ],
-                cb
+              
+                conn.query(
+                  "SELECT seguridad.ft_insert_autoregistro($1,$2,$3)",
+                    [
+                      data.nombre_usuario,
+                      data.correo_electronico,
+                      data.contrasena,
+                      
+                    ],
+                    cb
             );
       }
     }

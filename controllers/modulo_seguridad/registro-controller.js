@@ -96,6 +96,36 @@ UsuarioController.save = (req, res, next) => {
 	})
 }
 
+UsuarioController.autoregistro = (req, res, next) => {
+	let usuario = {
+        
+        nombre_usuario : req.body.nombre_usuario,
+        correo_electronico : req.body.correo_electronico,
+        contrasena : req.body.contrasena,
+        
+	}
+
+	console.log(usuario)
+
+	UsuarioModel.autoregistro(usuario, (err) => {
+		if(err)
+		{
+			let locals = {
+				title : `Error al salvar el registro con el id: ${usuario.id_usuario}`,
+				description : "Error de Sintaxis SQL",
+				error : err
+			}
+
+			res.render('error', locals)
+		}
+		else
+		{
+			res.send('Success')
+			//res.redirect('/')
+		}
+	})
+}
+
 UsuarioController.delete = (req, res, next) => {
 	let id_usuario = req.params.id_usuario
 	console.log(id_usuario)

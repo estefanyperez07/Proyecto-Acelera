@@ -50,6 +50,40 @@ UsuarioModel.save = (data, cb) => {
   );
 };
 
+UsuarioModel.autoregistro = (data, cb) => {
+  conn.query(
+    "SELECT * FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1",
+    [data.id_usuario],
+    (err, rows) => {
+      console.log(`Número de registros: ${rows.rows.length}`);
+      console.log(`Número de registros: ${err}`);
+
+      if (err) {
+        return err;
+      } else {
+        return rows.rows.length === 1
+          ? conn.query(
+              "SELECT seguridad.()",
+              [
+                
+              ],
+              cb
+            )
+          : conn.query(
+            "SELECT seguridad.sp_insert_autoregistro($1,$2,$3)",
+              [
+                data.nombre_usuario,
+                data.correo_electronico,
+                data.contrasena,
+                
+              ],
+              cb
+            );
+      }
+    }
+  );
+};
+
 UsuarioModel.delete = (id, cb) =>
   conn.query("SELECT seguridad.d_delete_usuario($1)", [id], cb);
 

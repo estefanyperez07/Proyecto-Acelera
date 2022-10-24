@@ -1,14 +1,43 @@
 
-const conn = require("../db-connection")
+var LoginModel = require('../../models/modulo_seguridad/registro-model'),
+LoginController = () => {}
 
-exports.login = async function(req, res, next) {
+LoginController.login = (req, res, next) => {
+	let usuario = {
+        
+        nombre_usuario : req.body.user,
+       
+        contrasena : req.body.pass,
+        
+	}
 
-  let esLoginCorrecto = await db.func("seguridad.ft_login", [req.body.usuario, req.body.pass]).catch(error => {
-    console.log(error)
-    res.send({msg:"Ocurrio un error al intentar registrar el usuario"})
-  })
-  
-  res.send(esLoginCorrecto)
+	console.log(usuario)
 
+	LoginModel.login(usuario, (err) => {
+		if(err)
+		{
+			let locals = {
+				title : `Error al salvar el registro con el id: ${usuario.id_usuario}`,
+				description : "Error de Sintaxis SQL",
+				error : err
+			}
+
+			res.render('error', locals)
+		}
+		else
+		{
+			res.send('Success')
+			//res.redirect('/')
+		}
+	})
 }
+
+module.exports = LoginController
+
+
+
+
+
+
+
 

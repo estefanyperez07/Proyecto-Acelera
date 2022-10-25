@@ -15,7 +15,6 @@ LoginController.getOne = (req, res, next) => {
 				description : "Error de Sintaxis SQL",
 				error : err
 			}
-			
 			res.render('error', locals)
 		}
 		else
@@ -32,16 +31,13 @@ LoginController.getOne = (req, res, next) => {
 
 LoginController.login = (req, res, next) => {
 	let usuario = {
-        
-        nombre_usuario : req.body.usuario,
-       
-        contrasena : req.body.pass,
-        
+        nombre_usuario : req.body.nombre_usuario, 
+        contrasena : req.body.contrasena,    
 	}
 
 	console.log(usuario)
 
-	LoginModel.login(usuario, (err) => {
+	LoginModel.login(usuario, (err,rows) => {
 		if(err)
 		{
 			let locals = {
@@ -51,10 +47,12 @@ LoginController.login = (req, res, next) => {
 			}
 
 			res.render('error', locals)
+
 		}
 		else
 		{
-			res.send('Success')
+			res.status(200).send(rows.rows)
+			//res.send('Success')
 			//res.redirect('/')
 		}
 	})

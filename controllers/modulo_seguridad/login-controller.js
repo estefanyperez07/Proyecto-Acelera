@@ -52,8 +52,7 @@ LoginController.login = (req, res, next) => {
 		else
 		{
 			res.status(200).send(rows.rows)
-			//res.send('Success')
-			//res.redirect('/')
+		
 		}
 	})
 }

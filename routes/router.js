@@ -1,5 +1,7 @@
 "use strict";
 
+const UnidadMedidaController = require("../controllers/unidad_medida-controller");
+
 var CategoriaController = require("../controllers/categoria-controller"),
   DescuentoController = require("../controllers/descuento-controller"),
   ImpuestoController = require("../controllers/impuesto-controller"),
@@ -8,6 +10,12 @@ var CategoriaController = require("../controllers/categoria-controller"),
   CorrelativoController = require("../controllers/correlativo-controller"),
   MetodoPagoController = require("../controllers/metodo_pago-controller"),
   ModoPedidoController = require("../controllers/modo_pedido-controller"),
+  PosController = require("../controllers/pos-controller"),
+  PromoListaController = require("../controllers/promo_lista-controller"),
+  PromoController = require("../controllers/promo-controller"),
+  SocioNegocioController = require("../controllers/socio_negocio-controller"),
+  SucursalController = require("../controllers/sucursal-controller"),
+  UnidadMedida = require("../controllers/unidad_medida-controller"),
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
@@ -66,7 +74,38 @@ router
   .get("/modo_pedido/getone/:id_modo_pedido", ModoPedidoController.getOne)
   .put("/modo_pedido/actualizar-insertar/:id_modo_pedido", ModoPedidoController.save)
   .delete("/modo_pedido/eliminar/:id_modo_pedido", ModoPedidoController.delete)
-  
+  //****POS****
+  .get("/pos/getall", PosController.getAll)
+  .get("/pos/getone/:id_pos", PosController.getOne)
+  .put("/pos/actualizar-insertar/:id_pos", PosController.save)
+  .delete("/pos/eliminar/:id_pos", PosController.delete)
+  //****PROMO LISTA****
+  .get("/promo_lista/getall", PromoListaController.getAll)
+  .get("/promo_lista/getone/:id_promo", PromoListaController.getOne)
+  .put("/promo_lista/actualizar-insertar/:id_promo", PromoListaController.save)
+  .delete("/promo_lista/eliminar/:id_promo", PromoListaController.delete)
+  //****PROMO****
+  .get("/promo/getall", PromoController.getAll)
+  .get("/promo/getone", PromoController.getOne)
+  .put("/promo/actualizar-insertar/:id_promo", PromoController.save)
+  .delete("/promo/eliminar/:id_promo", PromoController.delete)
+  //****SOCIO NEGOCIO****
+  .get("/socio_negocio/getall", SocioNegocioController.getAll)
+  .get("/socio_negocio/getone/:id_socio_negocio", SocioNegocioController.getOne)
+  .put("/socio_negocio/actualizar-insertar/:id_socio_negocio", SocioNegocioController.save)
+  .delete("/socio_negocio/eliminar/:id_socio_negocio", SocioNegocioController.delete)
+  //****SUCURSAL****
+  .get("/sucursal/getall", SucursalController.getAll)
+  .get("/sucursal/getone/:id_sucursal", SucursalController.getOne)
+  .put("/sucursal/actualizar-insertar/:id_sucursal", SucursalController.save)
+  .delete("/sucursal/eliminar/:id_sucursal", SucursalController.delete)
+  //****UNIDAD MEDIDA****
+  .get("/unidad_medida/getall", UnidadMedidaController.getAll)
+  .get("/unidad_medida/getone/:id_unidad_medida", UnidadMedidaController.getOne)
+  .put("/unidad_medida/actualizar-insertar/:id_unidad_medida", UnidadMedidaController.save)
+  .delete("/unidad_medida/eliminar/:id_unidad_medida", UnidadMedidaController.delete)
+
+
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login
   .get("/ms_login/login", LoginController.login)

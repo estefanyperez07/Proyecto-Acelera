@@ -15,7 +15,9 @@ var CategoriaController = require("../controllers/categoria-controller"),
   PromoController = require("../controllers/promo-controller"),
   SocioNegocioController = require("../controllers/socio_negocio-controller"),
   SucursalController = require("../controllers/sucursal-controller"),
-  UnidadMedida = require("../controllers/unidad_medida-controller"),
+  UnidadMedidaController = require("../controllers/unidad_medida-controller"),
+  MapaController = require("../controllers/mapa-controller"),
+  MesaController = require("../controllers/mesa-controller"),
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
@@ -104,6 +106,16 @@ router
   .get("/unidad_medida/getone/:id_unidad_medida", UnidadMedidaController.getOne)
   .put("/unidad_medida/actualizar-insertar/:id_unidad_medida", UnidadMedidaController.save)
   .delete("/unidad_medida/eliminar/:id_unidad_medida", UnidadMedidaController.delete)
+  //****MAPA****
+  .get("/mapa/getall", MapaController.getAll)
+  .get("/mapa/getone/:id_mapa", MapaController.getOne)
+  .put("/mapa/actualizar-insertar/:id_mapa", MapaController.save)
+  .delete("/mapa/eliminar/:id_mapa", MapaController.delete)
+  //****MESA****
+  .get("/mesa/getall", MesaController.getAll)
+  .get("/mesa/getone/:id_mesa", MesaController.getOne)
+  .put("/mesa/actualizar-insertar/:id_mesa", MesaController.save)
+  .delete("/mesa/eliminar/:id_mesa", MesaController.delete)
 
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐

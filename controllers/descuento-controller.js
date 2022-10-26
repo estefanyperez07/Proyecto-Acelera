@@ -43,7 +43,7 @@ DescuentoController.getOne = (req, res, next) => {
         title: "Editar Película",
         data: rows,
       };
-      res.status(200).send(rows.rows);
+      res.status(200).send(rows.rows[0]);
       //res.render('edit-movie', locals)
     }
   });

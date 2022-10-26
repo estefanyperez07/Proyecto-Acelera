@@ -1,7 +1,5 @@
 "use strict";
 
-const UnidadMedidaController = require("../controllers/unidad_medida-controller");
-
 var CategoriaController = require("../controllers/categoria-controller"),
   DescuentoController = require("../controllers/descuento-controller"),
   ImpuestoController = require("../controllers/impuesto-controller"),
@@ -18,7 +16,6 @@ var CategoriaController = require("../controllers/categoria-controller"),
   UnidadMedidaController = require("../controllers/unidad_medida-controller"),
   MapaController = require("../controllers/mapa-controller"),
   MesaController = require("../controllers/mesa-controller"),
-
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
@@ -29,7 +26,6 @@ var CategoriaController = require("../controllers/categoria-controller"),
   ParametroController = require("../controllers/modulo_seguridad/parametros-controller"),
   ObjetoController = require("../controllers/modulo_seguridad/objeto-controller"),
   LoginController = require("../controllers/modulo_seguridad/login-controller"),
-  
   express = require("express"),
   router = express.Router();
 
@@ -59,22 +55,37 @@ router
   //****CENTRO COSTO****
   .get("/centro_costo/getall", CentroCostoController.getAll)
   .get("/centro_costo/getone/:id_centro_costo", CentroCostoController.getOne)
-  .put("/centro_costo/actualizar-insertar/:id_centro_costo", CentroCostoController.save)
-  .delete("/centro_costo/eliminar/:id_centro_costo", CentroCostoController.delete)
+  .put(
+    "/centro_costo/actualizar-insertar/:id_centro_costo",
+    CentroCostoController.save
+  )
+  .delete(
+    "/centro_costo/eliminar/:id_centro_costo",
+    CentroCostoController.delete
+  )
   //****CORRELATIVO****
   .get("/correlativo/getall", CorrelativoController.getAll)
   .get("/correlativo/getone/:id_correlativo", CorrelativoController.getOne)
-  .put("/correlativo/actualizar-insertar/:id_correlativo", CorrelativoController.save)
+  .put(
+    "/correlativo/actualizar-insertar/:id_correlativo",
+    CorrelativoController.save
+  )
   .delete("/correlativo/eliminar/:id_correlativo", CorrelativoController.delete)
   //****METODO PAGO****
   .get("/metodo_pago/getall", MetodoPagoController.getAll)
   .get("/metodo_pago/getone/:id_metodo_pago", MetodoPagoController.getOne)
-  .put("/metodo_pago/actualizar-insertar/:id_metodo_pago", MetodoPagoController.save)
+  .put(
+    "/metodo_pago/actualizar-insertar/:id_metodo_pago",
+    MetodoPagoController.save
+  )
   .delete("/metodo_pago/eliminar/:id_metodo_pago", MetodoPagoController.delete)
   //****MODO PEDIDO****
   .get("/modo_pedido/getall", ModoPedidoController.getAll)
   .get("/modo_pedido/getone/:id_modo_pedido", ModoPedidoController.getOne)
-  .put("/modo_pedido/actualizar-insertar/:id_modo_pedido", ModoPedidoController.save)
+  .put(
+    "/modo_pedido/actualizar-insertar/:id_modo_pedido",
+    ModoPedidoController.save
+  )
   .delete("/modo_pedido/eliminar/:id_modo_pedido", ModoPedidoController.delete)
   //****POS****
   .get("/pos/getall", PosController.getAll)
@@ -94,8 +105,14 @@ router
   //****SOCIO NEGOCIO****
   .get("/socio_negocio/getall", SocioNegocioController.getAll)
   .get("/socio_negocio/getone/:id_socio_negocio", SocioNegocioController.getOne)
-  .put("/socio_negocio/actualizar-insertar/:id_socio_negocio", SocioNegocioController.save)
-  .delete("/socio_negocio/eliminar/:id_socio_negocio", SocioNegocioController.delete)
+  .put(
+    "/socio_negocio/actualizar-insertar/:id_socio_negocio",
+    SocioNegocioController.save
+  )
+  .delete(
+    "/socio_negocio/eliminar/:id_socio_negocio",
+    SocioNegocioController.delete
+  )
   //****SUCURSAL****
   .get("/sucursal/getall", SucursalController.getAll)
   .get("/sucursal/getone/:id_sucursal", SucursalController.getOne)
@@ -104,8 +121,14 @@ router
   //****UNIDAD MEDIDA****
   .get("/unidad_medida/getall", UnidadMedidaController.getAll)
   .get("/unidad_medida/getone/:id_unidad_medida", UnidadMedidaController.getOne)
-  .put("/unidad_medida/actualizar-insertar/:id_unidad_medida", UnidadMedidaController.save)
-  .delete("/unidad_medida/eliminar/:id_unidad_medida", UnidadMedidaController.delete)
+  .put(
+    "/unidad_medida/actualizar-insertar/:id_unidad_medida",
+    UnidadMedidaController.save
+  )
+  .delete(
+    "/unidad_medida/eliminar/:id_unidad_medida",
+    UnidadMedidaController.delete
+  )
   //****MAPA****
   .get("/mapa/getall", MapaController.getAll)
   .get("/mapa/getone/:id_mapa", MapaController.getOne)
@@ -116,7 +139,6 @@ router
   .get("/mesa/getone/:id_mesa", MesaController.getOne)
   .put("/mesa/actualizar-insertar/:id_mesa", MesaController.save)
   .delete("/mesa/eliminar/:id_mesa", MesaController.delete)
-
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login
@@ -135,34 +157,49 @@ router
   //Preguntas
   .get("/ms_pregunta/getall", PreguntasController.getAll)
   .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
-  .put("/ms_pregunta/actualizar-insertar/:id_pregunta", PreguntasController.save)
+  .put(
+    "/ms_pregunta/actualizar-insertar/:id_pregunta",
+    PreguntasController.save
+  )
   .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
   //Preguntas Usuario
   .get("/ms_pregunta_usuario/getall", PreguntasUsuarioController.getAll)
-  .get("/ms_pregunta_usuario/getone/:id_preguntas_usuario", PreguntasUsuarioController.getOne)
-  .put("/ms_pregunta_usuario/actualizar-insertar/:id_preguntas_usuario", PreguntasUsuarioController.save)
-  .delete("/ms_pregunta_usuario/eliminar/:id_preguntas_usuario", PreguntasUsuarioController.delete)
+  .get(
+    "/ms_pregunta_usuario/getone/:id_preguntas_usuario",
+    PreguntasUsuarioController.getOne
+  )
+  .put(
+    "/ms_pregunta_usuario/actualizar-insertar/:id_preguntas_usuario",
+    PreguntasUsuarioController.save
+  )
+  .delete(
+    "/ms_pregunta_usuario/eliminar/:id_preguntas_usuario",
+    PreguntasUsuarioController.delete
+  )
   //Rol
   .get("/ms_rol/getall", RolController.getAll)
   .get("/ms_rol/getone/:id_rol", RolController.getOne)
   .put("/ms_rol/actualizar-insertar/:id_rol", RolController.save)
-  .delete("/ms_rol/eliminar/:id_rol", RolController.delete)  
+  .delete("/ms_rol/eliminar/:id_rol", RolController.delete)
   //Permisos
   .get("/ms_permisos/getall", PermisosController.getAll)
   .get("/ms_permisos/getone/:id_permiso", PermisosController.getOne)
   .put("/ms_permisos/actualizar-insertar/:id_permiso", PermisosController.save)
-  .delete("/ms_permisos/eliminar/:id_permiso", PermisosController.delete)  
+  .delete("/ms_permisos/eliminar/:id_permiso", PermisosController.delete)
   //Parámetros
   .get("/ms_parametros/getall", ParametroController.getAll)
   .get("/ms_parametros/getone/:id_parametro", ParametroController.getOne)
-  .put("/ms_parametros/actualizar-insertar/:id_parametro", ParametroController.save)
-  .delete("/ms_parametros/eliminar/:id_parametro", ParametroController.delete) 
+  .put(
+    "/ms_parametros/actualizar-insertar/:id_parametro",
+    ParametroController.save
+  )
+  .delete("/ms_parametros/eliminar/:id_parametro", ParametroController.delete)
   //Objetos
   .get("/ms_objetos/getall", ObjetoController.getAll)
   .get("/ms_objetos/getone/:id_objeto", ObjetoController.getOne)
   .put("/ms_objetos/actualizar-insertar/:id_objeto", ObjetoController.save)
-  .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)  
+  .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)
 
   .use(CategoriaController.error404);
- 
+
 module.exports = router;

@@ -6,12 +6,12 @@ var conn = require("./db-connection"),
 ArticuloModel.getAll = (cb) => conn.query("SELECT * FROM tbl_articulo", cb);
 
 ArticuloModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_articulo WHERE id_articulo = $1", [id], cb);
+  conn.query("SELECT * FROM tbl_articulo WHERE cod_articulo = $1", [id], cb);
 
 ArticuloModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM tbl_articulo WHERE id_articulo = $1",
-    [data.id_articulo],
+    "SELECT * FROM tbl_articulo WHERE cod_articulo = $1",
+    [data.cod_articulo],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
@@ -23,7 +23,7 @@ ArticuloModel.save = (data, cb) => {
           ? conn.query(
               "call prc_articulo_update ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)",
               [
-                data.id_articulo,
+                data.cod_articulo,
                 data.tipo,
                 data.descripcion,
                 data.descripcion_corta,
@@ -35,16 +35,16 @@ ArticuloModel.save = (data, cb) => {
                 data.id_unidad_compra,
                 data.codigo_barra,
                 data.id_unidad_medida,
+                data.activo,
                 data.modificado_por,
-                data.fecha_modificacion,
-                data.activo
+                data.fecha_modificacion
               ],
               cb
             )
           : conn.query(
               "call prc_articulo_insert ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)",
               [
-                data.id_articulo,
+                data.cod_articulo,
                 data.tipo,
                 data.descripcion,
                 data.descripcion_corta,
@@ -56,9 +56,9 @@ ArticuloModel.save = (data, cb) => {
                 data.id_unidad_compra,
                 data.codigo_barra,
                 data.id_unidad_medida,
+                data.activo,
                 data.creado_por,
-                data.fecha_creacion,
-                data.activo
+                data.fecha_creacion 
               ],
               cb
             );

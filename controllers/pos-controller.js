@@ -25,14 +25,14 @@ PosController.getAll = (req, res, next) => {
 };
 
 PosController.getOne = (req, res, next) => {
-  let id_pos = req.params.id_pos;
-  console.log(id_pos);
+  let cod_pos = req.params.cod_pos;
+  console.log(cod_pos);
 
-  PosModel.getOne(id_pos, (err, rows) => {
+  PosModel.getOne(cod_pos, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_pos}`,
+        title: `Error al buscar el registro con el id: ${cod_pos}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,15 +51,15 @@ PosController.getOne = (req, res, next) => {
 
 PosController.save = (req, res, next) => {
   let pos = {
-    id_categoria: req.body.id_categoria,
+    cod_categoria: req.body.cod_categoria,
     descripcion: req.body.descripcion,
     id_sucursal: req.body.id_sucursal,
     id_correlativo: req.body.id_correlativo,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(pos);
@@ -67,7 +67,7 @@ PosController.save = (req, res, next) => {
   PosModel.save(pos, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${pos.id_pos}`,
+        title: `Error al salvar el registro con el id: ${pos.cod_pos}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -81,14 +81,14 @@ PosController.save = (req, res, next) => {
 };
 
 PosController.delete = (req, res, next) => {
-  let id_pos = req.params.id_pos;
-  console.log(id_pos);
+  let cod_pos = req.params.cod_pos;
+  console.log(cod_pos);
 
-  PosModel.delete(id_pos, (err, rows) => {
+  PosModel.delete(cod_pos, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_pos}`,
+        title: `Error al eliminar el registro con el id: ${cod_pos}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

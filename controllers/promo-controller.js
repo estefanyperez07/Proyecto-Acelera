@@ -25,14 +25,14 @@ PromoController.getAll = (req, res, next) => {
 };
 
 PromoController.getOne = (req, res, next) => {
-  let id_promo = req.params.id_promo;
-  console.log(id_promo);
+  let cod_promo = req.params.cod_promo;
+  console.log(cod_promo);
 
-  PromoModel.getOne(id_promo, (err, rows) => {
+  PromoModel.getOne(cod_promo, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_promo}`,
+        title: `Error al buscar el registro con el id: ${cod_promo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,16 +51,16 @@ PromoController.getOne = (req, res, next) => {
 
 PromoController.save = (req, res, next) => {
   let promo = {
-    id_promo: req.body.id_promo,
+    cod_promo: req.body.cod_promo,
     desc_promo: req.body.desc_promo,
     precio: req.body.precio,
     id_categoria: req.body.id_categoria,
     valida_hasta: req.body.valida_hasta,
+    estado: req.body.estado,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    estado: req.body.estado,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(promo);
@@ -68,7 +68,7 @@ PromoController.save = (req, res, next) => {
   PromoModel.save(promo, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${promo.id_promo}`,
+        title: `Error al salvar el registro con el id: ${promo.cod_promo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -82,14 +82,14 @@ PromoController.save = (req, res, next) => {
 };
 
 PromoController.delete = (req, res, next) => {
-  let id_promo = req.params.id_promo;
-  console.log(id_promo);
+  let cod_promo = req.params.id_promo;
+  console.log(cod_promo);
 
-  PromoModel.delete(id_promo, (err, rows) => {
+  PromoModel.delete(cod_promo, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_promo}`,
+        title: `Error al eliminar el registro con el id: ${cod_promo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

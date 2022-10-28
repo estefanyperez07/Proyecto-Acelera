@@ -25,14 +25,14 @@ MapaController.getAll = (req, res, next) => {
 };
 
 MapaController.getOne = (req, res, next) => {
-  let id_mapa = req.params.id_mapa;
-  console.log(id_mapa);
+  let cod_mapa = req.params.cod_mapa;
+  console.log(cod_mapa);
 
-  MapaModel.getOne(id_mapa, (err, rows) => {
+  MapaModel.getOne(cod_mapa, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_mapa}`,
+        title: `Error al buscar el registro con el id: ${cod_mapa}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,15 +51,15 @@ MapaController.getOne = (req, res, next) => {
 
 MapaController.save = (req, res, next) => {
   let mapa = {
-    id_mapa: req.body.id_mapa,
+    cod_mapa: req.body.cod_mapa,
     descripcion: req.body.descripcion,
     res_x: req.body.res_x,
     res_y: req.body.res_y,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(mapa);
@@ -67,7 +67,7 @@ MapaController.save = (req, res, next) => {
   MapaModel.save(mapa, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${mapa.id_mapa}`,
+        title: `Error al salvar el registro con el id: ${mapa.cod_mapa}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -81,14 +81,14 @@ MapaController.save = (req, res, next) => {
 };
 
 MapaController.delete = (req, res, next) => {
-  let id_mapa = req.params.id_mapa;
-  console.log(id_mapa);
+  let cod_mapa = req.params.cod_mapa;
+  console.log(cod_mapa);
 
-  MapaModel.delete(id_mapa, (err, rows) => {
+  MapaModel.delete(cod_mapa, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_mapa}`,
+        title: `Error al eliminar el registro con el id: ${cod_mapa}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

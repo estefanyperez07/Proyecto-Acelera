@@ -6,12 +6,12 @@ var conn = require("./db-connection"),
 CentroCostoModel.getAll = (cb) => conn.query("SELECT * FROM tbl_centro_costo", cb);
 
 CentroCostoModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_centro_costo WHERE id_centro_costo = $1", [id], cb);
+  conn.query("SELECT * FROM tbl_centro_costo WHERE cod_centro_costo = $1", [id], cb);
 
 CentroCostoModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM tbl_centro_costo WHERE id_centro_costo = $1",
-    [data.id_centro_costo],
+    "SELECT * FROM tbl_centro_costo WHERE cod_centro_costo = $1",
+    [data.cod_centro_costo],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
@@ -23,22 +23,22 @@ CentroCostoModel.save = (data, cb) => {
           ? conn.query(
               "call prc_centro_costo_update ($1,$2,$3,$4,$5)",
               [
-                data.id_centro_costo,
+                data.cod_centro_costo,
 								data.descripcion,
+                data.activo,
 								data.modificado_por,
-								data.fecha_modificacion,
-								data.activo
+								data.fecha_modificacion
               ],
               cb
             )
           : conn.query(
               "call prc_centro_costo_insert ($1,$2,$3,$4,$5)",
               [
-                data.id_centro_costo,
+                data.cod_centro_costo,
 								data.descripcion,
+                data.activo,
 								data.creado_por,
-								data.fecha_creacion,
-								data.activo
+								data.fecha_creacion
               ],
               cb
             );

@@ -25,14 +25,14 @@ SocioNegocioController.getAll = (req, res, next) => {
 };
 
 SocioNegocioController.getOne = (req, res, next) => {
-  let id_socio_negocio = req.params.id_socio_negocio;
-  console.log(id_socio_negocio);
+  let cod_socio_negocio = req.params.cod_socio_negocio;
+  console.log(cod_socio_negocio);
 
-  SocioNegocioModel.getOne(id_socio_negocio, (err, rows) => {
+  SocioNegocioModel.getOne(cod_socio_negocio, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_socio_negocio}`,
+        title: `Error al buscar el registro con el id: ${cod_socio_negocio}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,7 +51,7 @@ SocioNegocioController.getOne = (req, res, next) => {
 
 SocioNegocioController.save = (req, res, next) => {
   let socio_negocio = {
-    id_socio_negocio: req.body.id_socio_negocio,
+    cod_socio_negocio: req.body.cod_socio_negocio,
     tipo: req.body.tipo,
     descripcion: req.body.descripcion,
     direccion: req.body.direccion,
@@ -61,11 +61,11 @@ SocioNegocioController.save = (req, res, next) => {
     rtn: req.body.rtn,
     balance: req.body.balance,
     cuenta_contable: req.body.cuenta_contable,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(socio_negocio);
@@ -73,7 +73,7 @@ SocioNegocioController.save = (req, res, next) => {
   SocioNegocioModel.save(socio_negocio, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${socio_negocio.id_socio_negocio}`,
+        title: `Error al salvar el registro con el id: ${socio_negocio.cod_socio_negocio}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -87,14 +87,14 @@ SocioNegocioController.save = (req, res, next) => {
 };
 
 SocioNegocioController.delete = (req, res, next) => {
-  let id_socio_negocio = req.params.id_socio_negocio;
-  console.log(id_socio_negocio);
+  let cod_socio_negocio = req.params.cod_socio_negocio;
+  console.log(cod_socio_negocio);
 
-  SocioNegocioModel.delete(id_socio_negocio, (err, rows) => {
+  SocioNegocioModel.delete(cod_socio_negocio, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_socio_negocio}`,
+        title: `Error al eliminar el registro con el id: ${cod_socio_negocio}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

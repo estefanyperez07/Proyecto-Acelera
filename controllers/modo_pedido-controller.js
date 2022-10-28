@@ -25,14 +25,14 @@ ModoPedidoController.getAll = (req, res, next) => {
 };
 
 ModoPedidoController.getOne = (req, res, next) => {
-  let id_modo_pedido = req.params.id_modo_pedido;
-  console.log(id_modo_pedido);
+  let cod_modo_pedido = req.params.cod_modo_pedido;
+  console.log(cod_modo_pedido);
 
-  ModoPedidoModel.getOne(id_modo_pedido, (err, rows) => {
+  ModoPedidoModel.getOne(cod_modo_pedido, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_modo_pedido}`,
+        title: `Error al buscar el registro con el id: ${cod_modo_pedido}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,13 +51,13 @@ ModoPedidoController.getOne = (req, res, next) => {
 
 ModoPedidoController.save = (req, res, next) => {
   let modo_pedido = {
-    id_modo_pedido: req.body.id_modo_pedido,
+    cod_modo_pedido: req.body.cod_modo_pedido,
     descripcion: req.body.descripcion,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(modo_pedido);
@@ -65,7 +65,7 @@ ModoPedidoController.save = (req, res, next) => {
   ModoPedidoModel.save(modo_pedido, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${modo_pedido.id_categoria}`,
+        title: `Error al salvar el registro con el id: ${modo_pedido.cod_categoria}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -79,14 +79,14 @@ ModoPedidoController.save = (req, res, next) => {
 };
 
 ModoPedidoController.delete = (req, res, next) => {
-  let id_modo_pedido = req.params.id_modo_pedido;
-  console.log(id_modo_pedido);
+  let cod_modo_pedido = req.params.cod_modo_pedido;
+  console.log(cod_modo_pedido);
 
-  ModoPedidoModel.delete(id_modo_pedido, (err, rows) => {
+  ModoPedidoModel.delete(cod_modo_pedido, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_modo_pedido}`,
+        title: `Error al eliminar el registro con el id: ${cod_modo_pedido}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

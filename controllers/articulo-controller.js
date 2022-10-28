@@ -25,14 +25,14 @@ ArticuloController.getAll = (req, res, next) => {
 };
 
 ArticuloController.getOne = (req, res, next) => {
-  let id_articulo = req.params.id_articulo;
-  console.log(id_articulo);
+  let cod_articulo = req.params.cod_articulo;
+  console.log(cod_articulo);
 
-  ArticuloModel.getOne(id_articulo, (err, rows) => {
+  ArticuloModel.getOne(cod_articulo, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_articulo}`,
+        title: `Error al buscar el registro con el id: ${cod_articulo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,7 +51,7 @@ ArticuloController.getOne = (req, res, next) => {
 
 ArticuloController.save = (req, res, next) => {
   let articulo = {
-    id_articulo: req.body.id_articulo,
+    cod_articulo: req.body.cod_articulo,
     tipo: req.body.tipo,
     descripcion: req.body.descripcion,
     descripcion_corta: req.body.descripcion_corta,
@@ -63,11 +63,11 @@ ArticuloController.save = (req, res, next) => {
     id_unidad_compra: req.body.id_unidad_compra,
     codigo_barra: req.body.codigo_barra,
     id_unidad_medida: req.body.id_unidad_medida,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(articulo);
@@ -75,7 +75,7 @@ ArticuloController.save = (req, res, next) => {
   ArticuloModel.save(articulo, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${articulo.id_categoria}`,
+        title: `Error al salvar el registro con el id: ${articulo.cod_articulo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -89,14 +89,14 @@ ArticuloController.save = (req, res, next) => {
 };
 
 ArticuloController.delete = (req, res, next) => {
-  let id_articulo = req.params.id_articulo;
-  console.log(id_articulo);
+  let cod_articulo = req.params.cod_articulo;
+  console.log(cod_articulo);
 
-  ArticuloModel.delete(id_articulo, (err, rows) => {
+  ArticuloModel.delete(cod_articulo, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_articulo}`,
+        title: `Error al eliminar el registro con el id: ${cod_articulo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

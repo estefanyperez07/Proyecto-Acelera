@@ -25,14 +25,14 @@ SucursalController.getAll = (req, res, next) => {
 };
 
 SucursalController.getOne = (req, res, next) => {
-  let id_sucursal = req.params.id_sucursal;
-  console.log(id_sucursal);
+  let cod_sucursal = req.params.cod_sucursal;
+  console.log(cod_sucursal);
 
-  SucursalModel.getOne(id_sucursal, (err, rows) => {
+  SucursalModel.getOne(cod_sucursal, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_sucursal}`,
+        title: `Error al buscar el registro con el id: ${cod_sucursal}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,18 +51,18 @@ SucursalController.getOne = (req, res, next) => {
 
 SucursalController.save = (req, res, next) => {
   let sucursal = {
-    id_sucursal: req.body.id_sucursal,
+    cod_sucursal: req.body.cod_sucursal,
     descripcion: req.body.descripcion,
     direccion: req.body.direccion,
     telefono: req.body.telefono,
     rtn: req.body.rtn,
     id_centro_costo: req.body.id_centro_costo,
     id_mapa: req.body.id_mapa,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(sucursal);
@@ -70,7 +70,7 @@ SucursalController.save = (req, res, next) => {
   SucursalModel.save(sucursal, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${sucursal.id_sucursal}`,
+        title: `Error al salvar el registro con el id: ${sucursal.cod_sucursal}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -84,14 +84,14 @@ SucursalController.save = (req, res, next) => {
 };
 
 SucursalController.delete = (req, res, next) => {
-  let id_sucursal = req.params.id_sucursal;
-  console.log(id_sucursal);
+  let cod_sucursal = req.params.cod_sucursal;
+  console.log(cod_sucursal);
 
-  SucursalModel.delete(id_sucursal, (err, rows) => {
+  SucursalModel.delete(cod_sucursal, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_sucursal}`,
+        title: `Error al eliminar el registro con el id: ${cod_sucursal}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

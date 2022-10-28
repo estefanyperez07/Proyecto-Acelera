@@ -25,14 +25,14 @@ MesaController.getAll = (req, res, next) => {
 };
 
 MesaController.getOne = (req, res, next) => {
-  let id_mesa = req.params.id_mesa;
-  console.log(id_mesa);
+  let cod_mesa = req.params.cod_mesa;
+  console.log(cod_mesa);
 
-  MesaModel.getOne(id_mesa, (err, rows) => {
+  MesaModel.getOne(cod_mesa, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_mesa}`,
+        title: `Error al buscar el registro con el id: ${cod_mesa}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,16 +51,16 @@ MesaController.getOne = (req, res, next) => {
 
 MesaController.save = (req, res, next) => {
   let mesa = {
-    id_mesa: req.id_mesa,
+    cod_mesa: req.cod_mesa,
     id_mapa: req.id_mapa,
     descripcion: req.descripcion,
     pos_x: req.pos_x,
     pos_y: req.pos_y,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(mesa);
@@ -68,7 +68,7 @@ MesaController.save = (req, res, next) => {
   MesaModel.save(mesa, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${mesa.id_mesa}`,
+        title: `Error al salvar el registro con el id: ${mesa.cod_mesa}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -82,14 +82,14 @@ MesaController.save = (req, res, next) => {
 };
 
 MesaController.delete = (req, res, next) => {
-  let id_mesa = req.params.id_mesa;
-  console.log(id_mesa);
+  let cod_mesa = req.params.cod_mesa;
+  console.log(cod_mesa);
 
-  MesaModel.delete(id_mesa, (err, rows) => {
+  MesaModel.delete(cod_mesa, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_mesa}`,
+        title: `Error al eliminar el registro con el id: ${cod_mesa}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

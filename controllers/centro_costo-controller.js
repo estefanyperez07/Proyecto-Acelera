@@ -25,14 +25,14 @@ CentroCostoController.getAll = (req, res, next) => {
 };
 
 CentroCostoController.getOne = (req, res, next) => {
-  let id_centro_costo = req.params.id_centro_costo;
-  console.log(id_centro_costo);
+  let cod_centro_costo = req.params.cod_centro_costo;
+  console.log(cod_centro_costo);
 
-  CentroCostoModel.getOne(id_centro_costo, (err, rows) => {
+  CentroCostoModel.getOne(cod_centro_costo, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_centro_costo}`,
+        title: `Error al buscar el registro con el id: ${cod_centro_costo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -51,13 +51,13 @@ CentroCostoController.getOne = (req, res, next) => {
 
 CentroCostoController.save = (req, res, next) => {
   let centro_costo = {
-    id_centro_costo: req.body.id_centro_costo,
+    cod_centro_costo: req.body.cod_centro_costo,
     descripcion: req.body.descripcion,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
+    fecha_modificacion: req.body.fecha_modificacion
   };
 
   console.log(centro_costo);
@@ -65,7 +65,7 @@ CentroCostoController.save = (req, res, next) => {
   CentroCostoModel.save(centro_costo, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${centro_costo.id_centro_costo}`,
+        title: `Error al salvar el registro con el id: ${centro_costo.cod_centro_costo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -79,14 +79,14 @@ CentroCostoController.save = (req, res, next) => {
 };
 
 CentroCostoController.delete = (req, res, next) => {
-  let id_centro_costo = req.params.id_centro_costo;
-  console.log(id_centro_costo);
+  let cod_centro_costo = req.params.cod_centro_costo;
+  console.log(cod_centro_costo);
 
-  CentroCostoModel.delete(id_centro_costo, (err, rows) => {
+  CentroCostoModel.delete(cod_centro_costo, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_centro_costo}`,
+        title: `Error al eliminar el registro con el id: ${cod_centro_costo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

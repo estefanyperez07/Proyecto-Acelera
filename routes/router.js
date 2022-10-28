@@ -16,6 +16,7 @@ var CategoriaController = require("../controllers/categoria-controller"),
   UnidadMedidaController = require("../controllers/unidad_medida-controller"),
   MapaController = require("../controllers/mapa-controller"),
   MesaController = require("../controllers/mesa-controller"),
+  ListaMaterialesController = require("../controllers/lista_materiales-controller"),
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
@@ -55,18 +56,18 @@ router
   .delete("/impuesto/eliminar/:cod_impuesto", ImpuestoController.delete)
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
-  .get("/articulo/getone/:id_articulo", ArticuloController.getOne)
-  .put("/articulo/actualizar-insertar/:id_articulo", ArticuloController.save)
-  .delete("/articulo/eliminar/:id_articulo", ArticuloController.delete)
+  .get("/articulo/getone/:cod_articulo", ArticuloController.getOne)
+  .put("/articulo/actualizar-insertar/:cod_articulo", ArticuloController.save)
+  .delete("/articulo/eliminar/:cod_articulo", ArticuloController.delete)
   //****CENTRO COSTO****
   .get("/centro_costo/getall", CentroCostoController.getAll)
-  .get("/centro_costo/getone/:id_centro_costo", CentroCostoController.getOne)
+  .get("/centro_costo/getone/:cod_centro_costo", CentroCostoController.getOne)
   .put(
-    "/centro_costo/actualizar-insertar/:id_centro_costo",
+    "/centro_costo/actualizar-insertar/:cod_centro_costo",
     CentroCostoController.save
   )
   .delete(
-    "/centro_costo/eliminar/:id_centro_costo",
+    "/centro_costo/eliminar/:cod_centro_costo",
     CentroCostoController.delete
   )
   //****CORRELATIVO****
@@ -87,17 +88,17 @@ router
   .delete("/metodo_pago/eliminar/:cod_metodo_pago", MetodoPagoController.delete)
   //****MODO PEDIDO****
   .get("/modo_pedido/getall", ModoPedidoController.getAll)
-  .get("/modo_pedido/getone/:id_modo_pedido", ModoPedidoController.getOne)
+  .get("/modo_pedido/getone/:cod_modo_pedido", ModoPedidoController.getOne)
   .put(
-    "/modo_pedido/actualizar-insertar/:id_modo_pedido",
+    "/modo_pedido/actualizar-insertar/:cod_modo_pedido",
     ModoPedidoController.save
   )
-  .delete("/modo_pedido/eliminar/:id_modo_pedido", ModoPedidoController.delete)
+  .delete("/modo_pedido/eliminar/:cod_modo_pedido", ModoPedidoController.delete)
   //****POS****
   .get("/pos/getall", PosController.getAll)
-  .get("/pos/getone/:id_pos", PosController.getOne)
-  .put("/pos/actualizar-insertar/:id_pos", PosController.save)
-  .delete("/pos/eliminar/:id_pos", PosController.delete)
+  .get("/pos/getone/:cod_pos", PosController.getOne)
+  .put("/pos/actualizar-insertar/:cod_pos", PosController.save)
+  .delete("/pos/eliminar/:cod_pos", PosController.delete)
   //****PROMO LISTA****
   .get("/promo_lista/getall", PromoListaController.getAll)
   .get("/promo_lista/getone/:id_promo", PromoListaController.getOne)
@@ -105,46 +106,39 @@ router
   .delete("/promo_lista/eliminar/:id_promo", PromoListaController.delete)
   //****PROMO****
   .get("/promo/getall", PromoController.getAll)
-  .get("/promo/getone", PromoController.getOne)
-  .put("/promo/actualizar-insertar/:id_promo", PromoController.save)
-  .delete("/promo/eliminar/:id_promo", PromoController.delete)
+  .get("/promo/getone/:cod_promo", PromoController.getOne)
+  .put("/promo/actualizar-insertar/:cod_promo", PromoController.save)
+  .delete("/promo/eliminar/:cod_promo", PromoController.delete)
   //****SOCIO NEGOCIO****
   .get("/socio_negocio/getall", SocioNegocioController.getAll)
-  .get("/socio_negocio/getone/:id_socio_negocio", SocioNegocioController.getOne)
-  .put(
-    "/socio_negocio/actualizar-insertar/:id_socio_negocio",
-    SocioNegocioController.save
-  )
-  .delete(
-    "/socio_negocio/eliminar/:id_socio_negocio",
-    SocioNegocioController.delete
-  )
+  .get("/socio_negocio/getone/:cod_socio_negocio", SocioNegocioController.getOne)
+  .put("/socio_negocio/actualizar-insertar/:cod_socio_negocio", SocioNegocioController.save)
+  .delete("/socio_negocio/eliminar/:cod_socio_negocio", SocioNegocioController.delete)
   //****SUCURSAL****
   .get("/sucursal/getall", SucursalController.getAll)
-  .get("/sucursal/getone/:id_sucursal", SucursalController.getOne)
-  .put("/sucursal/actualizar-insertar/:id_sucursal", SucursalController.save)
-  .delete("/sucursal/eliminar/:id_sucursal", SucursalController.delete)
+  .get("/sucursal/getone/:cod_sucursal", SucursalController.getOne)
+  .put("/sucursal/actualizar-insertar/:cod_sucursal", SucursalController.save)
+  .delete("/sucursal/eliminar/:cod_sucursal", SucursalController.delete)
   //****UNIDAD MEDIDA****
   .get("/unidad_medida/getall", UnidadMedidaController.getAll)
   .get("/unidad_medida/getone/:id_unidad_medida", UnidadMedidaController.getOne)
-  .put(
-    "/unidad_medida/actualizar-insertar/:id_unidad_medida",
-    UnidadMedidaController.save
-  )
-  .delete(
-    "/unidad_medida/eliminar/:id_unidad_medida",
-    UnidadMedidaController.delete
-  )
+  .put("/unidad_medida/actualizar-insertar/:id_unidad_medida", UnidadMedidaController.save)
+  .delete("/unidad_medida/eliminar/:id_unidad_medida", UnidadMedidaController.delete)
   //****MAPA****
   .get("/mapa/getall", MapaController.getAll)
-  .get("/mapa/getone/:id_mapa", MapaController.getOne)
-  .put("/mapa/actualizar-insertar/:id_mapa", MapaController.save)
-  .delete("/mapa/eliminar/:id_mapa", MapaController.delete)
+  .get("/mapa/getone/:cod_mapa", MapaController.getOne)
+  .put("/mapa/actualizar-insertar/:cod_mapa", MapaController.save)
+  .delete("/mapa/eliminar/:cod_mapa", MapaController.delete)
   //****MESA****
   .get("/mesa/getall", MesaController.getAll)
-  .get("/mesa/getone/:id_mesa", MesaController.getOne)
-  .put("/mesa/actualizar-insertar/:id_mesa", MesaController.save)
-  .delete("/mesa/eliminar/:id_mesa", MesaController.delete)
+  .get("/mesa/getone/:cod_mesa", MesaController.getOne)
+  .put("/mesa/actualizar-insertar/:cod_mesa", MesaController.save)
+  .delete("/mesa/eliminar/:cod_mesa", MesaController.delete)
+  //****LISTA MATERIALES****
+  .get("/lista_materiales/getall", ListaMaterialesController.getAll)
+  .get("/lista_materiales/getone/:id_articulo_padre", ListaMaterialesController.getOne)
+  .put("/lista_materiales/actualizar-insertar/:id_articulo_padre", ListaMaterialesController.save)
+  .delete("/lista_materiales/eliminar/:id_articulo_padre", ListaMaterialesController.delete)
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login

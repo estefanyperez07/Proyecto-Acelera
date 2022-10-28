@@ -50,9 +50,9 @@ router
   .delete("/descuento/eliminar/:cod_descuento", DescuentoController.delete)
   //****IMPUESTOS****
   .get("/impuesto/getall", ImpuestoController.getAll)
-  .get("/impuesto/getone/:id_impuesto", ImpuestoController.getOne)
-  .put("/impuesto/actualizar-insertar/:id_impuesto", ImpuestoController.save)
-  .delete("/impuesto/eliminar/:id_impuesto", ImpuestoController.delete)
+  .get("/impuesto/getone/:cod_impuesto", ImpuestoController.getOne)
+  .put("/impuesto/actualizar-insertar/:cod_impuesto", ImpuestoController.save)
+  .delete("/impuesto/eliminar/:cod_impuesto", ImpuestoController.delete)
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
   .get("/articulo/getone/:id_articulo", ArticuloController.getOne)
@@ -79,12 +79,12 @@ router
   .delete("/correlativo/eliminar/:id_correlativo", CorrelativoController.delete)
   //****METODO PAGO****
   .get("/metodo_pago/getall", MetodoPagoController.getAll)
-  .get("/metodo_pago/getone/:id_metodo_pago", MetodoPagoController.getOne)
+  .get("/metodo_pago/getone/:cod_metodo_pago", MetodoPagoController.getOne)
   .put(
-    "/metodo_pago/actualizar-insertar/:id_metodo_pago",
+    "/metodo_pago/actualizar-insertar/:cod_metodo_pago",
     MetodoPagoController.save
   )
-  .delete("/metodo_pago/eliminar/:id_metodo_pago", MetodoPagoController.delete)
+  .delete("/metodo_pago/eliminar/:cod_metodo_pago", MetodoPagoController.delete)
   //****MODO PEDIDO****
   .get("/modo_pedido/getall", ModoPedidoController.getAll)
   .get("/modo_pedido/getone/:id_modo_pedido", ModoPedidoController.getOne)

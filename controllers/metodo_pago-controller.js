@@ -12,7 +12,7 @@ MetodoPagoController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -25,19 +25,19 @@ MetodoPagoController.getAll = (req, res, next) => {
 };
 
 MetodoPagoController.getOne = (req, res, next) => {
-  let id_metodo_pago = req.params.id_metodo_pago;
-  console.log(id_metodo_pago);
+  let cod_metodo_pago = req.params.cod_metodo_pago;
+  console.log(cod_metodo_pago);
 
-  MetodoPagoModel.getOne(id_metodo_pago, (err, rows) => {
+  MetodoPagoModel.getOne(cod_metodo_pago, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_metodo_pago}`,
+        title: `Error al buscar el registro con el id: ${cod_metodo_pago}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -51,15 +51,15 @@ MetodoPagoController.getOne = (req, res, next) => {
 
 MetodoPagoController.save = (req, res, next) => {
   let metodo_pago = {
-    id_metodo_pago: req.body.id_metodo_pago,
+    cod_metodo_pago: req.body.cod_metodo_pago,
     descripcion: req.body.descripcion,
     tipo: req.body.tipo,
     cuenta_contable: req.body.cuenta_contable,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
     fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
   };
 
   console.log(metodo_pago);
@@ -67,35 +67,35 @@ MetodoPagoController.save = (req, res, next) => {
   MetodoPagoModel.save(metodo_pago, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${metodo_pago.id_metodo_pago}`,
+        title: `Error al salvar el registro con el id: ${metodo_pago.cod_metodo_pago}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      //res.render('error', locals)
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });
 };
 
 MetodoPagoController.delete = (req, res, next) => {
-  let id_metodo_pago = req.params.id_metodo_pago;
-  console.log(id_metodo_pago);
+  let cod_metodo_pago = req.params.cod_metodo_pago;
+  console.log(cod_metodo_pago);
 
-  MetodoPagoModel.delete(id_metodo_pago, (err, rows) => {
+  MetodoPagoModel.delete(cod_metodo_pago, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_metodo_pago}`,
+        title: `Error al eliminar el registro con el id: ${cod_metodo_pago}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });

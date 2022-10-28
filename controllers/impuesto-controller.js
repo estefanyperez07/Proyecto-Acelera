@@ -12,7 +12,7 @@ ImpuestoController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -25,19 +25,19 @@ ImpuestoController.getAll = (req, res, next) => {
 };
 
 ImpuestoController.getOne = (req, res, next) => {
-  let id_impuesto = req.params.id_impuesto;
-  console.log(id_impuesto);
+  let cod_impuesto = req.params.cod_impuesto;
+  console.log(cod_impuesto);
 
-  ImpuestoModel.getOne(id_impuesto, (err, rows) => {
+  ImpuestoModel.getOne(cod_impuesto, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_impuesto}`,
+        title: `Error al buscar el registro con el id: ${cod_impuesto}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -51,15 +51,15 @@ ImpuestoController.getOne = (req, res, next) => {
 
 ImpuestoController.save = (req, res, next) => {
   let impuesto = {
-    id_impuesto: req.body.id_impuesto,
+    cod_impuesto: req.body.cod_impuesto,
     descripcion: req.body.descripcion,
     porcentaje: req.body.porcentaje,
     tipo: req.body.tipo,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
     fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
   };
 
   console.log(impuesto);
@@ -67,13 +67,12 @@ ImpuestoController.save = (req, res, next) => {
   ImpuestoModel.save(impuesto, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${impuesto.id_impuesto}`,
+        title: `Error al salvar el registro con el id: ${impuesto.cod_impuesto}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
-      res.send(locals);
+      res.status(520).json(err);
     } else {
       res.send("Success");
       //res.redirect('/')
@@ -82,19 +81,19 @@ ImpuestoController.save = (req, res, next) => {
 };
 
 ImpuestoController.delete = (req, res, next) => {
-  let id_impuesto = req.params.id_impuesto;
-  console.log(id_impuesto);
+  let cod_impuesto = req.params.cod_impuesto;
+  console.log(cod_impuesto);
 
-  ImpuestoModel.delete(id_impuesto, (err, rows) => {
+  ImpuestoModel.delete(cod_impuesto, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_impuesto}`,
+        title: `Error al eliminar el registro con el id: ${cod_impuesto}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       res.send("Success");
       //res.redirect('/')

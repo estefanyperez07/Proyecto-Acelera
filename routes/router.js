@@ -42,9 +42,12 @@ router
   .delete("/categoria/eliminar/:cod_categoria", CategoriaController.delete)
   //****DESCUENTOS****
   .get("/descuento/getall", DescuentoController.getAll)
-  .get("/descuento/getone/:id_descuento", DescuentoController.getOne)
-  .put("/descuento/actualizar-insertar/:id_descuento", DescuentoController.save)
-  .delete("/descuento/eliminar/:id_descuento", DescuentoController.delete)
+  .get("/descuento/getone/:cod_descuento", DescuentoController.getOne)
+  .put(
+    "/descuento/actualizar-insertar/:cod_descuento",
+    DescuentoController.save
+  )
+  .delete("/descuento/eliminar/:cod_descuento", DescuentoController.delete)
   //****IMPUESTOS****
   .get("/impuesto/getall", ImpuestoController.getAll)
   .get("/impuesto/getone/:id_impuesto", ImpuestoController.getOne)

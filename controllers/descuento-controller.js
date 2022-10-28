@@ -12,7 +12,7 @@ DescuentoController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -25,19 +25,19 @@ DescuentoController.getAll = (req, res, next) => {
 };
 
 DescuentoController.getOne = (req, res, next) => {
-  let id_descuento = req.params.id_descuento;
-  console.log(id_categoria);
+  let cod_descuento = req.params.cod_descuento;
+  console.log(cod_descuento);
 
-  DescuentoModel.getOne(id_descuento, (err, rows) => {
+  DescuentoModel.getOne(cod_descuento, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_descuento}`,
+        title: `Error al buscar el registro con el id: ${cod_descuento}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -51,14 +51,14 @@ DescuentoController.getOne = (req, res, next) => {
 
 DescuentoController.save = (req, res, next) => {
   let descuento = {
-    id_descuento: req.body.id_descuento,
+    cod_descuento: req.body.cod_descuento,
     descripcion: req.body.descripcion,
     porcentaje: req.body.porcentaje,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
     fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
   };
 
   console.log(descuento);
@@ -66,36 +66,35 @@ DescuentoController.save = (req, res, next) => {
   DescuentoModel.save(descuento, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${descuento.id_descuento}`,
+        title: `Error al salvar el registro con el id: ${descuento.cod_descuento}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
-      res.send(locals);
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });
 };
 
 DescuentoController.delete = (req, res, next) => {
-  let id_descuento = req.params.id_descuento;
-  console.log(id_descuento);
+  let cod_descuento = req.params.cod_descuento;
+  console.log(cod_descuento);
 
-  DescuentoModel.delete(id_descuento, (err, rows) => {
+  DescuentoModel.delete(cod_descuento, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_descuento}`,
+        title: `Error al eliminar el registro con el id: ${cod_descuento}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });

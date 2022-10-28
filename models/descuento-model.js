@@ -5,13 +5,13 @@ var conn = require("./db-connection"),
 
 DescuentoModel.getAll = (cb) => conn.query("SELECT * FROM tbl_descuento", cb);
 
-DescuentoModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_descuento WHERE id_descuento = $1", [id], cb);
+DescuentoModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM tbl_descuento WHERE cod_descuento = $1", [cod], cb);
 
 DescuentoModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM tbl_descuento WHERE id_descuento = $1",
-    [data.id_descuento],
+    "SELECT * FROM tbl_descuento WHERE cod_descuento = $1",
+    [data.cod_descuento],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
@@ -23,24 +23,24 @@ DescuentoModel.save = (data, cb) => {
           ? conn.query(
               "call prc_descuento_update ($1,$2,$3,$4,$5,$6)",
               [
-                data.id_descuento,
+                data.cod_descuento,
                 data.descripcion,
                 data.porcentaje,
+                data.activo,
                 data.modificado_por,
                 data.fecha_modificacion,
-                data.activo,
               ],
               cb
             )
           : conn.query(
               "call prc_descuento_insert ($1,$2,$3,$4,$5,$6)",
               [
-                data.id_descuento,
+                data.cod_descuento,
                 data.descripcion,
                 data.porcentaje,
+                data.activo,
                 data.creado_por,
                 data.fecha_creacion,
-                data.activo,
               ],
               cb
             );
@@ -49,7 +49,7 @@ DescuentoModel.save = (data, cb) => {
   );
 };
 
-DescuentoModel.delete = (id, cb) =>
-  conn.query("call prc_descuento_delete ($1)", [id], cb);
+DescuentoModel.delete = (cod, cb) =>
+  conn.query("call prc_descuento_delete ($1)", [cod], cb);
 
 module.exports = DescuentoModel;

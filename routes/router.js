@@ -34,9 +34,12 @@ router
   //.post('/', CategoriaController.save)
   //****CATEGORIAS****
   .get("/categoria/getall", CategoriaController.getAll)
-  .get("/categoria/getone/:id_categoria", CategoriaController.getOne)
-  .put("/categoria/actualizar-insertar/:id_categoria", CategoriaController.save)
-  .delete("/categoria/eliminar/:id_categoria", CategoriaController.delete)
+  .get("/categoria/getone/:cod_categoria", CategoriaController.getOne)
+  .put(
+    "/categoria/actualizar-insertar/:cod_categoria",
+    CategoriaController.save
+  )
+  .delete("/categoria/eliminar/:cod_categoria", CategoriaController.delete)
   //****DESCUENTOS****
   .get("/descuento/getall", DescuentoController.getAll)
   .get("/descuento/getone/:id_descuento", DescuentoController.getOne)

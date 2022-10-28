@@ -12,7 +12,7 @@ CategoriaController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -25,19 +25,19 @@ CategoriaController.getAll = (req, res, next) => {
 };
 
 CategoriaController.getOne = (req, res, next) => {
-  let id_categoria = req.params.id_categoria;
-  console.log(id_categoria);
+  let cod_categoria = req.params.cod_categoria;
+  console.log(cod_categoria);
 
-  CategoriaModel.getOne(id_categoria, (err, rows) => {
+  CategoriaModel.getOne(cod_categoria, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_categoria}`,
+        title: `Error al buscar el registro con el id: ${cod_categoria}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -51,13 +51,13 @@ CategoriaController.getOne = (req, res, next) => {
 
 CategoriaController.save = (req, res, next) => {
   let categoria = {
-    id_categoria: req.body.id_categoria,
+    cod_categoria: req.body.cod_categoria,
     descripcion: req.body.descripcion,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
     fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
   };
 
   console.log(categoria);
@@ -65,12 +65,12 @@ CategoriaController.save = (req, res, next) => {
   CategoriaModel.save(categoria, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${categoria.id_categoria}`,
+        title: `Error al salvar el registro con el id: ${categoria.cod_categoria}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      //res.render('error', locals)
+      res.status(520).json(err);
     } else {
       res.send("Success");
       //res.redirect('/')
@@ -79,19 +79,19 @@ CategoriaController.save = (req, res, next) => {
 };
 
 CategoriaController.delete = (req, res, next) => {
-  let id_categoria = req.params.id_categoria;
-  console.log(id_categoria);
+  let cod_categoria = req.params.cod_categoria;
+  console.log(cod_categoria);
 
-  CategoriaModel.delete(id_categoria, (err, rows) => {
+  CategoriaModel.delete(cod_categoria, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${id_categoria}`,
+        title: `Error al eliminar el registro con el id: ${cod_categoria}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err.detail);
     } else {
       res.send("Success");
       //res.redirect('/')

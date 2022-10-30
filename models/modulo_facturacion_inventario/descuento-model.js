@@ -1,33 +1,31 @@
 "use strict";
 
-var conn = require("./db-connection"),
-  ImpuestoModel = () => {};
+var conn = require("../db-connection"),
+  DescuentoModel = () => {};
 
-ImpuestoModel.getAll = (cb) => conn.query("SELECT * FROM tbl_impuesto", cb);
+DescuentoModel.getAll = (cb) => conn.query("SELECT * FROM tbl_descuento", cb);
 
-ImpuestoModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM tbl_impuesto WHERE cod_impuesto = $1", [cod], cb);
+DescuentoModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM tbl_descuento WHERE cod_descuento = $1", [cod], cb);
 
-ImpuestoModel.save = (data, cb) => {
+DescuentoModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM tbl_impuesto WHERE cod_impuesto = $1",
-    [data.cod_impuesto],
+    "SELECT * FROM tbl_descuento WHERE cod_descuento = $1",
+    [data.cod_descuento],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
-      console.log(data.cod_impuesto);
 
       if (err) {
         return err;
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "call prc_impuesto_update ($1,$2,$3,$4,$5,$6,$7)",
+              "call prc_descuento_update ($1,$2,$3,$4,$5,$6)",
               [
-                data.cod_impuesto,
+                data.cod_descuento,
                 data.descripcion,
                 data.porcentaje,
-                data.tipo,
                 data.activo,
                 data.modificado_por,
                 data.fecha_modificacion,
@@ -35,12 +33,11 @@ ImpuestoModel.save = (data, cb) => {
               cb
             )
           : conn.query(
-              "call prc_impuesto_insert ($1,$2,$3,$4,$5,$6,$7)",
+              "call prc_descuento_insert ($1,$2,$3,$4,$5,$6)",
               [
-                data.cod_impuesto,
+                data.cod_descuento,
                 data.descripcion,
                 data.porcentaje,
-                data.tipo,
                 data.activo,
                 data.creado_por,
                 data.fecha_creacion,
@@ -52,7 +49,7 @@ ImpuestoModel.save = (data, cb) => {
   );
 };
 
-ImpuestoModel.delete = (cod, cb) =>
-  conn.query("call prc_impuesto_delete ($1)", [cod], cb);
+DescuentoModel.delete = (cod, cb) =>
+  conn.query("call prc_descuento_delete ($1)", [cod], cb);
 
-module.exports = ImpuestoModel;
+module.exports = DescuentoModel;

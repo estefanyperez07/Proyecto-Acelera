@@ -1,10 +1,10 @@
 "use strict";
 
-var ModoPedidoModel = require("../models/modo_pedido-model"),
-  ModoPedidoController = () => {};
+var CategoriaModel = require("../../models/modulo_facturacion_inventario/categoria-model"),
+  CategoriaController = () => {};
 
-ModoPedidoController.getAll = (req, res, next) => {
-  ModoPedidoModel.getAll((err, rows) => {
+CategoriaController.getAll = (req, res, next) => {
+  CategoriaModel.getAll((err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -12,7 +12,7 @@ ModoPedidoController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -24,20 +24,20 @@ ModoPedidoController.getAll = (req, res, next) => {
   });
 };
 
-ModoPedidoController.getOne = (req, res, next) => {
-  let cod_modo_pedido = req.params.cod_modo_pedido;
-  console.log(cod_modo_pedido);
+CategoriaController.getOne = (req, res, next) => {
+  let cod_categoria = req.params.cod_categoria;
+  console.log(cod_categoria);
 
-  ModoPedidoModel.getOne(cod_modo_pedido, (err, rows) => {
+  CategoriaModel.getOne(cod_categoria, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${cod_modo_pedido}`,
+        title: `Error al buscar el registro con el id: ${cod_categoria}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -49,28 +49,28 @@ ModoPedidoController.getOne = (req, res, next) => {
   });
 };
 
-ModoPedidoController.save = (req, res, next) => {
-  let modo_pedido = {
-    cod_modo_pedido: req.body.cod_modo_pedido,
+CategoriaController.save = (req, res, next) => {
+  let categoria = {
+    cod_categoria: req.body.cod_categoria,
     descripcion: req.body.descripcion,
     activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion
+    fecha_modificacion: req.body.fecha_modificacion,
   };
 
-  console.log(modo_pedido);
+  console.log(categoria);
 
-  ModoPedidoModel.save(modo_pedido, (err) => {
+  CategoriaModel.save(categoria, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${modo_pedido.cod_categoria}`,
+        title: `Error al salvar el registro con el id: ${categoria.cod_categoria}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      //res.render('error', locals)
+      res.status(520).json(err);
     } else {
       res.send("Success");
       //res.redirect('/')
@@ -78,20 +78,20 @@ ModoPedidoController.save = (req, res, next) => {
   });
 };
 
-ModoPedidoController.delete = (req, res, next) => {
-  let cod_modo_pedido = req.params.cod_modo_pedido;
-  console.log(cod_modo_pedido);
+CategoriaController.delete = (req, res, next) => {
+  let cod_categoria = req.params.cod_categoria;
+  console.log(cod_categoria);
 
-  ModoPedidoModel.delete(cod_modo_pedido, (err, rows) => {
+  CategoriaModel.delete(cod_categoria, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${cod_modo_pedido}`,
+        title: `Error al eliminar el registro con el id: ${cod_categoria}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err.detail);
     } else {
       res.send("Success");
       //res.redirect('/')
@@ -99,10 +99,10 @@ ModoPedidoController.delete = (req, res, next) => {
   });
 };
 
-ModoPedidoController.addForm = (req, res, next) =>
+CategoriaController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar Película" });
 
-ModoPedidoController.error404 = (req, res, next) => {
+CategoriaController.error404 = (req, res, next) => {
   let error = new Error(),
     locals = {
       title: "Error 404",
@@ -117,4 +117,4 @@ ModoPedidoController.error404 = (req, res, next) => {
   next();
 };
 
-module.exports = ModoPedidoController;
+module.exports = CategoriaController;

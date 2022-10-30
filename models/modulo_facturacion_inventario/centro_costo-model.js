@@ -1,12 +1,17 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   CentroCostoModel = () => {};
 
-CentroCostoModel.getAll = (cb) => conn.query("SELECT * FROM tbl_centro_costo", cb);
+CentroCostoModel.getAll = (cb) =>
+  conn.query("SELECT * FROM tbl_centro_costo", cb);
 
-CentroCostoModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_centro_costo WHERE cod_centro_costo = $1", [id], cb);
+CentroCostoModel.getOne = (cod, cb) =>
+  conn.query(
+    "SELECT * FROM tbl_centro_costo WHERE cod_centro_costo = $1",
+    [cod],
+    cb
+  );
 
 CentroCostoModel.save = (data, cb) => {
   conn.query(
@@ -24,10 +29,10 @@ CentroCostoModel.save = (data, cb) => {
               "call prc_centro_costo_update ($1,$2,$3,$4,$5)",
               [
                 data.cod_centro_costo,
-								data.descripcion,
+                data.descripcion,
                 data.activo,
-								data.modificado_por,
-								data.fecha_modificacion
+                data.modificado_por,
+                data.fecha_modificacion,
               ],
               cb
             )
@@ -35,10 +40,10 @@ CentroCostoModel.save = (data, cb) => {
               "call prc_centro_costo_insert ($1,$2,$3,$4,$5)",
               [
                 data.cod_centro_costo,
-								data.descripcion,
+                data.descripcion,
                 data.activo,
-								data.creado_por,
-								data.fecha_creacion
+                data.creado_por,
+                data.fecha_creacion,
               ],
               cb
             );
@@ -47,7 +52,7 @@ CentroCostoModel.save = (data, cb) => {
   );
 };
 
-CentroCostoModel.delete = (id, cb) =>
-  conn.query("call prc_centro_costo_delete ($1)", [id], cb);
+CentroCostoModel.delete = (cod, cb) =>
+  conn.query("call prc_centro_costo_delete ($1)", [cod], cb);
 
 module.exports = CentroCostoModel;

@@ -1,12 +1,17 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   ModoPedidoModel = () => {};
 
-ModoPedidoModel.getAll = (cb) => conn.query("SELECT * FROM tbl_modo_pedido", cb);
+ModoPedidoModel.getAll = (cb) =>
+  conn.query("SELECT * FROM tbl_modo_pedido", cb);
 
-ModoPedidoModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_modo_pedido WHERE cod_modo_pedido = $1", [id], cb);
+ModoPedidoModel.getOne = (cod, cb) =>
+  conn.query(
+    "SELECT * FROM tbl_modo_pedido WHERE cod_modo_pedido = $1",
+    [cod],
+    cb
+  );
 
 ModoPedidoModel.save = (data, cb) => {
   conn.query(
@@ -27,7 +32,7 @@ ModoPedidoModel.save = (data, cb) => {
                 data.descripcion,
                 data.activo,
                 data.modificado_por,
-                data.fecha_modificacion
+                data.fecha_modificacion,
               ],
               cb
             )
@@ -38,7 +43,7 @@ ModoPedidoModel.save = (data, cb) => {
                 data.descripcion,
                 data.activo,
                 data.creado_por,
-                data.fecha_creacion
+                data.fecha_creacion,
               ],
               cb
             );
@@ -47,7 +52,7 @@ ModoPedidoModel.save = (data, cb) => {
   );
 };
 
-ModoPedidoModel.delete = (id, cb) =>
-  conn.query("call prc_modo_pedido_delete ($1)", [id], cb);
+ModoPedidoModel.delete = (cod, cb) =>
+  conn.query("call prc_modo_pedido_delete ($1)", [cod], cb);
 
 module.exports = ModoPedidoModel;

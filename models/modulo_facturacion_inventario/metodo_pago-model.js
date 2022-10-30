@@ -1,6 +1,6 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   MetodoPagoModel = () => {};
 
 MetodoPagoModel.getAll = (cb) =>

@@ -1,12 +1,17 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   SocioNegocioModel = () => {};
 
-SocioNegocioModel.getAll = (cb) => conn.query("SELECT * FROM tbl_socio_negocio", cb);
+SocioNegocioModel.getAll = (cb) =>
+  conn.query("SELECT * FROM tbl_socio_negocio", cb);
 
-SocioNegocioModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_socio_negocio WHERE cod_socio_negocio = $1", [id], cb);
+SocioNegocioModel.getOne = (cod, cb) =>
+  conn.query(
+    "SELECT * FROM tbl_socio_negocio WHERE cod_socio_negocio = $1",
+    [cod],
+    cb
+  );
 
 SocioNegocioModel.save = (data, cb) => {
   conn.query(
@@ -35,7 +40,7 @@ SocioNegocioModel.save = (data, cb) => {
                 data.cuenta_contable,
                 data.activo,
                 data.modificado_por,
-                data.fecha_modificacion
+                data.fecha_modificacion,
               ],
               cb
             )
@@ -54,7 +59,7 @@ SocioNegocioModel.save = (data, cb) => {
                 data.cuenta_contable,
                 data.activo,
                 data.creado_por,
-                data.fecha_creacion
+                data.fecha_creacion,
               ],
               cb
             );
@@ -63,7 +68,7 @@ SocioNegocioModel.save = (data, cb) => {
   );
 };
 
-SocioNegocioModel.delete = (id, cb) =>
-  conn.query("call prc_socio_negocio_delete ($1)", [id], cb);
+SocioNegocioModel.delete = (cod, cb) =>
+  conn.query("call prc_socio_negocio_delete ($1)", [cod], cb);
 
 module.exports = SocioNegocioModel;

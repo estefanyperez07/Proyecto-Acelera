@@ -1,10 +1,10 @@
 "use strict";
 
-var DescuentoModel = require("../models/descuento-model"),
-  DescuentoController = () => {};
+var ImpuestoModel = require("../../models/modulo_facturacion_inventario/impuesto-model"),
+  ImpuestoController = () => {};
 
-DescuentoController.getAll = (req, res, next) => {
-  DescuentoModel.getAll((err, rows) => {
+ImpuestoController.getAll = (req, res, next) => {
+  ImpuestoModel.getAll((err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -24,15 +24,15 @@ DescuentoController.getAll = (req, res, next) => {
   });
 };
 
-DescuentoController.getOne = (req, res, next) => {
-  let cod_descuento = req.params.cod_descuento;
-  console.log(cod_descuento);
+ImpuestoController.getOne = (req, res, next) => {
+  let cod_impuesto = req.params.cod_impuesto;
+  console.log(cod_impuesto);
 
-  DescuentoModel.getOne(cod_descuento, (err, rows) => {
+  ImpuestoModel.getOne(cod_impuesto, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${cod_descuento}`,
+        title: `Error al buscar el registro con el id: ${cod_impuesto}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -49,11 +49,12 @@ DescuentoController.getOne = (req, res, next) => {
   });
 };
 
-DescuentoController.save = (req, res, next) => {
-  let descuento = {
-    cod_descuento: req.body.cod_descuento,
+ImpuestoController.save = (req, res, next) => {
+  let impuesto = {
+    cod_impuesto: req.body.cod_impuesto,
     descripcion: req.body.descripcion,
     porcentaje: req.body.porcentaje,
+    tipo: req.body.tipo,
     activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
@@ -61,49 +62,49 @@ DescuentoController.save = (req, res, next) => {
     fecha_modificacion: req.body.fecha_modificacion,
   };
 
-  console.log(descuento);
+  console.log(impuesto);
 
-  DescuentoModel.save(descuento, (err) => {
+  ImpuestoModel.save(impuesto, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${descuento.cod_descuento}`,
+        title: `Error al salvar el registro con el id: ${impuesto.cod_impuesto}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
       res.status(520).json(err);
     } else {
-      res.status(200).json("Success");
+      res.send("Success");
       //res.redirect('/')
     }
   });
 };
 
-DescuentoController.delete = (req, res, next) => {
-  let cod_descuento = req.params.cod_descuento;
-  console.log(cod_descuento);
+ImpuestoController.delete = (req, res, next) => {
+  let cod_impuesto = req.params.cod_impuesto;
+  console.log(cod_impuesto);
 
-  DescuentoModel.delete(cod_descuento, (err, rows) => {
+  ImpuestoModel.delete(cod_impuesto, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${cod_descuento}`,
+        title: `Error al eliminar el registro con el id: ${cod_impuesto}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
       res.status(520).json(err);
     } else {
-      res.status(200).json("Success");
+      res.send("Success");
       //res.redirect('/')
     }
   });
 };
 
-DescuentoController.addForm = (req, res, next) =>
+ImpuestoController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar Película" });
 
-DescuentoController.error404 = (req, res, next) => {
+ImpuestoController.error404 = (req, res, next) => {
   let error = new Error(),
     locals = {
       title: "Error 404",
@@ -118,4 +119,4 @@ DescuentoController.error404 = (req, res, next) => {
   next();
 };
 
-module.exports = DescuentoController;
+module.exports = ImpuestoController;

@@ -1,17 +1,17 @@
 "use strict";
 
-var CategoriaController = require("../controllers/categoria-controller"),
-  DescuentoController = require("../controllers/descuento-controller"),
-  ImpuestoController = require("../controllers/impuesto-controller"),
+var CategoriaController = require("../controllers/modulo_facturacion_inventario/categoria-controller"),
+  DescuentoController = require("../controllers/modulo_facturacion_inventario/descuento-controller"),
+  ImpuestoController = require("../controllers/modulo_facturacion_inventario/impuesto-controller"),
   ArticuloController = require("../controllers/articulo-controller"),
-  CentroCostoController = require("../controllers/centro_costo-controller"),
+  CentroCostoController = require("../controllers/modulo_facturacion_inventario/centro_costo-controller"),
   CorrelativoController = require("../controllers/correlativo-controller"),
-  MetodoPagoController = require("../controllers/metodo_pago-controller"),
-  ModoPedidoController = require("../controllers/modo_pedido-controller"),
+  MetodoPagoController = require("../controllers/modulo_facturacion_inventario/metodo_pago-controller"),
+  ModoPedidoController = require("../controllers/modulo_facturacion_inventario/modo_pedido-controller"),
   PosController = require("../controllers/pos-controller"),
   PromoListaController = require("../controllers/promo_lista-controller"),
   PromoController = require("../controllers/promo-controller"),
-  SocioNegocioController = require("../controllers/socio_negocio-controller"),
+  SocioNegocioController = require("../controllers/modulo_facturacion_inventario/socio_negocio-controller"),
   SucursalController = require("../controllers/sucursal-controller"),
   UnidadMedidaController = require("../controllers/unidad_medida-controller"),
   MapaController = require("../controllers/mapa-controller"),
@@ -111,9 +111,18 @@ router
   .delete("/promo/eliminar/:cod_promo", PromoController.delete)
   //****SOCIO NEGOCIO****
   .get("/socio_negocio/getall", SocioNegocioController.getAll)
-  .get("/socio_negocio/getone/:cod_socio_negocio", SocioNegocioController.getOne)
-  .put("/socio_negocio/actualizar-insertar/:cod_socio_negocio", SocioNegocioController.save)
-  .delete("/socio_negocio/eliminar/:cod_socio_negocio", SocioNegocioController.delete)
+  .get(
+    "/socio_negocio/getone/:cod_socio_negocio",
+    SocioNegocioController.getOne
+  )
+  .put(
+    "/socio_negocio/actualizar-insertar/:cod_socio_negocio",
+    SocioNegocioController.save
+  )
+  .delete(
+    "/socio_negocio/eliminar/:cod_socio_negocio",
+    SocioNegocioController.delete
+  )
   //****SUCURSAL****
   .get("/sucursal/getall", SucursalController.getAll)
   .get("/sucursal/getone/:cod_sucursal", SucursalController.getOne)
@@ -122,8 +131,14 @@ router
   //****UNIDAD MEDIDA****
   .get("/unidad_medida/getall", UnidadMedidaController.getAll)
   .get("/unidad_medida/getone/:id_unidad_medida", UnidadMedidaController.getOne)
-  .put("/unidad_medida/actualizar-insertar/:id_unidad_medida", UnidadMedidaController.save)
-  .delete("/unidad_medida/eliminar/:id_unidad_medida", UnidadMedidaController.delete)
+  .put(
+    "/unidad_medida/actualizar-insertar/:id_unidad_medida",
+    UnidadMedidaController.save
+  )
+  .delete(
+    "/unidad_medida/eliminar/:id_unidad_medida",
+    UnidadMedidaController.delete
+  )
   //****MAPA****
   .get("/mapa/getall", MapaController.getAll)
   .get("/mapa/getone/:cod_mapa", MapaController.getOne)
@@ -136,9 +151,18 @@ router
   .delete("/mesa/eliminar/:cod_mesa", MesaController.delete)
   //****LISTA MATERIALES****
   .get("/lista_materiales/getall", ListaMaterialesController.getAll)
-  .get("/lista_materiales/getone/:id_articulo_padre", ListaMaterialesController.getOne)
-  .put("/lista_materiales/actualizar-insertar/:id_articulo_padre", ListaMaterialesController.save)
-  .delete("/lista_materiales/eliminar/:id_articulo_padre", ListaMaterialesController.delete)
+  .get(
+    "/lista_materiales/getone/:id_articulo_padre",
+    ListaMaterialesController.getOne
+  )
+  .put(
+    "/lista_materiales/actualizar-insertar/:id_articulo_padre",
+    ListaMaterialesController.save
+  )
+  .delete(
+    "/lista_materiales/eliminar/:id_articulo_padre",
+    ListaMaterialesController.delete
+  )
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login

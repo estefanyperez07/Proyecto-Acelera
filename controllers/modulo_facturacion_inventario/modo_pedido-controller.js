@@ -1,10 +1,10 @@
 "use strict";
 
-var MetodoPagoModel = require("../models/metodo_pago-model"),
-  MetodoPagoController = () => {};
+var ModoPedidoModel = require("../../models/modulo_facturacion_inventario/modo_pedido-model"),
+  ModoPedidoController = () => {};
 
-MetodoPagoController.getAll = (req, res, next) => {
-  MetodoPagoModel.getAll((err, rows) => {
+ModoPedidoController.getAll = (req, res, next) => {
+  ModoPedidoModel.getAll((err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -24,15 +24,15 @@ MetodoPagoController.getAll = (req, res, next) => {
   });
 };
 
-MetodoPagoController.getOne = (req, res, next) => {
-  let cod_metodo_pago = req.params.cod_metodo_pago;
-  console.log(cod_metodo_pago);
+ModoPedidoController.getOne = (req, res, next) => {
+  let cod_modo_pedido = req.params.cod_modo_pedido;
+  console.log(cod_modo_pedido);
 
-  MetodoPagoModel.getOne(cod_metodo_pago, (err, rows) => {
+  ModoPedidoModel.getOne(cod_modo_pedido, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${cod_metodo_pago}`,
+        title: `Error al buscar el registro con el id: ${cod_modo_pedido}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -49,12 +49,10 @@ MetodoPagoController.getOne = (req, res, next) => {
   });
 };
 
-MetodoPagoController.save = (req, res, next) => {
-  let metodo_pago = {
-    cod_metodo_pago: req.body.cod_metodo_pago,
+ModoPedidoController.save = (req, res, next) => {
+  let modo_pedido = {
+    cod_modo_pedido: req.body.cod_modo_pedido,
     descripcion: req.body.descripcion,
-    tipo: req.body.tipo,
-    cuenta_contable: req.body.cuenta_contable,
     activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
@@ -62,12 +60,12 @@ MetodoPagoController.save = (req, res, next) => {
     fecha_modificacion: req.body.fecha_modificacion,
   };
 
-  console.log(metodo_pago);
+  console.log(modo_pedido);
 
-  MetodoPagoModel.save(metodo_pago, (err) => {
+  ModoPedidoModel.save(modo_pedido, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${metodo_pago.cod_metodo_pago}`,
+        title: `Error al salvar el registro con el id: ${modo_pedido.modo_pedido}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -80,15 +78,15 @@ MetodoPagoController.save = (req, res, next) => {
   });
 };
 
-MetodoPagoController.delete = (req, res, next) => {
-  let cod_metodo_pago = req.params.cod_metodo_pago;
-  console.log(cod_metodo_pago);
+ModoPedidoController.delete = (req, res, next) => {
+  let cod_modo_pedido = req.params.cod_modo_pedido;
+  console.log(cod_modo_pedido);
 
-  MetodoPagoModel.delete(cod_metodo_pago, (err, rows) => {
+  ModoPedidoModel.delete(cod_modo_pedido, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${cod_metodo_pago}`,
+        title: `Error al eliminar el registro con el id: ${cod_modo_pedido}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -101,10 +99,10 @@ MetodoPagoController.delete = (req, res, next) => {
   });
 };
 
-MetodoPagoController.addForm = (req, res, next) =>
+ModoPedidoController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar Película" });
 
-MetodoPagoController.error404 = (req, res, next) => {
+ModoPedidoController.error404 = (req, res, next) => {
   let error = new Error(),
     locals = {
       title: "Error 404",
@@ -119,4 +117,4 @@ MetodoPagoController.error404 = (req, res, next) => {
   next();
 };
 
-module.exports = MetodoPagoController;
+module.exports = ModoPedidoController;

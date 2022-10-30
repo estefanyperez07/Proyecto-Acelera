@@ -1,10 +1,10 @@
 "use strict";
 
-var CentroCostoModel = require("../models/centro_costo-model"),
-  CentroCostoController = () => {};
+var MetodoPagoModel = require("../../models/modulo_facturacion_inventario/metodo_pago-model"),
+  MetodoPagoController = () => {};
 
-CentroCostoController.getAll = (req, res, next) => {
-  CentroCostoModel.getAll((err, rows) => {
+MetodoPagoController.getAll = (req, res, next) => {
+  MetodoPagoModel.getAll((err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -12,7 +12,7 @@ CentroCostoController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -24,20 +24,20 @@ CentroCostoController.getAll = (req, res, next) => {
   });
 };
 
-CentroCostoController.getOne = (req, res, next) => {
-  let cod_centro_costo = req.params.cod_centro_costo;
-  console.log(cod_centro_costo);
+MetodoPagoController.getOne = (req, res, next) => {
+  let cod_metodo_pago = req.params.cod_metodo_pago;
+  console.log(cod_metodo_pago);
 
-  CentroCostoModel.getOne(cod_centro_costo, (err, rows) => {
+  MetodoPagoModel.getOne(cod_metodo_pago, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${cod_centro_costo}`,
+        title: `Error al buscar el registro con el id: ${cod_metodo_pago}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -49,60 +49,62 @@ CentroCostoController.getOne = (req, res, next) => {
   });
 };
 
-CentroCostoController.save = (req, res, next) => {
-  let centro_costo = {
-    cod_centro_costo: req.body.cod_centro_costo,
+MetodoPagoController.save = (req, res, next) => {
+  let metodo_pago = {
+    cod_metodo_pago: req.body.cod_metodo_pago,
     descripcion: req.body.descripcion,
+    tipo: req.body.tipo,
+    cuenta_contable: req.body.cuenta_contable,
     activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion
+    fecha_modificacion: req.body.fecha_modificacion,
   };
 
-  console.log(centro_costo);
+  console.log(metodo_pago);
 
-  CentroCostoModel.save(centro_costo, (err) => {
+  MetodoPagoModel.save(metodo_pago, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${centro_costo.cod_centro_costo}`,
+        title: `Error al salvar el registro con el id: ${metodo_pago.cod_metodo_pago}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      //res.render('error', locals)
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });
 };
 
-CentroCostoController.delete = (req, res, next) => {
-  let cod_centro_costo = req.params.cod_centro_costo;
-  console.log(cod_centro_costo);
+MetodoPagoController.delete = (req, res, next) => {
+  let cod_metodo_pago = req.params.cod_metodo_pago;
+  console.log(cod_metodo_pago);
 
-  CentroCostoModel.delete(cod_centro_costo, (err, rows) => {
+  MetodoPagoModel.delete(cod_metodo_pago, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${cod_centro_costo}`,
+        title: `Error al eliminar el registro con el id: ${cod_metodo_pago}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });
 };
 
-CentroCostoController.addForm = (req, res, next) =>
+MetodoPagoController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar Película" });
 
-CentroCostoController.error404 = (req, res, next) => {
+MetodoPagoController.error404 = (req, res, next) => {
   let error = new Error(),
     locals = {
       title: "Error 404",
@@ -117,4 +119,4 @@ CentroCostoController.error404 = (req, res, next) => {
   next();
 };
 
-module.exports = CentroCostoController;
+module.exports = MetodoPagoController;

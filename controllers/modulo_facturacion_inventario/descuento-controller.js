@@ -1,10 +1,10 @@
 "use strict";
 
-var UnidadMedidaModel = require("../models/unidad_medida-model"),
-  UnidadMedidaController = () => {};
+var DescuentoModel = require("../../models/modulo_facturacion_inventario/descuento-model"),
+  DescuentoController = () => {};
 
-UnidadMedidaController.getAll = (req, res, next) => {
-  UnidadMedidaModel.getAll((err, rows) => {
+DescuentoController.getAll = (req, res, next) => {
+  DescuentoModel.getAll((err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -24,15 +24,15 @@ UnidadMedidaController.getAll = (req, res, next) => {
   });
 };
 
-UnidadMedidaController.getOne = (req, res, next) => {
-  let id_unidad_medida = req.params.id_unidad_medida;
-  console.log(id_unidad_medida);
+DescuentoController.getOne = (req, res, next) => {
+  let cod_descuento = req.params.cod_descuento;
+  console.log(cod_descuento);
 
-  UnidadMedidaModel.getOne(cod_unidad_medida, (err, rows) => {
+  DescuentoModel.getOne(cod_descuento, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${cod_unidad_medida}`,
+        title: `Error al buscar el registro con el id: ${cod_descuento}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -49,22 +49,24 @@ UnidadMedidaController.getOne = (req, res, next) => {
   });
 };
 
-UnidadMedidaController.save = (req, res, next) => {
-  let unidad_medida = {
-    id_unidad_medida: req.body.cod_unidad_medida,
+DescuentoController.save = (req, res, next) => {
+  let descuento = {
+    cod_descuento: req.body.cod_descuento,
     descripcion: req.body.descripcion,
+    porcentaje: req.body.porcentaje,
+    activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
     fecha_modificacion: req.body.fecha_modificacion,
   };
 
-  console.log(unidad_medida);
+  console.log(descuento);
 
-  UnidadMedidaModel.save(unidad_medida, (err) => {
+  DescuentoModel.save(descuento, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${unidad_medida.cod_unidad_medida}`,
+        title: `Error al salvar el registro con el id: ${descuento.cod_descuento}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -77,15 +79,15 @@ UnidadMedidaController.save = (req, res, next) => {
   });
 };
 
-UnidadMedidaController.delete = (req, res, next) => {
-  let id_unidad_medida = req.params.cod_unidad_medida;
-  console.log(id_unidad_medida);
+DescuentoController.delete = (req, res, next) => {
+  let cod_descuento = req.params.cod_descuento;
+  console.log(cod_descuento);
 
-  UnidadMedidaModel.delete(cod_unidad_medida, (err, rows) => {
+  DescuentoModel.delete(cod_descuento, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${cod_unidad_medida}`,
+        title: `Error al eliminar el registro con el id: ${cod_descuento}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -98,10 +100,10 @@ UnidadMedidaController.delete = (req, res, next) => {
   });
 };
 
-UnidadMedidaController.addForm = (req, res, next) =>
+DescuentoController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar Película" });
 
-UnidadMedidaController.error404 = (req, res, next) => {
+DescuentoController.error404 = (req, res, next) => {
   let error = new Error(),
     locals = {
       title: "Error 404",
@@ -116,4 +118,4 @@ UnidadMedidaController.error404 = (req, res, next) => {
   next();
 };
 
-module.exports = UnidadMedidaController;
+module.exports = DescuentoController;

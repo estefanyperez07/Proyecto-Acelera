@@ -1,10 +1,10 @@
 "use strict";
 
-var ImpuestoModel = require("../models/impuesto-model"),
-  ImpuestoController = () => {};
+var CentroCostoModel = require("../../models/modulo_facturacion_inventario/centro_costo-model"),
+  CentroCostoController = () => {};
 
-ImpuestoController.getAll = (req, res, next) => {
-  ImpuestoModel.getAll((err, rows) => {
+CentroCostoController.getAll = (req, res, next) => {
+  CentroCostoModel.getAll((err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -24,15 +24,15 @@ ImpuestoController.getAll = (req, res, next) => {
   });
 };
 
-ImpuestoController.getOne = (req, res, next) => {
-  let cod_impuesto = req.params.cod_impuesto;
-  console.log(cod_impuesto);
+CentroCostoController.getOne = (req, res, next) => {
+  let cod_centro_costo = req.params.cod_centro_costo;
+  console.log(cod_centro_costo);
 
-  ImpuestoModel.getOne(cod_impuesto, (err, rows) => {
+  CentroCostoModel.getOne(cod_centro_costo, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${cod_impuesto}`,
+        title: `Error al buscar el registro con el id: ${cod_centro_costo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -49,12 +49,10 @@ ImpuestoController.getOne = (req, res, next) => {
   });
 };
 
-ImpuestoController.save = (req, res, next) => {
-  let impuesto = {
-    cod_impuesto: req.body.cod_impuesto,
+CentroCostoController.save = (req, res, next) => {
+  let centro_costo = {
+    cod_centro_costo: req.body.cod_centro_costo,
     descripcion: req.body.descripcion,
-    porcentaje: req.body.porcentaje,
-    tipo: req.body.tipo,
     activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
@@ -62,49 +60,49 @@ ImpuestoController.save = (req, res, next) => {
     fecha_modificacion: req.body.fecha_modificacion,
   };
 
-  console.log(impuesto);
+  console.log(centro_costo);
 
-  ImpuestoModel.save(impuesto, (err) => {
+  CentroCostoModel.save(centro_costo, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${impuesto.cod_impuesto}`,
+        title: `Error al salvar el registro con el id: ${centro_costo.cod_centro_costo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
       res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });
 };
 
-ImpuestoController.delete = (req, res, next) => {
-  let cod_impuesto = req.params.cod_impuesto;
-  console.log(cod_impuesto);
+CentroCostoController.delete = (req, res, next) => {
+  let cod_centro_costo = req.params.cod_centro_costo;
+  console.log(cod_centro_costo);
 
-  ImpuestoModel.delete(cod_impuesto, (err, rows) => {
+  CentroCostoModel.delete(cod_centro_costo, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${cod_impuesto}`,
+        title: `Error al eliminar el registro con el id: ${cod_centro_costo}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
 
       res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });
 };
 
-ImpuestoController.addForm = (req, res, next) =>
+CentroCostoController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar Película" });
 
-ImpuestoController.error404 = (req, res, next) => {
+CentroCostoController.error404 = (req, res, next) => {
   let error = new Error(),
     locals = {
       title: "Error 404",
@@ -119,4 +117,4 @@ ImpuestoController.error404 = (req, res, next) => {
   next();
 };
 
-module.exports = ImpuestoController;
+module.exports = CentroCostoController;

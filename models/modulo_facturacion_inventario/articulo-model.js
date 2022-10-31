@@ -1,16 +1,17 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   ArticuloModel = () => {};
 
-ArticuloModel.getAll = (cb) => conn.query("SELECT * FROM tbl_articulo", cb);
+ArticuloModel.getAll = (cb) =>
+  conn.query("SELECT * FROM ft_articulo_getall()", cb);
 
-ArticuloModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_articulo WHERE cod_articulo = $1", [id], cb);
+ArticuloModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM ft_articulo_getone($1)", [cod], cb);
 
 ArticuloModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM tbl_articulo WHERE cod_articulo = $1",
+    "SELECT * FROM ft_articulo_getone($1)",
     [data.cod_articulo],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
@@ -30,14 +31,14 @@ ArticuloModel.save = (data, cb) => {
                 data.id_impuesto,
                 data.id_categoria,
                 data.precio,
-                data.data.id_unidad_venta,
+                data.id_unidad_venta,
                 data.id_socio_negocio,
                 data.id_unidad_compra,
                 data.codigo_barra,
                 data.id_unidad_medida,
                 data.activo,
                 data.modificado_por,
-                data.fecha_modificacion
+                data.fecha_modificacion,
               ],
               cb
             )
@@ -51,14 +52,14 @@ ArticuloModel.save = (data, cb) => {
                 data.id_impuesto,
                 data.id_categoria,
                 data.precio,
-                data.data.id_unidad_venta,
+                data.id_unidad_venta,
                 data.id_socio_negocio,
                 data.id_unidad_compra,
                 data.codigo_barra,
                 data.id_unidad_medida,
                 data.activo,
                 data.creado_por,
-                data.fecha_creacion 
+                data.fecha_creacion,
               ],
               cb
             );
@@ -67,7 +68,7 @@ ArticuloModel.save = (data, cb) => {
   );
 };
 
-ArticuloModel.delete = (id, cb) =>
-  conn.query("call prc_articulo_delete ($1)", [id], cb);
+ArticuloModel.delete = (cod, cb) =>
+  conn.query("call prc_articulo_delete ($1)", [cod], cb);
 
 module.exports = ArticuloModel;

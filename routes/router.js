@@ -3,7 +3,7 @@
 var CategoriaController = require("../controllers/modulo_facturacion_inventario/categoria-controller"),
   DescuentoController = require("../controllers/modulo_facturacion_inventario/descuento-controller"),
   ImpuestoController = require("../controllers/modulo_facturacion_inventario/impuesto-controller"),
-  ArticuloController = require("../controllers/articulo-controller"),
+  ArticuloController = require("../controllers/modulo_facturacion_inventario/articulo-controller"),
   CentroCostoController = require("../controllers/modulo_facturacion_inventario/centro_costo-controller"),
   CorrelativoController = require("../controllers/correlativo-controller"),
   MetodoPagoController = require("../controllers/modulo_facturacion_inventario/metodo_pago-controller"),

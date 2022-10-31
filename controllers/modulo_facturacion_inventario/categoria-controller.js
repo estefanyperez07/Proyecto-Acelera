@@ -72,7 +72,7 @@ CategoriaController.save = (req, res, next) => {
 
       res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).send("Success");
       //res.redirect('/')
     }
   });
@@ -93,7 +93,7 @@ CategoriaController.delete = (req, res, next) => {
 
       res.status(520).json(err.detail);
     } else {
-      res.send("Success");
+      res.status(200).send("Success");
       //res.redirect('/')
     }
   });

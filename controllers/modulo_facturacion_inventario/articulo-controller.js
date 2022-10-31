@@ -1,6 +1,6 @@
 "use strict";
 
-var ArticuloModel = require("../models/articulo-model"),
+var ArticuloModel = require("../../models/modulo_facturacion_inventario/articulo-model"),
   ArticuloController = () => {};
 
 ArticuloController.getAll = (req, res, next) => {
@@ -12,7 +12,7 @@ ArticuloController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -37,7 +37,7 @@ ArticuloController.getOne = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -67,7 +67,7 @@ ArticuloController.save = (req, res, next) => {
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion
+    fecha_modificacion: req.body.fecha_modificacion,
   };
 
   console.log(articulo);
@@ -80,9 +80,9 @@ ArticuloController.save = (req, res, next) => {
         error: err,
       };
 
-      //res.render('error', locals)
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).send("Success");
       //res.redirect('/')
     }
   });
@@ -101,9 +101,9 @@ ArticuloController.delete = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).send("Success");
       //res.redirect('/')
     }
   });

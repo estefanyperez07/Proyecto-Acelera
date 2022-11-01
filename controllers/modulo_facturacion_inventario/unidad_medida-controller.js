@@ -1,6 +1,6 @@
 "use strict";
 
-var UnidadMedidaModel = require("../models/unidad_medida-model"),
+var UnidadMedidaModel = require("../../models/modulo_facturacion_inventario/unidad_medida-model"),
   UnidadMedidaController = () => {};
 
 UnidadMedidaController.getAll = (req, res, next) => {
@@ -25,8 +25,8 @@ UnidadMedidaController.getAll = (req, res, next) => {
 };
 
 UnidadMedidaController.getOne = (req, res, next) => {
-  let id_unidad_medida = req.params.id_unidad_medida;
-  console.log(id_unidad_medida);
+  let cod_unidad_medida = req.params.cod_unidad_medida;
+  console.log(cod_unidad_medida);
 
   UnidadMedidaModel.getOne(cod_unidad_medida, (err, rows) => {
     console.log(err, "---", rows);
@@ -51,7 +51,7 @@ UnidadMedidaController.getOne = (req, res, next) => {
 
 UnidadMedidaController.save = (req, res, next) => {
   let unidad_medida = {
-    id_unidad_medida: req.body.cod_unidad_medida,
+    cod_unidad_medida: req.body.cod_unidad_medida,
     descripcion: req.body.descripcion,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
@@ -78,8 +78,8 @@ UnidadMedidaController.save = (req, res, next) => {
 };
 
 UnidadMedidaController.delete = (req, res, next) => {
-  let id_unidad_medida = req.params.cod_unidad_medida;
-  console.log(id_unidad_medida);
+  let cod_unidad_medida = req.params.cod_unidad_medida;
+  console.log(cod_unidad_medida);
 
   UnidadMedidaModel.delete(cod_unidad_medida, (err, rows) => {
     console.log(err, "---", rows);

@@ -13,7 +13,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   PromoController = require("../controllers/promo-controller"),
   SocioNegocioController = require("../controllers/modulo_facturacion_inventario/socio_negocio-controller"),
   SucursalController = require("../controllers/modulo_facturacion_inventario/sucursal-controller"),
-  UnidadMedidaController = require("../controllers/unidad_medida-controller"),
+  UnidadMedidaController = require("../controllers/modulo_facturacion_inventario/unidad_medida-controller"),
   MapaController = require("../controllers/mapa-controller"),
   MesaController = require("../controllers/mesa-controller"),
   ListaMaterialesController = require("../controllers/lista_materiales-controller"),
@@ -130,13 +130,16 @@ router
   .delete("/sucursal/eliminar/:cod_sucursal", SucursalController.delete)
   //****UNIDAD MEDIDA****
   .get("/unidad_medida/getall", UnidadMedidaController.getAll)
-  .get("/unidad_medida/getone/:id_unidad_medida", UnidadMedidaController.getOne)
+  .get(
+    "/unidad_medida/getone/:cod_unidad_medida",
+    UnidadMedidaController.getOne
+  )
   .put(
-    "/unidad_medida/actualizar-insertar/:id_unidad_medida",
+    "/unidad_medida/actualizar-insertar/:cod_unidad_medida",
     UnidadMedidaController.save
   )
   .delete(
-    "/unidad_medida/eliminar/:id_unidad_medida",
+    "/unidad_medida/eliminar/:cod_unidad_medida",
     UnidadMedidaController.delete
   )
   //****MAPA****

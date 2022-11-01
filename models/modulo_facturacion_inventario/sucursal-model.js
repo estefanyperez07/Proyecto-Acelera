@@ -1,12 +1,13 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   SucursalModel = () => {};
 
-SucursalModel.getAll = (cb) => conn.query("SELECT * FROM tbl_sucursal", cb);
+SucursalModel.getAll = (cb) =>
+  conn.query("SELECT * FROM ft_sucursal_getall()", cb);
 
-SucursalModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_sucursal WHERE cod_sucursal = $1", [id], cb);
+SucursalModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM ft_sucursal_getone($1)", [cod], cb);
 
 SucursalModel.save = (data, cb) => {
   conn.query(
@@ -32,7 +33,7 @@ SucursalModel.save = (data, cb) => {
                 data.id_mapa,
                 data.activo,
                 data.modificado_por,
-                data.fecha_modificacion
+                data.fecha_modificacion,
               ],
               cb
             )
@@ -48,7 +49,7 @@ SucursalModel.save = (data, cb) => {
                 data.id_mapa,
                 data.activo,
                 data.creado_por,
-                data.fecha_creacion
+                data.fecha_creacion,
               ],
               cb
             );

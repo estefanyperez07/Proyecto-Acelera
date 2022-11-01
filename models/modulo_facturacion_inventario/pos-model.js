@@ -1,12 +1,12 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   PosModel = () => {};
 
-PosModel.getAll = (cb) => conn.query("SELECT * FROM tbl_pos", cb);
+PosModel.getAll = (cb) => conn.query("SELECT * FROM ft_pos_getall()", cb);
 
-PosModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_pos WHERE cod_pos = $1", [id], cb);
+PosModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM ft_pos_getone($1)", [cod], cb);
 
 PosModel.save = (data, cb) => {
   conn.query(
@@ -21,28 +21,26 @@ PosModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "call prc_pos_update ($1,$2,$3,$4,$5,$6,$7)",
+              "call prc_pos_update ($1,$2,$3,$4,$5,$6)",
               [
                 data.cod_pos,
                 data.descripcion,
                 data.id_sucursal,
-                data.id_correlativo,
                 data.activo,
                 data.modificado_por,
-                data.fecha_modificacion
+                data.fecha_modificacion,
               ],
               cb
             )
           : conn.query(
-              "call prc_pos_insert ($1,$2,$3,$4,$5,$6,$7)",
+              "call prc_pos_insert ($1,$2,$3,$4,$5,$6)",
               [
                 data.cod_pos,
                 data.descripcion,
                 data.id_sucursal,
-                data.id_correlativo,
                 data.activo,
                 data.creado_por,
-                data.fecha_creacion
+                data.fecha_creacion,
               ],
               cb
             );
@@ -51,7 +49,6 @@ PosModel.save = (data, cb) => {
   );
 };
 
-PosModel.delete = (id, cb) =>
-  conn.query("call prc_pos_delete ($1)", [id], cb);
+PosModel.delete = (id, cb) => conn.query("call prc_pos_delete ($1)", [id], cb);
 
 module.exports = PosModel;

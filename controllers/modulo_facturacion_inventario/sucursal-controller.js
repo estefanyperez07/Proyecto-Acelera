@@ -1,6 +1,6 @@
 "use strict";
 
-var SucursalModel = require("../models/sucursal-model"),
+var SucursalModel = require("../../models/modulo_facturacion_inventario/sucursal-model"),
   SucursalController = () => {};
 
 SucursalController.getAll = (req, res, next) => {
@@ -12,7 +12,7 @@ SucursalController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -37,7 +37,7 @@ SucursalController.getOne = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -62,7 +62,7 @@ SucursalController.save = (req, res, next) => {
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion
+    fecha_modificacion: req.body.fecha_modificacion,
   };
 
   console.log(sucursal);
@@ -75,9 +75,9 @@ SucursalController.save = (req, res, next) => {
         error: err,
       };
 
-      //res.render('error', locals)
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).send("Success");
       //res.redirect('/')
     }
   });
@@ -96,9 +96,9 @@ SucursalController.delete = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).send("Success");
       //res.redirect('/')
     }
   });

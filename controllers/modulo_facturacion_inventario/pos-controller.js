@@ -1,6 +1,6 @@
 "use strict";
 
-var PosModel = require("../models/pos-model"),
+var PosModel = require("../../models/modulo_facturacion_inventario/pos-model"),
   PosController = () => {};
 
 PosController.getAll = (req, res, next) => {
@@ -12,7 +12,7 @@ PosController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -37,7 +37,7 @@ PosController.getOne = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -51,15 +51,14 @@ PosController.getOne = (req, res, next) => {
 
 PosController.save = (req, res, next) => {
   let pos = {
-    cod_categoria: req.body.cod_categoria,
+    cod_pos: req.body.cod_pos,
     descripcion: req.body.descripcion,
     id_sucursal: req.body.id_sucursal,
-    id_correlativo: req.body.id_correlativo,
     activo: req.body.activo,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion
+    fecha_modificacion: req.body.fecha_modificacion,
   };
 
   console.log(pos);
@@ -72,9 +71,9 @@ PosController.save = (req, res, next) => {
         error: err,
       };
 
-      //res.render('error', locals)
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).send("Success");
       //res.redirect('/')
     }
   });
@@ -93,9 +92,9 @@ PosController.delete = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).send("Success");
       //res.redirect('/')
     }
   });

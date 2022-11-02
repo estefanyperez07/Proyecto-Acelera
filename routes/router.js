@@ -154,18 +154,13 @@ router
   .delete("/mesa/eliminar/:cod_mesa", MesaController.delete)
   //****LISTA MATERIALES****
   .get("/lista_materiales/getall", ListaMaterialesController.getAll)
+  .get("/lista_materiales/getone/", ListaMaterialesController.getOne)
   .get(
-    "/lista_materiales/getone/:id_articulo_padre",
-    ListaMaterialesController.getOne
+    "/lista_materiales/padregetone/:id_articulo_padre",
+    ListaMaterialesController.padreGetAll
   )
-  .put(
-    "/lista_materiales/actualizar-insertar/:id_articulo_padre",
-    ListaMaterialesController.save
-  )
-  .delete(
-    "/lista_materiales/eliminar/:id_articulo_padre",
-    ListaMaterialesController.delete
-  )
+  .put("/lista_materiales/actualizar-insertar/", ListaMaterialesController.save)
+  .delete("/lista_materiales/eliminar/", ListaMaterialesController.delete)
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login

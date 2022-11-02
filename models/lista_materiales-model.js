@@ -3,15 +3,26 @@
 var conn = require("./db-connection"),
   ListaMaterialesModel = () => {};
 
-ListaMaterialesModel.getAll = (cb) => conn.query("SELECT * FROM tbl_lista_materiales", cb);
+ListaMaterialesModel.getAll = (cb) =>
+  conn.query("SELECT * FROM tbl_lista_materiales", cb);
 
-ListaMaterialesModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_lista_materiales WHERE id_articulo_padre = $1", [id], cb);
+ListaMaterialesModel.getOne = (id_padre, id_hijo, cb) =>
+  conn.query(
+    "SELECT * from public.ft_lista_materiales_getone($1,$2)",
+    [id_padre, id_hijo],
+    cb
+  );
+ListaMaterialesModel.padreGetAll = (id_padre, cb) =>
+  conn.query(
+    "SELECT * from public.ft_lista_materiales_padre_getall($1)",
+    [id_padre],
+    cb
+  );
 
 ListaMaterialesModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM tbl_lista_materiales WHERE id_articulo_padre = $1",
-    [data.id_articulo_padre],
+    "SELECT * from public.ft_lista_materiales_getone($1,$2)",
+    [data.id_articulo_padre, data.id_articulo_hijo],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
@@ -28,19 +39,19 @@ ListaMaterialesModel.save = (data, cb) => {
                 data.cantidad,
                 data.comentario,
                 data.modificado_por,
-                data.fecha_modificacion
+                data.fecha_modificacion,
               ],
               cb
             )
           : conn.query(
-              "call prc_lista_materiales_insert ($1,$2,$3,$4,$5)",
+              "call prc_lista_materiales_insert ($1,$2,$3,$4,$5,$6)",
               [
                 data.id_articulo_padre,
                 data.id_articulo_hijo,
                 data.cantidad,
                 data.comentario,
                 data.creado_por,
-                data.fecha_creacion
+                data.fecha_creacion,
               ],
               cb
             );

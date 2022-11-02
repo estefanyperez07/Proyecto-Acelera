@@ -1,6 +1,6 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   ListaMaterialesModel = () => {};
 
 ListaMaterialesModel.getAll = (cb) =>
@@ -60,7 +60,11 @@ ListaMaterialesModel.save = (data, cb) => {
   );
 };
 
-ListaMaterialesModel.delete = (id, cb) =>
-  conn.query("call prc_lista_materiales_delete ($1)", [id], cb);
+ListaMaterialesModel.delete = (id_padre, id_hijo, cb) =>
+  conn.query(
+    "CALL public.prc_lista_materiales_delete($1,$2)",
+    [id_padre, id_hijo],
+    cb
+  );
 
 module.exports = ListaMaterialesModel;

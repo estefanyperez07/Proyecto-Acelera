@@ -1,16 +1,17 @@
 "use strict";
 
-var conn = require("./db-connection"),
+var conn = require("../db-connection"),
   CorrelativoModel = () => {};
 
-CorrelativoModel.getAll = (cb) => conn.query("SELECT * FROM tbl_correlativo", cb);
+CorrelativoModel.getAll = (cb) =>
+  conn.query("SELECT * FROM public.ft_correlativo_getall()", cb);
 
 CorrelativoModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM tbl_correlativo WHERE id_correlativo = $1", [id], cb);
+  conn.query("SELECT * FROM public.ft_correlativo_getone($1)", [id], cb);
 
 CorrelativoModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM tbl_correlativo WHERE id_correlativo = $1",
+    "SELECT * FROM public.ft_correlativo_getone($1)",
     [data.id_correlativo],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
@@ -21,9 +22,10 @@ CorrelativoModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "call prc_correlativo_update ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
+              "call prc_correlativo_update ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
               [
                 data.id_correlativo,
+                data.id_pos,
                 data.cai,
                 data.sucursal_sar,
                 data.terminal_sar,
@@ -32,16 +34,17 @@ CorrelativoModel.save = (data, cb) => {
                 data.correlativo_final,
                 data.correlativo_actual,
                 data.fecha_vencimiento,
+                data.activo,
+                data.siguiente,
                 data.modificado_por,
                 data.fecha_modificacion,
-                data.activo
               ],
               cb
             )
           : conn.query(
-              "call prc_correlativo_insert ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
+              "call prc_correlativo_insert ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)",
               [
-                data.id_correlativo,
+                data.id_pos,
                 data.cai,
                 data.sucursal_sar,
                 data.terminal_sar,
@@ -50,9 +53,10 @@ CorrelativoModel.save = (data, cb) => {
                 data.correlativo_final,
                 data.correlativo_actual,
                 data.fecha_vencimiento,
+                data.activo,
+                data.siguiente,
                 data.creado_por,
                 data.fecha_creacion,
-                data.activo
               ],
               cb
             );

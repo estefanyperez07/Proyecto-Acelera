@@ -5,7 +5,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   ImpuestoController = require("../controllers/modulo_facturacion_inventario/impuesto-controller"),
   ArticuloController = require("../controllers/modulo_facturacion_inventario/articulo-controller"),
   CentroCostoController = require("../controllers/modulo_facturacion_inventario/centro_costo-controller"),
-  CorrelativoController = require("../controllers/correlativo-controller"),
+  CorrelativoController = require("../controllers/modulo_facturacion_inventario/correlativo-controller"),
   MetodoPagoController = require("../controllers/modulo_facturacion_inventario/metodo_pago-controller"),
   ModoPedidoController = require("../controllers/modulo_facturacion_inventario/modo_pedido-controller"),
   PosController = require("../controllers/modulo_facturacion_inventario/pos-controller"),
@@ -16,7 +16,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   UnidadMedidaController = require("../controllers/modulo_facturacion_inventario/unidad_medida-controller"),
   MapaController = require("../controllers/mapa-controller"),
   MesaController = require("../controllers/mesa-controller"),
-  ListaMaterialesController = require("../controllers/lista_materiales-controller"),
+  ListaMaterialesController = require("../controllers/modulo_facturacion_inventario/lista_materiales-controller"),
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
@@ -154,7 +154,7 @@ router
   .delete("/mesa/eliminar/:cod_mesa", MesaController.delete)
   //****LISTA MATERIALES****
   .get("/lista_materiales/getall", ListaMaterialesController.getAll)
-  .get("/lista_materiales/getone/", ListaMaterialesController.getOne)
+  .get("/lista_materiales/getone", ListaMaterialesController.getOne)
   .get(
     "/lista_materiales/padregetone/:id_articulo_padre",
     ListaMaterialesController.padreGetAll

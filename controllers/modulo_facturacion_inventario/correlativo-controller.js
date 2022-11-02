@@ -1,6 +1,6 @@
 "use strict";
 
-var CorrelativoModel = require("../models/correlativo-model"),
+var CorrelativoModel = require("../../models/modulo_facturacion_inventario/correlativo-model"),
   CorrelativoController = () => {};
 
 CorrelativoController.getAll = (req, res, next) => {
@@ -12,7 +12,7 @@ CorrelativoController.getAll = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Lista de Películas",
@@ -37,7 +37,7 @@ CorrelativoController.getOne = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
       let locals = {
         title: "Editar Película",
@@ -51,7 +51,8 @@ CorrelativoController.getOne = (req, res, next) => {
 
 CorrelativoController.save = (req, res, next) => {
   let correlativo = {
-    id_correlativo: req.body.id_correlativo,
+    id_correlativo: req.params.id_correlativo,
+    id_pos: req.body.id_pos,
     cai: req.body.cai,
     sucursal_sar: req.body.sucursal_sar,
     terminal_sar: req.body.terminal_sar,
@@ -60,11 +61,12 @@ CorrelativoController.save = (req, res, next) => {
     correlativo_final: req.body.correlativo_final,
     correlativo_actual: req.body.correlativo_actual,
     fecha_vencimiento: req.body.fecha_vencimiento,
+    activo: req.body.activo,
+    siguiente: req.body.siguiente,
     creado_por: req.body.creado_por,
     fecha_creacion: req.body.fecha_creacion,
     modificado_por: req.body.modificado_por,
     fecha_modificacion: req.body.fecha_modificacion,
-    activo: req.body.activo,
   };
 
   console.log(correlativo);
@@ -77,16 +79,16 @@ CorrelativoController.save = (req, res, next) => {
         error: err,
       };
 
-      //res.render('error', locals)
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });
 };
 
 CorrelativoController.delete = (req, res, next) => {
-  let id_correlativo = req.params.id_categoria;
+  let id_correlativo = req.params.id_correlativo;
   console.log(id_correlativo);
 
   CorrelativoModel.delete(id_correlativo, (err, rows) => {
@@ -98,9 +100,9 @@ CorrelativoController.delete = (req, res, next) => {
         error: err,
       };
 
-      res.render("error", locals);
+      res.status(520).json(err);
     } else {
-      res.send("Success");
+      res.status(200).json("Success");
       //res.redirect('/')
     }
   });

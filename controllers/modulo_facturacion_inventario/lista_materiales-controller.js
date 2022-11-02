@@ -1,6 +1,6 @@
 "use strict";
 
-var ListaMaterialesModel = require("../models/lista_materiales-model"),
+var ListaMaterialesModel = require("../../models/modulo_facturacion_inventario/lista_materiales-model"),
   ListaMaterialesController = () => {};
 
 ListaMaterialesController.getAll = (req, res, next) => {
@@ -109,24 +109,29 @@ ListaMaterialesController.save = (req, res, next) => {
 };
 
 ListaMaterialesController.delete = (req, res, next) => {
-  let id_articulo_padre = req.params.id_articulo_padre;
-  console.log(id_articulo_padre);
+  let id_articulo_padre = req.body.id_articulo_padre;
+  let id_articulo_hijo = req.body.id_articulo_hijo;
+  console.log(id_articulo_padre, id_articulo_hijo);
 
-  ListaMaterialesModel.delete(id_articulo_padre, (err, rows) => {
-    console.log(err, "---", rows);
-    if (err) {
-      let locals = {
-        title: `Error al eliminar el registro con el id: ${id_articulo_padre}`,
-        description: "Error de Sintaxis SQL",
-        error: err,
-      };
+  ListaMaterialesModel.delete(
+    id_articulo_padre,
+    id_articulo_hijo,
+    (err, rows) => {
+      console.log(err, "---", rows);
+      if (err) {
+        let locals = {
+          title: `Error al eliminar el registro con el id: ${id_articulo_padre}`,
+          description: "Error de Sintaxis SQL",
+          error: err,
+        };
 
-      res.status(520).json(err);
-    } else {
-      res.status(200).json("Success");
-      //res.redirect('/')
+        res.status(520).json(err);
+      } else {
+        res.status(200).json("Success");
+        //res.redirect('/')
+      }
     }
-  });
+  );
 };
 
 ListaMaterialesController.addForm = (req, res, next) =>

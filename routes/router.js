@@ -17,6 +17,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   MapaController = require("../controllers/mapa-controller"),
   MesaController = require("../controllers/mesa-controller"),
   ListaMaterialesController = require("../controllers/modulo_facturacion_inventario/lista_materiales-controller"),
+  BitacoraController = require("../controllers/modulo_facturacion_inventario/bitacora-controller"),
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
@@ -161,6 +162,11 @@ router
   )
   .put("/lista_materiales/actualizar-insertar/", ListaMaterialesController.save)
   .delete("/lista_materiales/eliminar/", ListaMaterialesController.delete)
+
+  //*****BITACORA******/
+  .get("/bitacora/getallbydate", BitacoraController.getAllByDate)
+  .post("/bitacora/insertar/", BitacoraController.save)
+  .delete("/bitacora/eliminar/", BitacoraController.delete)
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login

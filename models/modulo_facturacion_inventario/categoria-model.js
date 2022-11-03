@@ -10,8 +10,8 @@ CategoriaModel.getOne = (cod, cb) =>
 
 CategoriaModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM tbl_categoria WHERE cod_categoria = $1",
-    [data.cod_categoria],
+    "SELECT * FROM tbl_categoria WHERE id_categoria = $1 and cod_categoria = $2",
+    [data.id_categoria, data.cod_categoria],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
@@ -21,8 +21,9 @@ CategoriaModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "call prc_categoria_update ($1,$2,$3,$4,$5)",
+              "call prc_categoria_update ($1,$2,$3,$4,$5,$6)",
               [
+                data.id_categoria,
                 data.cod_categoria,
                 data.descripcion,
                 data.activo,

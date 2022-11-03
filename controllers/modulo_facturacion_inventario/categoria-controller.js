@@ -51,6 +51,7 @@ CategoriaController.getOne = (req, res, next) => {
 
 CategoriaController.save = (req, res, next) => {
   let categoria = {
+    id_categoria: req.body.id_categoria,
     cod_categoria: req.body.cod_categoria,
     descripcion: req.body.descripcion,
     activo: req.body.activo,

@@ -66,12 +66,13 @@ CategoriaController.save = (req, res, next) => {
   CategoriaModel.save(categoria, (err) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${categoria.cod_categoria}`,
-        description: "Error de Sintaxis SQL",
-        error: err,
+        title: `Error al salvar el registro con el cod_categoria: ${categoria.cod_categoria}`,
+        description: "El registro ya existe",
+        error: err.detail,
       };
-
-      res.status(520).json(err);
+      if (err.code === "23505") {
+        res.status(520).json(locals);
+      } else res.status(520).json(err);
     } else {
       res.status(200).send("Success");
       //res.redirect('/')

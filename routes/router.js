@@ -18,6 +18,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   MesaController = require("../controllers/mesa-controller"),
   ListaMaterialesController = require("../controllers/modulo_facturacion_inventario/lista_materiales-controller"),
   BitacoraController = require("../controllers/modulo_facturacion_inventario/bitacora-controller"),
+  VentaController = require("../controllers/modulo_facturacion_inventario/venta-controller"),
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
@@ -167,6 +168,9 @@ router
   .get("/bitacora/getallbydate", BitacoraController.getAllByDate)
   .post("/bitacora/insertar/", BitacoraController.save)
   .delete("/bitacora/eliminar/", BitacoraController.delete)
+
+  //******VENTA*******/
+  .post("/venta/insertar/", VentaController.post)
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login

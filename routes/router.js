@@ -28,6 +28,15 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   ParametroController = require("../controllers/modulo_seguridad/parametros-controller"),
   ObjetoController = require("../controllers/modulo_seguridad/objeto-controller"),
   LoginController = require("../controllers/modulo_seguridad/login-controller"),
+  //⮊⮊⮊⮊ CONTABILIDAD ⮈⮈⮈⮈ 🖐
+  SubcuentaController = require("../controllers/modulo_contabilidad/subcuenta-controller"),
+  EstadoController = require("../controllers/modulo_contabilidad/estado-controller"),
+  LibroDetalleController = require("../controllers/modulo_contabilidad/librodiariodetalle-controller"),
+  LibroEncabezadoController = require("../controllers/modulo_contabilidad/librodiarioencabezado-controller"),
+  PeriodoContableController = require("../controllers/modulo_contabilidad/periodo-controller"),
+  LibroMayorController = require("../controllers/modulo_contabilidad/libromayor-controller"),
+
+
   express = require("express"),
   router = express.Router();
 
@@ -227,6 +236,38 @@ router
   .get("/ms_objetos/getone/:id_objeto", ObjetoController.getOne)
   .put("/ms_objetos/actualizar-insertar/:id_objeto", ObjetoController.save)
   .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)
+
+  //⮊⮊⮊⮊ CONTABILIDAD ⮈⮈⮈⮈ 🖐
+  //SUBCUENTA
+  .get("/mc_subcuenta/getall", SubcuentaController.getAll)
+  .get("/mc_subcuenta/getone/:id_subcuenta", SubcuentaController.getOne)
+  .put("/mc_subcuenta/actualizar-insertar/:id_subcuenta", SubcuentaController.save)
+  .delete("/mc_subcuenta/eliminar/:id_subcuenta", SubcuentaController.delete)
+  //ESTADO
+  .get("/mc_estado/getall", EstadoController.getAll)
+  .get("/mc_estado/getone/:id_estado", EstadoController.getOne)
+  .put("/mc_estado/actualizar-insertar/:id_estado", EstadoController.save)
+  .delete("/mc_estado/eliminar/:id_estado", EstadoController.delete)
+  //LIBRO DIARIO DETALLE
+  .get("/mc_librodetalle/getall", LibroDetalleController.getAll)
+  .get("/mc_librodetalle/getone/:id_libro_diario_deta", LibroDetalleController.getOne)
+  .put("/mc_librodetalle/actualizar-insertar/:id_libro_diario_deta", LibroDetalleController.save)
+  .delete("/mc_librodetalle/eliminar/:id_libro_diario_deta", LibroDetalleController.delete)
+  //LIBRO DIARIO ENCABEZADO
+  .get("/mc_libroencabezado/getall", LibroEncabezadoController.getAll)
+  .get("/mc_libroencabezado/getone/:id_libro_diario_enca", LibroEncabezadoController.getOne)
+  .put("/mc_libroencabezado/actualizar-insertar/:id_libro_diario_enca", LibroEncabezadoController.save)
+  .delete("/mc_libroencabezado/eliminar/:id_libro_diario_enca", LibroEncabezadoController.delete)
+   //PERIODO CONTABLE
+   .get("/mc_periodo/getall", PeriodoContableController.getAll)
+   .get("/mc_periodo/getone/:id_periodo_contable", PeriodoContableController.getOne)
+   .put("/mc_periodo/actualizar-insertar/:id_periodo_contable", PeriodoContableController.save)
+   .delete("/mc_periodo/eliminar/:id_periodo_contable", PeriodoContableController.delete)
+   //LIBRO MAYOR
+   .get("/mc_libromayor/getall", LibroMayorController.getAll)
+   .get("/mc_libromayor/getone/:id_libro_mayor", LibroMayorController.getOne)
+   .put("/mc_libromayor/actualizar-insertar/:id_libro_mayor", LibroMayorController.save)
+   .delete("/mc_libromayor/eliminar/:id_libro_mayor", LibroMayorController.delete)
 
   .use(CategoriaController.error404);
 

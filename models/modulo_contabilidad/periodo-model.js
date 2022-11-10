@@ -4,7 +4,7 @@ var conn = require("../db-connection"),
   PeriodoContableModel = () => {};
 
 PeriodoContableModel.getAll = (cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_periodo_contable", cb);
+  conn.query("SELECT * FROM contabilidad.ft_select_periodo_contable()", cb);
 
 PeriodoContableModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_periodo_contable WHERE id_periodo_contable = $1 ", [cod], cb);

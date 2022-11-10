@@ -4,7 +4,7 @@ var conn = require("../db-connection"),
   LibroMayorModel = () => {};
 
 LibroMayorModel.getAll = (cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_libro_mayor", cb);
+  conn.query("SELECT * FROM contabilidad.ft_select_libro_mayor()", cb);
 
 LibroMayorModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_libro_mayor WHERE id_libro_mayor = $1 ", [cod], cb);

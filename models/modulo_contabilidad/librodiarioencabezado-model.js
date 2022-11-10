@@ -4,7 +4,7 @@ var conn = require("../db-connection"),
   LibroEncabezadoModel = () => {};
 
 LibroEncabezadoModel.getAll = (cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_libro_diario_encabezado", cb);
+  conn.query("SELECT * FROM contabilidad.ft_select_libro_diario_encabezado()", cb);
 
 LibroEncabezadoModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_libro_diario_encabezado WHERE id_libro_diario_enca = $1 ", [cod], cb);

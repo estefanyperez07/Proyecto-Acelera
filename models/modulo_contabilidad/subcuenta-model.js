@@ -4,7 +4,7 @@ var conn = require("../db-connection"),
   SubcuentaModel = () => {};
 
 SubcuentaModel.getAll = (cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_subcuenta", cb);
+  conn.query("SELECT * FROM contabilidad.ft_select_subcuenta()", cb);
 
 SubcuentaModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_subcuenta WHERE id_subcuenta = $1 ", [cod], cb);

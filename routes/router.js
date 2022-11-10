@@ -35,6 +35,10 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   LibroEncabezadoController = require("../controllers/modulo_contabilidad/librodiarioencabezado-controller"),
   PeriodoContableController = require("../controllers/modulo_contabilidad/periodo-controller"),
   LibroMayorController = require("../controllers/modulo_contabilidad/libromayor-controller"),
+  CategoriaContController = require("../controllers/modulo_contabilidad/categoriacon-controller"),
+  CatalogoController = require("../controllers/modulo_contabilidad/catalogo_cuentas-controller"),
+  DestinoCuentaController = require("../controllers/modulo_contabilidad/destino_cuenta-controller"),
+  InformeFinancieroController = require("../controllers/modulo_contabilidad/informe_financiero-controller"),
 
 
   express = require("express"),
@@ -268,6 +272,26 @@ router
    .get("/mc_libromayor/getone/:id_libro_mayor", LibroMayorController.getOne)
    .put("/mc_libromayor/actualizar-insertar/:id_libro_mayor", LibroMayorController.save)
    .delete("/mc_libromayor/eliminar/:id_libro_mayor", LibroMayorController.delete)
+   //CATEGORIA CONTABLE
+  .get("/mc_categoriacont/getall", CategoriaContController.getAll)
+  .get("/mc_categoriacont/getone/:id_categoria", CategoriaContController.getOne)
+  .put("/mc_categoriacont/actualizar-insertar/:id_categoria", CategoriaContController.save)
+  .delete("/mc_categoriacont/eliminar/:id_categoria", CategoriaContController.delete)
+  //CATALOGO DE CUENTAS
+  .get("/mc_catalogo/getall", CatalogoController.getAll)
+  .get("/mc_catalogo/getone/:id_cuenta", CatalogoController.getOne)
+  .put("/mc_catalogo/actualizar-insertar/:id_cuenta", CatalogoController.save)
+  .delete("/mc_catalogo/eliminar/:id_cuenta", CatalogoController.delete)
+   //DESTINO DE CUENTAS
+   .get("/mc_destino/getall", DestinoCuentaController.getAll)
+   .get("/mc_destino/getone/:id_destino_cuenta", DestinoCuentaController.getOne)
+   .put("/mc_destino/actualizar-insertar/:id_destino_cuenta", DestinoCuentaController.save)
+   .delete("/mc_destino/eliminar/:id_destino_cuenta", DestinoCuentaController.delete)
+   //INFORME FINANCIERO
+   .get("/mc_informefinanciero/getall", InformeFinancieroController.getAll)
+   .get("/mc_informefinanciero/getone/:id_informe_financiero", InformeFinancieroController.getOne)
+   .put("/mc_informefinanciero/actualizar-insertar/:id_informe_financiero", InformeFinancieroController.save)
+   .delete("/mc_informefinanciero/eliminar/:id_informe_financiero", InformeFinancieroController.delete)
 
   .use(CategoriaController.error404);
 

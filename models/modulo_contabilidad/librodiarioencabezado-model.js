@@ -9,6 +9,10 @@ LibroEncabezadoModel.getAll = (cb) =>
 LibroEncabezadoModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_libro_diario_encabezado WHERE id_libro_diario_enca = $1 ", [cod], cb);
 
+  LibroEncabezadoModel.post = (data, cb) => {
+    conn.query("select contabilidad.fcn_diario_insert($1)", [data], cb);
+  };
+
 LibroEncabezadoModel.save = (data, cb) => {
   conn.query(
     "SELECT * FROM contabilidad.tbl_libro_diario_encabezado WHERE id_libro_diario_enca = $1",

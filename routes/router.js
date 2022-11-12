@@ -295,6 +295,11 @@ router
     "/mc_libroencabezado/eliminar/:id_libro_diario_enca",
     LibroEncabezadoController.delete
   )
+  
+  .post(
+    "/mc_libroencabezado/insertar",
+    LibroEncabezadoController.post
+  )
   //PERIODO CONTABLE
   .get("/mc_periodo/getall", PeriodoContableController.getAll)
   .get(

@@ -108,7 +108,7 @@ LibroEncabezadoController.post = (req, res, next) => {
     monto_haber: req.body.monto_haber,
     id_usuario: req.body.id_usuario,
     nombre_usuario: req.body.nombre_usuario,
-
+    detalle: req.body.detalle,
   };
 
   console.log(JSON.stringify(librodiarioencabezado));
@@ -127,6 +127,5 @@ LibroEncabezadoController.post = (req, res, next) => {
     }
   });
 };
-
 
 module.exports = LibroEncabezadoController;

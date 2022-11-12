@@ -24,6 +24,27 @@ MetodoPagoController.getAll = (req, res, next) => {
   });
 };
 
+MetodoPagoController.getAllActive = (req, res, next) => {
+  MetodoPagoModel.getAllActive((err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+      //res.render('index', locals)
+    }
+  });
+};
+
 MetodoPagoController.getOne = (req, res, next) => {
   let cod_metodo_pago = req.params.cod_metodo_pago;
   console.log(cod_metodo_pago);

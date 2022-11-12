@@ -5,6 +5,9 @@ var conn = require("../db-connection"),
 
 DescuentoModel.getAll = (cb) => conn.query("SELECT * FROM tbl_descuento", cb);
 
+DescuentoModel.getAllActive = (cb) =>
+  conn.query("SELECT * FROM tbl_descuento where activo ='1'", cb);
+
 DescuentoModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM tbl_descuento WHERE cod_descuento = $1", [cod], cb);
 

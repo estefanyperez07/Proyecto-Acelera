@@ -24,6 +24,26 @@ CategoriaController.getAll = (req, res, next) => {
   });
 };
 
+CategoriaController.getAllActive = (req, res, next) => {
+  CategoriaModel.getAllActive((err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+    }
+  });
+};
+
 CategoriaController.getOne = (req, res, next) => {
   let cod_categoria = req.params.cod_categoria;
   console.log(cod_categoria);

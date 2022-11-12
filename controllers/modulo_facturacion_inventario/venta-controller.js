@@ -24,11 +24,30 @@ VentaController.getAll = (req, res, next) => {
   });
 };
 
-VentaController.getOne = (req, res, next) => {
-  let cod_sucursal = req.params.cod_sucursal;
-  console.log(cod_sucursal);
+VentaController.secuencia_enc_getone = (req, res, next) => {
+  VentaModel.secuencia_enc_getone((err, rows) => {
+    console.log(err, "---", rows);
+    if (err) {
+      let locals = {
+        title: `Error al buscar el registro con el id: ${cod_sucursal}`,
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
 
-  VentaModel.getOne(cod_sucursal, (err, rows) => {
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Editar Película",
+        data: rows,
+      };
+      res.status(200).send(rows.rows[0]);
+      //res.render('edit-movie', locals)
+    }
+  });
+};
+
+VentaController.secuencia_det_getone = (req, res, next) => {
+  VentaModel.secuencia_det_getone((err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
@@ -50,48 +69,53 @@ VentaController.getOne = (req, res, next) => {
 };
 
 VentaController.post = (req, res, next) => {
-  let sucursal = {
+  let venta = {
+    secuencia_enc: req.body.secuencia_enc,
+    id_sucursal: req.body.id_sucursal,
     cod_sucursal: req.body.cod_sucursal,
-    descripcion: req.body.descripcion,
-    direccion: req.body.direccion,
-    telefono: req.body.telefono,
+    fecha: req.body.fecha,
+    numero_cuenta: req.body.numero_cuenta,
+    venta_grabada_15: req.body.venta_grabada_15,
+    venta_grabada_18: req.body.venta_grabada_18,
+    venta_exenta: req.body.venta_exenta,
+    impuesto_15: req.body.impuesto_15,
+    impuesto_18: req.body.impuesto_18,
+    venta_total: req.body.venta_total,
+    cai: req.body.cai,
+    correlativo: req.body.correlativo,
     rtn: req.body.rtn,
-    id_centro_costo: req.body.id_centro_costo,
-    id_mapa: req.body.id_mapa,
-    activo: req.body.activo,
-    creado_por: req.body.creado_por,
-    fecha_creacion: req.body.fecha_creacion,
-    modificado_por: req.body.modificado_por,
-    fecha_modificacion: req.body.fecha_modificacion,
+    nombre_cliente: req.body.nombre_cliente,
+    detalle: req.body.detalle,
+    detalle_pago: req.body.detalle_pago,
+    detalle_promo: req.body.detalle_promo,
+    detalle_desc: req.body.detalle_desc,
   };
 
-  console.log(sucursal);
+  console.log(JSON.stringify(venta));
 
-  VentaModel.post(sucursal, (err) => {
+  VentaModel.post(venta, (err, rows) => {
     if (err) {
       let locals = {
-        title: `Error al salvar el registro con el id: ${sucursal.cod_sucursal}`,
+        title: `Error al salvar el registro con el id: ${venta.cod_sucursal}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
-
       res.status(520).json(err);
     } else {
-      res.status(200).send("Success");
+      res.status(200).json(rows.rows);
       //res.redirect('/')
     }
   });
 };
 
-VentaController.delete = (req, res, next) => {
-  let cod_sucursal = req.params.cod_sucursal;
-  console.log(cod_sucursal);
+VentaController.delete = (venta) => {
+  console.log(venta);
 
-  VentaModel.delete(cod_sucursal, (err, rows) => {
+  VentaModel.delete(venta, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al eliminar el registro con el id: ${cod_sucursal}`,
+        title: `Error al eliminar el registro con el id: ${venta}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

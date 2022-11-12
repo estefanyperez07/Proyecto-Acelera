@@ -6,6 +6,9 @@ var conn = require("../db-connection"),
 ModoPedidoModel.getAll = (cb) =>
   conn.query("SELECT * FROM tbl_modo_pedido", cb);
 
+ModoPedidoModel.getAllActive = (cb) =>
+  conn.query("SELECT * FROM tbl_modo_pedido where activo = '1'", cb);
+
 ModoPedidoModel.getOne = (cod, cb) =>
   conn.query(
     "SELECT * FROM tbl_modo_pedido WHERE cod_modo_pedido = $1",

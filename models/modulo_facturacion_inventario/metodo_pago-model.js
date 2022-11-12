@@ -6,6 +6,9 @@ var conn = require("../db-connection"),
 MetodoPagoModel.getAll = (cb) =>
   conn.query("SELECT * FROM tbl_metodo_pago", cb);
 
+MetodoPagoModel.getAllActive = (cb) =>
+  conn.query("SELECT * FROM tbl_metodo_pago where activo = '1'", cb);
+
 MetodoPagoModel.getOne = (cod, cb) =>
   conn.query(
     "SELECT * FROM tbl_metodo_pago WHERE cod_metodo_pago = $1",

@@ -6,6 +6,28 @@ var conn = require("../db-connection"),
 ArticuloModel.getAll = (cb) =>
   conn.query("SELECT * FROM ft_articulo_getall()", cb);
 
+ArticuloModel.getAllByCategoria = (id_categoria, cb) =>
+  conn.query(
+    `SELECT 		a.id_articulo
+			,a.cod_articulo
+			,a.descripcion
+			,a.descripcion_corta
+			,a.id_impuesto
+			,c.tipo
+			,c.porcentaje
+			,a.id_categoria
+			,a.precio
+			,a.codigo_barra
+  FROM 		tbl_articulo a 
+  inner join 	tbl_categoria b on a.id_categoria=b.id_categoria and b.activo='1'
+  inner join 	tbl_impuesto c on a.id_impuesto=c.id_impuesto
+  where 		a.activo = '1'
+  and			a.id_categoria = $1
+  and   a.tipo = 'V' `,
+    [id_categoria],
+    cb
+  );
+
 ArticuloModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM ft_articulo_getone($1)", [cod], cb);
 

@@ -24,6 +24,26 @@ DescuentoController.getAll = (req, res, next) => {
   });
 };
 
+DescuentoController.getAllActive = (req, res, next) => {
+  DescuentoModel.getAllActive((err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+    }
+  });
+};
+
 DescuentoController.getOne = (req, res, next) => {
   let cod_descuento = req.params.cod_descuento;
   console.log(cod_descuento);

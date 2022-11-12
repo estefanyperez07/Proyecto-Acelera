@@ -5,6 +5,9 @@ var conn = require("../db-connection"),
 
 CategoriaModel.getAll = (cb) => conn.query("SELECT * FROM tbl_categoria", cb);
 
+CategoriaModel.getAllActive = (cb) =>
+  conn.query("SELECT * FROM tbl_categoria where activo = '1'", cb);
+
 CategoriaModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM tbl_categoria WHERE cod_categoria = $1", [cod], cb);
 

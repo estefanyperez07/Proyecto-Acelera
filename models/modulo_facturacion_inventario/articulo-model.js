@@ -48,7 +48,7 @@ ArticuloModel.save = (data, cb) => {
               [
                 data.cod_articulo,
                 data.tipo,
-                data.descripcion,
+                data.descripcion_articulo,
                 data.descripcion_corta,
                 data.id_impuesto,
                 data.id_categoria,
@@ -69,7 +69,7 @@ ArticuloModel.save = (data, cb) => {
               [
                 data.cod_articulo,
                 data.tipo,
-                data.descripcion,
+                data.descripcion_articulo,
                 data.descripcion_corta,
                 data.id_impuesto,
                 data.id_categoria,

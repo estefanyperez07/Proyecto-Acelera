@@ -99,6 +99,33 @@ LibroEncabezadoController.delete = (req, res, next) => {
   });
 };
 
+LibroEncabezadoController.post = (req, res, next) => {
+  let librodiarioencabezado = {
+    id_estado: req.body.id_estado,
+    descripcion: req.body.descripcion,
+    fecha: req.body.fecha,
+    monto_debe: req.body.monto_debe,
+    monto_haber: req.body.monto_haber,
+    id_usuario: req.body.id_usuario,
+    nombre_usuario: req.body.nombre_usuario,
+    detalle: req.body.detalle,
+  };
 
+  console.log(JSON.stringify(librodiarioencabezado));
+
+  LibroEncabezadoModel.post(librodiarioencabezado, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: `Error al salvar el registro con el id: ${librodiarioencabezado}`,
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+      res.status(520).json(err);
+    } else {
+      res.status(200).json(rows.rows);
+      //res.redirect('/')
+    }
+  });
+};
 
 module.exports = LibroEncabezadoController;

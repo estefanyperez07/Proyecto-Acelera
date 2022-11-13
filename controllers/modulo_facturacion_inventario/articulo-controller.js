@@ -75,7 +75,7 @@ ArticuloController.save = (req, res, next) => {
   let articulo = {
     cod_articulo: req.body.cod_articulo,
     tipo: req.body.tipo,
-    descripcion: req.body.descripcion,
+    descripcion_articulo: req.body.descripcion_articulo,
     descripcion_corta: req.body.descripcion_corta,
     id_impuesto: req.body.id_impuesto,
     id_categoria: req.body.id_categoria,

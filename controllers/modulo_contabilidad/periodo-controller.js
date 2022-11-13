@@ -51,13 +51,12 @@ PeriodoContableController.getOne = (req, res, next) => {
 
 PeriodoContableController.save = (req, res, next) => {
   let periodo = {
-    id_periodo_contable: req.body.id_periodo_contable,
+    id_periodo_contable: req.params.id_periodo_contable,
     descripcion_periodo: req.body.descripcion_periodo,
     fecha_inicial: req.body.fecha_inicial,
     fecha_final: req.body.fecha_final,
     fecha_creacion: req.body.fecha_creacion,
     id_usuario: req.body.id_usuario,
-    nombre_usuario: req.body.nombre_usuario,
   };
 
   console.log(periodo);

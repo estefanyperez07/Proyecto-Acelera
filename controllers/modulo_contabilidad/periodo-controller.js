@@ -57,6 +57,8 @@ PeriodoContableController.save = (req, res, next) => {
     fecha_final: req.body.fecha_final,
     fecha_creacion: req.body.fecha_creacion,
     id_usuario: req.body.id_usuario,
+    tipo_periodo: req.body.tipo_periodo,
+    estado_periodo: req.body.estado_periodo,
   };
 
   console.log(periodo);

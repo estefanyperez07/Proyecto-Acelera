@@ -17,12 +17,12 @@ PeriodoContableModel.save = (data, cb) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
 
-      if (err) { //MODIFICAR
+      if (err) { 
         return err;
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "select contabilidad.ft_actualizar_periodo_contable ($1,$2,$3,$4,$5,$6)",
+              "select contabilidad.ft_actualizar_periodo_contable ($1,$2,$3,$4,$5,$6,$7,$8)",
               [
                 data.id_periodo_contable,
                 data.descripcion_periodo,
@@ -30,17 +30,21 @@ PeriodoContableModel.save = (data, cb) => {
                 data.fecha_final,
                 data.fecha_creacion,
                 data.id_usuario,
+                data.tipo_periodo,
+                data.estado_periodo,
               ],
               cb
             )
-          : conn.query( //MODIFICAR
-              "select contabilidad.sp_insert_periodo_contable ($1,$2,$3,$4,$5)",
+          : conn.query( 
+              "select contabilidad.sp_insert_periodo_contable ($1,$2,$3,$4,$5,$6,$7)",
               [
                 data.descripcion_periodo,
                 data.fecha_inicial,
                 data.fecha_final,
                 data.fecha_creacion,
                 data.id_usuario,
+                data.tipo_periodo,
+                data.estado_periodo,
               ],
               cb
             );
@@ -49,7 +53,7 @@ PeriodoContableModel.save = (data, cb) => {
   );
 };
 
-PeriodoContableModel.delete = (cod, cb) => //MODIFICAR
+PeriodoContableModel.delete = (cod, cb) =>
   conn.query("select contabilidad.d_delete_periodo_contable ($1)", [cod], cb);
 
 module.exports = PeriodoContableModel;

@@ -15,7 +15,7 @@ CatalogoModel.save = (data, cb) => {
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
-
+ //FUNCIONA---------
       if (err) {
         return err;
       } else {

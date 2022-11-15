@@ -49,6 +49,7 @@ CatalogoController.getOne = (req, res, next) => {
   });
 };
 
+//FUNCIONA------
 CatalogoController.save = (req, res, next) => { 
   let catalogo = {
     id_cuenta: req.params.id_cuenta,

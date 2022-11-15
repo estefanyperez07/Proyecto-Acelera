@@ -95,22 +95,4 @@ CategoriaContController.delete = (req, res, next) => {
   });
 };
 
-/*CategoriaContController.addForm = (req, res, next) =>
-  res.render("add-movie", { title: "Agregar categoría" });
-
-CategoriaContController.error404 = (req, res, next) => {
-  let error = new Error(),
-    locals = {
-      title: "Error 404",
-      description: "Recurso No Encontrado",
-      error: error,
-    };
-
-  error.status = 404;
-
-  res.render("error", locals);
-
-  next();
-};*/
-
 module.exports = CategoriaContController;

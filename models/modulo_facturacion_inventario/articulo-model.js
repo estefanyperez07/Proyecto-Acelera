@@ -28,6 +28,27 @@ ArticuloModel.getAllByCategoria = (id_categoria, cb) =>
     cb
   );
 
+ArticuloModel.getAllActive = (cb) =>
+  conn.query(
+    `SELECT 		a.id_articulo
+			,a.cod_articulo
+			,a.descripcion
+			,a.descripcion_corta
+			,a.id_impuesto
+			,c.tipo
+			,c.porcentaje
+			,a.id_categoria
+			,a.precio
+			,a.codigo_barra
+  FROM 		tbl_articulo a 
+  inner join 	tbl_categoria b on a.id_categoria=b.id_categoria and b.activo='1'
+  inner join 	tbl_impuesto c on a.id_impuesto=c.id_impuesto
+  where 		a.activo = '1'
+  and			b.activo = '1'
+  and   a.tipo = 'V' `,
+    cb
+  );
+
 ArticuloModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM ft_articulo_getone($1)", [cod], cb);
 

@@ -71,6 +71,7 @@ router
   .delete("/impuesto/eliminar/:cod_impuesto", ImpuestoController.delete)
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
+  .get("/articulo/getallactive", ArticuloController.getAllActive)
   .get(
     "/articulo/getallbycategoria/:id_categoria",
     ArticuloController.getAllByCategoria
@@ -295,11 +296,8 @@ router
     "/mc_libroencabezado/eliminar/:id_libro_diario_enca",
     LibroEncabezadoController.delete
   )
-  
-  .post(
-    "/mc_libroencabezado/insertar",
-    LibroEncabezadoController.post
-  )
+
+  .post("/mc_libroencabezado/insertar", LibroEncabezadoController.post)
   //PERIODO CONTABLE
   .get("/mc_periodo/getall", PeriodoContableController.getAll)
   .get(

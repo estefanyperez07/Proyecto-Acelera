@@ -4,7 +4,7 @@ var conn = require("../db-connection"),
   CorrelativoModel = () => {};
 
 CorrelativoModel.getAll = (cb) =>
-  conn.query("SELECT * FROM public.ft_correlativo_getall()", cb);
+  conn.query("SELECT * from public.ft_correlativo_getall()", cb);
 
 CorrelativoModel.getOne = (id, cb) =>
   conn.query("SELECT * FROM public.ft_correlativo_getone($1)", [id], cb);

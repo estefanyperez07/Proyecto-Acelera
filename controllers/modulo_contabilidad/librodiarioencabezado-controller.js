@@ -49,7 +49,7 @@ LibroEncabezadoController.getOne = (req, res, next) => {
   });
 };
 
-LibroEncabezadoController.save = (req, res, next) => {
+LibroEncabezadoController.save = (req, res, next) => { //REVISAR TABLA EN BASE DE DATOS
   let librodiarioencabezado = {
     id_libro_diario_enca: req.body.id_libro_diario_enca,
     id_estado: req.body.id_estado,

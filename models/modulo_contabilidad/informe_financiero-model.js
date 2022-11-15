@@ -1,17 +1,17 @@
 "use strict";
 
 var conn = require("../db-connection"),
-  CategoriaContModel = () => {};
+  InformeFinancieroModel = () => {};
 
-CategoriaContModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.ft_select_informe_financiero()", cb);
+InformeFinancieroModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.ft_select_informe_financiero()", cb);
 
-CategoriaContModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_categoria WHERE id_categoria = $1", [cod], cb);
+InformeFinancieroModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM contabilidad.tbl_informe_financiero WHERE id_informe_financiero = $1", [cod], cb);
 
-CategoriaContModel.save = (data, cb) => {
+InformeFinancieroModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM contabilidad.tbl_categoria WHERE id_categoria = $1",
-    [data.id_categoria],
+    "SELECT * FROM contabilidad.tbl_informe_financiero WHERE id_informe_financiero = $1",
+    [data.id_informe_financiero],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
@@ -21,17 +21,17 @@ CategoriaContModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "call ft_categoria_update ($1,$2)", //FALTA
+              "select contabilidad.ft_actualizar_informe_financiero ($1,$2)",
               [
-                data.id_categoria,
-                data.nombre_categoria,
+                data.id_informe_financiero,
+                data.descripcion,
               ],
               cb
             )
           : conn.query(
-              "call prc_categoria_insert ($1)",
+              "select contabilidad.sp_insert_informe_financiero ($1)",
               [
-                data.nombre_categoria,
+                data.descripcion,
               ],
               cb
             );
@@ -40,7 +40,7 @@ CategoriaContModel.save = (data, cb) => {
   );
 };
 
-CategoriaContModel.delete = (id, cb) =>
-  conn.query("call prc_categoria_delete ($1)", [id], cb);
+InformeFinancieroModel.delete = (id, cb) =>
+  conn.query("select contabilidad.d_delete_informe_financiero ($1)", [id], cb);
 
-module.exports = CategoriaContModel;
+module.exports = InformeFinancieroModel;

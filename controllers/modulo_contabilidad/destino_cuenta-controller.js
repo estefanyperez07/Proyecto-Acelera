@@ -51,7 +51,7 @@ DestinoCuentaController.getOne = (req, res, next) => {
 
 DestinoCuentaController.save = (req, res, next) => {
   let destinocuenta = {
-    id_destino_cuenta: req.body.id_destino_cuenta,
+    id_destino_cuenta: req.params.id_destino_cuenta,
     id_cuenta: req.body.id_cuenta,
     id_informe_financiero: req.body.id_informe_financiero,
   };
@@ -95,7 +95,7 @@ DestinoCuentaController.delete = (req, res, next) => {
   });
 };
 
-DestinoCuentaController.addForm = (req, res, next) =>
+/*DestinoCuentaController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar Destino Cuenta" });
 
 DestinoCuentaController.error404 = (req, res, next) => {
@@ -111,6 +111,6 @@ DestinoCuentaController.error404 = (req, res, next) => {
   res.render("error", locals);
 
   next();
-};
+};*/
 
 module.exports = DestinoCuentaController;

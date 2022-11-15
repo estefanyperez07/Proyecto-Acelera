@@ -21,17 +21,27 @@ CatalogoModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "call ft_categoria_update ($1,$2)", //FALTA
+              "select contabilidad.ft_actualizar_catalogo($1,$2,$3,$4,$5,$6,$7)",
               [
                 data.id_cuenta,
-                data.nombre_categoria,
+                data.id_usuario,
+                data.codigo_cuenta,
+                data.nombre_cuenta,
+                data.id_categoria,
+                data.id_destino_cuenta,
+                data.saldo,
               ],
               cb
             )
           : conn.query(
-              "call prc_categoria_insert ($1)",
+              "select contabilidad.sp_insert_catalogo_cuenta ($1,$2,$3,$4,$5,$6)",
               [
-                data.nombre_categoria,
+                data.id_usuario,
+                data.codigo_cuenta,
+                data.nombre_cuenta,
+                data.id_categoria,
+                data.id_destino_cuenta,
+                data.saldo,
               ],
               cb
             );
@@ -41,6 +51,6 @@ CatalogoModel.save = (data, cb) => {
 };
 
 CatalogoModel.delete = (id, cb) =>
-  conn.query("call prc_categoria_delete ($1)", [id], cb);
+  conn.query("select contabilidad.d_delete_catalogo_cuenta ($1)", [id], cb);
 
 module.exports = CatalogoModel;

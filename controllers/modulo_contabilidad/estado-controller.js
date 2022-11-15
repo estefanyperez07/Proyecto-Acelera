@@ -51,7 +51,7 @@ EstadoController.getOne = (req, res, next) => {
 
 EstadoController.save = (req, res, next) => {
   let estado = {
-    id_estado: req.body.id_estado,
+    id_estado: req.params.id_estado,
     tipo_estado: req.body.tipo_estado,
   };
 

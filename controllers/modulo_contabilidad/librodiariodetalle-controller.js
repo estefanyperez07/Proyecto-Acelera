@@ -49,7 +49,7 @@ LibroDetalleController.getOne = (req, res, next) => {
   });
 };
 
-LibroDetalleController.save = (req, res, next) => {
+LibroDetalleController.save = (req, res, next) => {  //REVISAR TABLA EN BASE DE DATOS
   let librodiariodetalle = {
     id_libro_diario_deta: req.body.id_libro_diario_deta,
     id_libro_diario_enca: req.body.id_libro_diario_enca,

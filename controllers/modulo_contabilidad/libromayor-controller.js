@@ -51,7 +51,7 @@ LibroMayorController.getOne = (req, res, next) => {
 
 LibroMayorController.save = (req, res, next) => {
   let libromayor = {
-    id_libro_mayor: req.body.id_libro_mayor,
+    id_libro_mayor: req.params.id_libro_mayor,
     id_periodo_contable: req.body.id_periodo_contable,
     fecha: req.body.fecha,
     id_cuenta: req.body.id_cuenta,

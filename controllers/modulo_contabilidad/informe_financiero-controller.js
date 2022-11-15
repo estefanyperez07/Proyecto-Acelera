@@ -49,14 +49,11 @@ InformeFinancieroController.getOne = (req, res, next) => {
   });
 };
 
+//FUNCIONA
 InformeFinancieroController.save = (req, res, next) => {
   let informefinanciero = {
-    id_informe_financiero: req.body.id_informe_financiero,
-    id_usuario: req.body.id_usuario,
-    codigo_cuenta: req.body.codigo_cuenta,
-    nombre_cuenta: req.body.nombre_cuenta,
-    id_categoria: req.body.id_categoria,
-    id_destino_cuenta: req.body.id_destino_cuenta,
+    id_informe_financiero: req.params.id_informe_financiero,
+    descripcion: req.body.descripcion,
   };
 
   console.log(informefinanciero);
@@ -98,7 +95,7 @@ InformeFinancieroController.delete = (req, res, next) => {
   });
 };
 
-InformeFinancieroController.addForm = (req, res, next) =>
+/*InformeFinancieroController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar informe financiero" });
 
 InformeFinancieroController.error404 = (req, res, next) => {
@@ -114,6 +111,6 @@ InformeFinancieroController.error404 = (req, res, next) => {
   res.render("error", locals);
 
   next();
-};
+};*/
 
 module.exports = InformeFinancieroController;

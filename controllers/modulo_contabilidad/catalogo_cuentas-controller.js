@@ -49,14 +49,15 @@ CatalogoController.getOne = (req, res, next) => {
   });
 };
 
-CatalogoController.save = (req, res, next) => {
+CatalogoController.save = (req, res, next) => { 
   let catalogo = {
-    id_cuenta: req.body.id_cuenta,
+    id_cuenta: req.params.id_cuenta,
     id_usuario: req.body.id_usuario,
     codigo_cuenta: req.body.codigo_cuenta,
     nombre_cuenta: req.body.nombre_cuenta,
     id_categoria: req.body.id_categoria,
     id_destino_cuenta: req.body.id_destino_cuenta,
+    saldo: req.body.saldo,
   };
 
   console.log(catalogo);
@@ -98,22 +99,5 @@ CatalogoController.delete = (req, res, next) => {
   });
 };
 
-CatalogoController.addForm = (req, res, next) =>
-  res.render("add-movie", { title: "Agregar Película" });
-
-CatalogoController.error404 = (req, res, next) => {
-  let error = new Error(),
-    locals = {
-      title: "Error 404",
-      description: "Recurso No Encontrado",
-      error: error,
-    };
-
-  error.status = 404;
-
-  res.render("error", locals);
-
-  next();
-};
 
 module.exports = CatalogoController;

@@ -51,7 +51,7 @@ CategoriaContController.getOne = (req, res, next) => {
 
 CategoriaContController.save = (req, res, next) => {
   let categoriacont = {
-    id_categoria: req.body.id_categoria,
+    id_categoria: req.params.id_categoria,
     nombre_categoria: req.body.nombre_categoria
   };
 
@@ -95,7 +95,7 @@ CategoriaContController.delete = (req, res, next) => {
   });
 };
 
-CategoriaContController.addForm = (req, res, next) =>
+/*CategoriaContController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar categoría" });
 
 CategoriaContController.error404 = (req, res, next) => {
@@ -111,6 +111,6 @@ CategoriaContController.error404 = (req, res, next) => {
   res.render("error", locals);
 
   next();
-};
+};*/
 
 module.exports = CategoriaContController;

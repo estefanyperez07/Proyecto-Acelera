@@ -15,21 +15,19 @@ CatalogoModel.save = (data, cb) => {
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
- //FUNCIONA---------
+ //FUNCIONA------------------
       if (err) {
         return err;
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "select contabilidad.ft_actualizar_catalogo($1,$2,$3,$4,$5,$6,$7)",
+              "select contabilidad.ft_actualizar_catalogo($1,$2,$3,$4,$5)",
               [
                 data.id_cuenta,
-                data.id_usuario,
                 data.codigo_cuenta,
                 data.nombre_cuenta,
                 data.id_categoria,
                 data.id_destino_cuenta,
-                data.saldo,
               ],
               cb
             )

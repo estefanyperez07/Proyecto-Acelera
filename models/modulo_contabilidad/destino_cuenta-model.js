@@ -8,6 +8,8 @@ DestinoCuentaModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.ft_se
 DestinoCuentaModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_destino_cuenta WHERE id_destino_cuenta = $1", [cod], cb);
 
+
+  //FUNCIONA--------------
 DestinoCuentaModel.save = (data, cb) => {
   conn.query(
     "SELECT * FROM contabilidad.tbl_destino_cuenta WHERE id_destino_cuenta = $1",

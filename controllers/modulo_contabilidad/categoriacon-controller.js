@@ -57,6 +57,7 @@ CategoriaContController.save = (req, res, next) => {
 
   console.log(categoriacont);
 
+  //FUNCIONA-----------------
   CategoriaContModel.save(categoriacont, (err) => {
     if (err) {
       let locals = {

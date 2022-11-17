@@ -8,6 +8,7 @@ CategoriaContModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.ft_se
 CategoriaContModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_categoria WHERE id_categoria = $1", [cod], cb);
 
+  //FUNCIONA-----------------
 CategoriaContModel.save = (data, cb) => {
   conn.query(
     "SELECT * FROM contabilidad.tbl_categoria WHERE id_categoria = $1",

@@ -58,6 +58,8 @@ DestinoCuentaController.save = (req, res, next) => {
 
   console.log(destinocuenta);
 
+
+  //FUNCIONA--------------------
   DestinoCuentaModel.save(destinocuenta, (err) => {
     if (err) {
       let locals = {

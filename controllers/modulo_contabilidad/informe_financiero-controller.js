@@ -49,7 +49,7 @@ InformeFinancieroController.getOne = (req, res, next) => {
   });
 };
 
-//FUNCIONA
+//FUNCIONA-------------------------
 InformeFinancieroController.save = (req, res, next) => {
   let informefinanciero = {
     id_informe_financiero: req.params.id_informe_financiero,

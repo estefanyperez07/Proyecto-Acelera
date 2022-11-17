@@ -8,6 +8,8 @@ InformeFinancieroModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.f
 InformeFinancieroModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_informe_financiero WHERE id_informe_financiero = $1", [cod], cb);
 
+
+  //FUNCIONA----------------
 InformeFinancieroModel.save = (data, cb) => {
   conn.query(
     "SELECT * FROM contabilidad.tbl_informe_financiero WHERE id_informe_financiero = $1",

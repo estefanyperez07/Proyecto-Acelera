@@ -26,29 +26,24 @@ LibroEncabezadoModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "select contabilidad.ft_actualizar_libro_diario_encabezado ($1,$2,$3,$4,$5,$6,$7,$8)", //REVISAR FUNCION, PARECE ESTAR MALA
+              "select contabilidad.ft_actualizar_libro_diario_encabezado ($1,$2,$3,$4,$5)", //REVISAR
               [
                 data.id_libro_diario_enca, 
                 data.id_estado, 
-                data.descripcion, 
                 data.fecha, 
                 data.monto_debe, 
-                data.monto_haber, 
-                data.id_usuario, 
-                data.nombre_usuario,
+                data.monto_haber,
               ],
               cb
             )
           : conn.query( 
-              "select contabilidad.sp_insert_libro_diario_encabezado ($1,$2,$3,$4,$5,$6,$7)", //REVISAR FUNCION, PARECE ESTAR MALA
+              "select contabilidad.sp_insert_libro_diario_encabezado ($1,$2,$3,$4,$5)", //REVISAR
               [
                 data.id_estado, 
-                data.descripcion, 
                 data.fecha, 
                 data.monto_debe, 
                 data.monto_haber, 
                 data.id_usuario, 
-                data.nombre_usuario,
               ],
               cb
             );

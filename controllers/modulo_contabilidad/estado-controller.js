@@ -49,6 +49,7 @@ EstadoController.getOne = (req, res, next) => {
   });
 };
 
+//FUNCIONA-------------------------------
 EstadoController.save = (req, res, next) => {
   let estado = {
     id_estado: req.params.id_estado,

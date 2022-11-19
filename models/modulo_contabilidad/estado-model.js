@@ -9,6 +9,8 @@ EstadoModel.getAll = (cb) =>
 EstadoModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_estado WHERE id_estado = $1 ", [cod], cb);
 
+
+  //FUNCIONA-------------------------------
 EstadoModel.save = (data, cb) => {
   conn.query(
     "SELECT * FROM contabilidad.tbl_estado WHERE id_estado = $1",
@@ -41,7 +43,7 @@ EstadoModel.save = (data, cb) => {
   );
 };
 
-EstadoModel.delete = (cod, cb) => //MODIFICAR
-  conn.query("select contabilidad.d_delete_estado ($1)", [cod], cb);
+EstadoModel.delete = (id, cb) =>
+  conn.query("select contabilidad.d_delete_estado ($1)", [id], cb);
 
 module.exports = EstadoModel;

@@ -9,24 +9,26 @@ LibroDetalleModel.getAll = (cb) =>
 LibroDetalleModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_libro_diario_detalle WHERE id_libro_diario_deta = $1 ", [cod], cb);
 
+//FUNCIONA----------------------------
+
 LibroDetalleModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM contabilidad.tbl_libro_diario_detalle WHERE id_libro_diario_deta = $1 and id_libro_diario_enca = $2",
+    "SELECT * FROM contabilidad.tbl_libro_diario_detalle WHERE id_libro_diario_deta = $1",
     [data.id_libro_diario_deta],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
 
-      if (err) { //MODIFICAR
+      if (err) { 
         return err;
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "select contabilidad.ft_actualizar_libro_diario_detalle ($1,$2,$3,$4,$5,$6,$7,$8,$9)", //REVISAR FUNCION, PARECE ESTAR MALA
+              "select contabilidad.ft_actualizar_libro_diario_detalle ($1,$2,$3,$4,$5,$6,$7,$8,$9)", 
               [
                 data.id_libro_diario_deta, 
-                data.id_libro_diario_enca, 
-                data.id_subcuenta, id_estado, 
+                data.id_subcuenta, 
+                data.id_estado, 
                 data.parcial, 
                 data.monto_debe, 
                 data.monto_haber, 
@@ -36,11 +38,12 @@ LibroDetalleModel.save = (data, cb) => {
               ],
               cb
             )
-          : conn.query( //MODIFICAR
-              "select contabilidad.sp_insert_libro_diario_detalle ($1,$2,$3,$4,$5,$6,$7,$8)", //REVISAR FUNCION, PARECE ESTAR MALA
+          : conn.query(
+              "select contabilidad.sp_insert_libro_diario_detalle ($1,$2,$3,$4,$5,$6,$7,$8,$9)", 
               [
                 data.id_libro_diario_enca, 
-                data.id_subcuenta, id_estado, 
+                data.id_subcuenta, 
+                data.id_estado, 
                 data.parcial, 
                 data.monto_debe, 
                 data.monto_haber, 
@@ -55,7 +58,7 @@ LibroDetalleModel.save = (data, cb) => {
   );
 };
 
-LibroDetalleModel.delete = (cod, cb) => //MODIFICAR
+LibroDetalleModel.delete = (cod, cb) => 
   conn.query("select contabilidad.d_delete_libro_diario_detalle ($1)", [cod], cb);
 
 module.exports = LibroDetalleModel;

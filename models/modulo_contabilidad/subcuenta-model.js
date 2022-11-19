@@ -9,36 +9,34 @@ SubcuentaModel.getAll = (cb) =>
 SubcuentaModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_subcuenta WHERE id_subcuenta = $1 ", [cod], cb);
 
+
+  //FUNCIONA-----------------------
 SubcuentaModel.save = (data, cb) => {
   conn.query(
-    "SELECT * FROM contabilidad.tbl_subcuenta WHERE id_subcuenta = $1 and id_cuenta = $2",
+    "SELECT * FROM contabilidad.tbl_subcuenta WHERE id_subcuenta = $1",
     [data.id_subcuenta],
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
 
-      if (err) { //MODIFICAR
+      if (err) { 
         return err;
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "select prc_articulo_update ($1,$2,$3,$4,$5)", //FALTA LA FUNCION DE ACTUALIZAR EN POSTGRES
+              "select contabilidad.ft_actualizar_subcuenta ($1,$2,$3)", 
               [
                 data.id_subcuenta,
                 data.id_cuenta,
-                data.nombre_cuenta,
                 data.nombre_subcuenta,
-                data.saldo,
               ],
               cb
             )
           : conn.query( 
-              "select contabilidad.sp_insert_subcuenta ($1,$2,$3,$4)",
+              "select contabilidad.sp_insert_subcuenta ($1,$2)",
               [
                 data.id_cuenta,
-                data.nombre_cuenta,
                 data.nombre_subcuenta,
-                data.saldo,
               ],
               cb
             );

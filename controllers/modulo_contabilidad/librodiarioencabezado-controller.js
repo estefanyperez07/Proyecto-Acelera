@@ -53,11 +53,11 @@ LibroEncabezadoController.save = (req, res, next) => { //REVISAR TABLA EN BASE D
   let librodiarioencabezado = {
     id_libro_diario_enca: req.body.id_libro_diario_enca,
     id_estado: req.body.id_estado,
+    descripcion: req.body.descripcion,
     fecha: req.body.fecha,
     monto_debe: req.body.monto_debe,
     monto_haber: req.body.monto_haber,
     id_usuario: req.body.id_usuario,
-    nombre_usuario: req.body.nombre_usuario,
   };
 
   console.log(librodiarioencabezado);
@@ -102,7 +102,6 @@ LibroEncabezadoController.delete = (req, res, next) => {
 LibroEncabezadoController.post = (req, res, next) => {
   let librodiarioencabezado = {
     id_estado: req.body.id_estado,
-    descripcion: req.body.descripcion,
     fecha: req.body.fecha,
     monto_debe: req.body.monto_debe,
     monto_haber: req.body.monto_haber,

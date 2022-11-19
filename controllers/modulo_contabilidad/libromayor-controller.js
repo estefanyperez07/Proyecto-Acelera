@@ -49,6 +49,8 @@ LibroMayorController.getOne = (req, res, next) => {
   });
 };
 
+//FUNCIONA-------------------------------
+
 LibroMayorController.save = (req, res, next) => {
   let libromayor = {
     id_libro_mayor: req.params.id_libro_mayor,
@@ -58,7 +60,6 @@ LibroMayorController.save = (req, res, next) => {
     id_subcuenta: req.body.id_subcuenta,
     monto_debe: req.body.monto_debe,
     monto_haber: req.body.monto_haber,
-    saldo: req.body.saldo,
   };
 
   console.log(libromayor);

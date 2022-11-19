@@ -51,15 +51,15 @@ SubcuentaController.getOne = (req, res, next) => {
 
 SubcuentaController.save = (req, res, next) => {
   let subcuenta = {
-    id_subcuenta: req.body.id_subcuenta,
+    id_subcuenta: req.params.id_subcuenta,
     id_cuenta: req.body.id_cuenta,
-    nombre_cuenta: req.body.nombre_cuenta,
     nombre_subcuenta: req.body.nombre_subcuenta,
     saldo: req.body.saldo,
   };
 
   console.log(subcuenta);
 
+  //FUNJCIONA-------------------------------
   SubcuentaModel.save(subcuenta, (err) => {
     if (err) {
       let locals = {

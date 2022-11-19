@@ -9,6 +9,8 @@ LibroMayorModel.getAll = (cb) =>
 LibroMayorModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.tbl_libro_mayor WHERE id_libro_mayor = $1 ", [cod], cb);
 
+//FUNCIONA-------------------------------
+
 LibroMayorModel.save = (data, cb) => {
   conn.query(
     "SELECT * FROM contabilidad.tbl_libro_mayor WHERE id_libro_mayor = $1",
@@ -22,7 +24,7 @@ LibroMayorModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "select contabilidad.ft_actualizar_libro_mayor ($1,$2,$3,$4,$5,$6,$7,$8)", //REVISAR FUNCION
+              "select contabilidad.ft_actualizar_libro_mayor ($1,$2,$3,$4,$5,$6,$7)",
               [
                 data.id_libro_mayor, 
                 data.id_periodo_contable, 
@@ -31,12 +33,11 @@ LibroMayorModel.save = (data, cb) => {
                 data.id_subcuenta,
                 data.monto_debe, 
                 data.monto_haber, 
-                data.saldo,
               ],
               cb
             )
           : conn.query( 
-              "select contabilidad.sp_insert_libro_mayor ($1,$2,$3,$4,$5,$6,$7)", //REVISAR FUNCION
+              "select contabilidad.sp_insert_libro_mayor ($1,$2,$3,$4,$5,$6)", 
               [
                 data.id_periodo_contable, 
                 data.fecha, 
@@ -44,7 +45,6 @@ LibroMayorModel.save = (data, cb) => {
                 data.id_subcuenta,
                 data.monto_debe, 
                 data.monto_haber, 
-                data.saldo,
               ],
               cb
             );
@@ -53,7 +53,7 @@ LibroMayorModel.save = (data, cb) => {
   );
 };
 
-LibroMayorModel.delete = (cod, cb) => //MODIFICAR
+LibroMayorModel.delete = (cod, cb) => 
   conn.query("select contabilidad.d_delete_libro_mayor ($1)", [cod], cb);
 
 module.exports = LibroMayorModel;

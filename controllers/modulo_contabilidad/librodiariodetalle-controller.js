@@ -51,7 +51,7 @@ LibroDetalleController.getOne = (req, res, next) => {
 
 LibroDetalleController.save = (req, res, next) => {  //REVISAR TABLA EN BASE DE DATOS
   let librodiariodetalle = {
-    id_libro_diario_deta: req.body.id_libro_diario_deta,
+    id_libro_diario_deta: req.params.id_libro_diario_deta,
     id_libro_diario_enca: req.body.id_libro_diario_enca,
     id_subcuenta: req.body.id_subcuenta,
     id_estado: req.body.id_estado,
@@ -59,15 +59,14 @@ LibroDetalleController.save = (req, res, next) => {  //REVISAR TABLA EN BASE DE 
     monto_debe: req.body.monto_debe,
     monto_haber: req.body.monto_haber,
     sinopsis: req.body.sinopsis,
-    tipo_estado: req.body.tipo_estado,
-    id_usuario: req.body.id_usuario,
-    nombre_usuario: req.body.nombre_usuario,
     sucursal: req.body.sucursal,
     centro_costo: req.body.centro_costo,
   };
 
   console.log(librodiariodetalle);
 
+//FUNCIONA----------------------------
+  
   LibroDetalleModel.save(librodiariodetalle, (err) => {
     if (err) {
       let locals = {

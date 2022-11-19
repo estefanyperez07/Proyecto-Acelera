@@ -7,7 +7,7 @@ SubcuentaModel.getAll = (cb) =>
   conn.query("SELECT * FROM contabilidad.ft_select_subcuenta()", cb);
 
 SubcuentaModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_subcuenta WHERE id_subcuenta = $1 ", [cod], cb);
+  conn.query("SELECT * FROM contabilidad.ft_getone_subcuenta($1) ", [cod], cb);
 
 
   //FUNCIONA-----------------------

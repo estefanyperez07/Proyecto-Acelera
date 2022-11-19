@@ -7,7 +7,7 @@ LibroDetalleModel.getAll = (cb) =>
   conn.query("SELECT * FROM contabilidad.ft_select_diario_detalle()", cb);
 
 LibroDetalleModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_libro_diario_detalle WHERE id_libro_diario_deta = $1 ", [cod], cb);
+  conn.query("SELECT * FROM contabilidad.ft_getone_libro_diario_deta($1) ", [cod], cb);
 
 //FUNCIONA----------------------------
 

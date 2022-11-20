@@ -4,14 +4,25 @@ var conn = require("../db-connection"),
   LibroEncabezadoModel = () => {};
 
 LibroEncabezadoModel.getAll = (cb) =>
-  conn.query("SELECT * FROM contabilidad.ft_select_libro_diario_encabezado()", cb);
+  conn.query(
+    "SELECT * FROM contabilidad.ft_select_libro_diario_encabezado()",
+    cb
+  );
 
 LibroEncabezadoModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_libro_diario_encabezado WHERE id_libro_diario_enca = $1 ", [cod], cb);
+  conn.query(
+    "SELECT * FROM contabilidad.tbl_libro_diario_encabezado WHERE id_libro_diario_enca = $1 ",
+    [cod],
+    cb
+  );
 
-  LibroEncabezadoModel.post = (data, cb) => {
-    conn.query("select contabilidad.fcn_diario_insert($1)", [data], cb);
-  };
+LibroEncabezadoModel.post = (data, cb) => {
+  conn.query("select contabilidad.fcn_diario_insert($1)", [data], cb);
+};
+
+LibroEncabezadoModel.update = (data, cb) => {
+  conn.query("select contabilidad.fcn_diario_update($1)", [data], cb);
+};
 
 LibroEncabezadoModel.save = (data, cb) => {
   conn.query(
@@ -21,29 +32,30 @@ LibroEncabezadoModel.save = (data, cb) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
 
-      if (err) { //MODIFICAR
+      if (err) {
+        //MODIFICAR
         return err;
       } else {
         return rows.rows.length === 1
           ? conn.query(
               "select contabilidad.ft_actualizar_libro_diario_encabezado ($1,$2,$3,$4,$5)", //REVISAR
               [
-                data.id_libro_diario_enca, 
-                data.id_estado, 
-                data.fecha, 
-                data.monto_debe, 
+                data.id_libro_diario_enca,
+                data.id_estado,
+                data.fecha,
+                data.monto_debe,
                 data.monto_haber,
               ],
               cb
             )
-          : conn.query( 
+          : conn.query(
               "select contabilidad.sp_insert_libro_diario_encabezado ($1,$2,$3,$4,$5)", //REVISAR
               [
-                data.id_estado, 
-                data.fecha, 
-                data.monto_debe, 
-                data.monto_haber, 
-                data.id_usuario, 
+                data.id_estado,
+                data.fecha,
+                data.monto_debe,
+                data.monto_haber,
+                data.id_usuario,
               ],
               cb
             );
@@ -52,7 +64,14 @@ LibroEncabezadoModel.save = (data, cb) => {
   );
 };
 
-LibroEncabezadoModel.delete = (cod, cb) => //MODIFICAR
-  conn.query("select contabilidad.d_delete_libro_diario_encabezado ($1)", [cod], cb);
+LibroEncabezadoModel.delete = (
+  cod,
+  cb //MODIFICAR
+) =>
+  conn.query(
+    "select contabilidad.d_delete_libro_diario_encabezado ($1)",
+    [cod],
+    cb
+  );
 
 module.exports = LibroEncabezadoModel;

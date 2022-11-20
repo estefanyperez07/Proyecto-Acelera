@@ -6,6 +6,9 @@ var conn = require("../db-connection"),
 VentaModel.getAll = (cb) =>
   conn.query("SELECT * FROM ft_sucursal_getall()", cb);
 
+VentaModel.facturasPorFecha = (fecha, cb) =>
+  conn.query("SELECT * FROM public.ft_facturas_por_fecha($1)", [fecha], cb);
+
 VentaModel.secuencia_enc_getone = (cb) =>
   conn.query("SELECT public.ft_secuencia_enc_getone()", cb);
 

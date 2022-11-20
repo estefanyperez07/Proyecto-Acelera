@@ -24,6 +24,32 @@ VentaController.getAll = (req, res, next) => {
   });
 };
 
+VentaController.facturasPorFecha = (req, res, next) => {
+  let fecha = req.params.fecha;
+  console.log(fecha);
+  VentaModel.facturasPorFecha(fecha, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      let venta = rows.rows;
+      venta[0].detalle = VentaModel.facturasPorFecha;
+      console.log(venta[0]);
+      res.status(200).send(rows.rows);
+      //res.render('index', locals)
+    }
+  });
+};
+
 VentaController.secuencia_enc_getone = (req, res, next) => {
   VentaModel.secuencia_enc_getone((err, rows) => {
     console.log(err, "---", rows);

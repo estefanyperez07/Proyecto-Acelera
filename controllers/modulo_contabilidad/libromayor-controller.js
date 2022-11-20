@@ -101,6 +101,29 @@ LibroMayorController.delete = (req, res, next) => {
   });
 };
 
+LibroMayorController.mayorizar = (req, res, next) => {
+  let parametros = {
+    id_periodo_contable: req.body.id_periodo_contable,
+    descripcion: req.body.descripcion,
+    fecha: req.body.fecha,
+  };
+  console.log(parametros);
 
+  LibroMayorModel.mayorizar(parametros, (err, rows) => {
+    console.log(err, "---", rows);
+    if (err) {
+      let locals = {
+        title: `Error al eliminar el registro con el id: ${parametros}`,
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      res.status(200).send("Success");
+      //res.redirect('/')
+    }
+  });
+};
 
 module.exports = LibroMayorController;

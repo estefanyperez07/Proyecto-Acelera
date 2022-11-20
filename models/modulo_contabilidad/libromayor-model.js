@@ -19,32 +19,32 @@ LibroMayorModel.save = (data, cb) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
 
-      if (err) { 
+      if (err) {
         return err;
       } else {
         return rows.rows.length === 1
           ? conn.query(
               "select contabilidad.ft_actualizar_libro_mayor ($1,$2,$3,$4,$5,$6,$7)",
               [
-                data.id_libro_mayor, 
-                data.id_periodo_contable, 
-                data.fecha, 
-                data.id_cuenta, 
+                data.id_libro_mayor,
+                data.id_periodo_contable,
+                data.fecha,
+                data.id_cuenta,
                 data.id_subcuenta,
-                data.monto_debe, 
-                data.monto_haber, 
+                data.monto_debe,
+                data.monto_haber,
               ],
               cb
             )
-          : conn.query( 
-              "select contabilidad.sp_insert_libro_mayor ($1,$2,$3,$4,$5,$6)", 
+          : conn.query(
+              "select contabilidad.sp_insert_libro_mayor ($1,$2,$3,$4,$5,$6)",
               [
-                data.id_periodo_contable, 
-                data.fecha, 
-                data.id_cuenta, 
+                data.id_periodo_contable,
+                data.fecha,
+                data.id_cuenta,
                 data.id_subcuenta,
-                data.monto_debe, 
-                data.monto_haber, 
+                data.monto_debe,
+                data.monto_haber,
               ],
               cb
             );
@@ -53,7 +53,14 @@ LibroMayorModel.save = (data, cb) => {
   );
 };
 
-LibroMayorModel.delete = (cod, cb) => 
+LibroMayorModel.delete = (cod, cb) =>
   conn.query("select contabilidad.d_delete_libro_mayor ($1)", [cod], cb);
+
+LibroMayorModel.mayorizar = (parametros, cb) =>
+  conn.query(
+    "select contabilidad.fcn_diario_mayorizar($1,$2,$3)",
+    [parametros.id_periodo_contable, parametros.descripcion, parametros.fecha],
+    cb
+  );
 
 module.exports = LibroMayorModel;

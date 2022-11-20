@@ -212,13 +212,25 @@ router
   //Preguntas
   .get("/ms_pregunta/getall", PreguntasController.getAll)
   .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
-  .put("/ms_pregunta/actualizar-insertar/:id_pregunta",PreguntasController.save)
+  .put(
+    "/ms_pregunta/actualizar-insertar/:id_pregunta",
+    PreguntasController.save
+  )
   .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
   //Preguntas Usuario
   .get("/ms_pregunta_usuario/getall", PreguntasUsuarioController.getAll)
-  .get("/ms_pregunta_usuario/getone/:id_preguntas_usuario",PreguntasUsuarioController.getOne)
-  .put("/ms_pregunta_usuario/actualizar-insertar/:id_preguntas_usuario",PreguntasUsuarioController.save)
-  .delete("/ms_pregunta_usuario/eliminar/:id_preguntas_usuario",PreguntasUsuarioController.delete)
+  .get(
+    "/ms_pregunta_usuario/getone/:id_preguntas_usuario",
+    PreguntasUsuarioController.getOne
+  )
+  .put(
+    "/ms_pregunta_usuario/actualizar-insertar/:id_preguntas_usuario",
+    PreguntasUsuarioController.save
+  )
+  .delete(
+    "/ms_pregunta_usuario/eliminar/:id_preguntas_usuario",
+    PreguntasUsuarioController.delete
+  )
   //Rol
   .get("/ms_rol/getall", RolController.getAll)
   .get("/ms_rol/getone/:id_rol", RolController.getOne)
@@ -232,7 +244,10 @@ router
   //Parámetros
   .get("/ms_parametros/getall", ParametroController.getAll)
   .get("/ms_parametros/getone/:id_parametro", ParametroController.getOne)
-  .put("/ms_parametros/actualizar-insertar/:id_parametro",ParametroController.save)
+  .put(
+    "/ms_parametros/actualizar-insertar/:id_parametro",
+    ParametroController.save
+  )
   .delete("/ms_parametros/eliminar/:id_parametro", ParametroController.delete)
   //Objetos
   .get("/ms_objetos/getall", ObjetoController.getAll)
@@ -244,7 +259,10 @@ router
   //SUBCUENTA
   .get("/mc_subcuenta/getall", SubcuentaController.getAll)
   .get("/mc_subcuenta/getone/:id_subcuenta", SubcuentaController.getOne)
-  .put("/mc_subcuenta/actualizar-insertar/:id_subcuenta",SubcuentaController.save)
+  .put(
+    "/mc_subcuenta/actualizar-insertar/:id_subcuenta",
+    SubcuentaController.save
+  )
   .delete("/mc_subcuenta/eliminar/:id_subcuenta", SubcuentaController.delete)
   //ESTADO
   .get("/mc_estado/getall", EstadoController.getAll)
@@ -253,31 +271,75 @@ router
   .delete("/mc_estado/eliminar/:id_estado", EstadoController.delete)
   //LIBRO DIARIO DETALLE
   .get("/mc_librodetalle/getall", LibroDetalleController.getAll)
-  .get("/mc_librodetalle/getone/:id_libro_diario_deta",LibroDetalleController.getOne)
-  .put("/mc_librodetalle/actualizar-insertar/:id_libro_diario_deta",LibroDetalleController.save)
-  .delete("/mc_librodetalle/eliminar/:id_libro_diario_deta",LibroDetalleController.delete)
+  .get(
+    "/mc_librodetalle/getone/:id_libro_diario_deta",
+    LibroDetalleController.getOne
+  )
+  .put(
+    "/mc_librodetalle/actualizar-insertar/:id_libro_diario_deta",
+    LibroDetalleController.save
+  )
+  .delete(
+    "/mc_librodetalle/eliminar/:id_libro_diario_deta",
+    LibroDetalleController.delete
+  )
   //LIBRO DIARIO ENCABEZADO
   .get("/mc_libroencabezado/getall", LibroEncabezadoController.getAll)
-  .get("/mc_libroencabezado/getone/:id_libro_diario_enca",LibroEncabezadoController.getOne)
-  .put("/mc_libroencabezado/actualizar-insertar/:id_libro_diario_enca",LibroEncabezadoController.save)
-  .delete("/mc_libroencabezado/eliminar/:id_libro_diario_enca",LibroEncabezadoController.delete)
+  .get(
+    "/mc_libroencabezado/getone/:id_libro_diario_enca",
+    LibroEncabezadoController.getOne
+  )
+  .put(
+    "/mc_libroencabezado/actualizar-insertar/:id_libro_diario_enca",
+    LibroEncabezadoController.save
+  )
+  .delete(
+    "/mc_libroencabezado/eliminar/:id_libro_diario_enca",
+    LibroEncabezadoController.delete
+  )
   .post("/mc_libroencabezado/insertar", LibroEncabezadoController.post)
   .post("/mc_libroencabezado/update", LibroEncabezadoController.update)
   //PERIODO CONTABLE
   .get("/mc_periodo/getall", PeriodoContableController.getAll)
-  .get("/mc_periodo/getone/:id_periodo_contable",PeriodoContableController.getOne)
-  .put("/mc_periodo/actualizar-insertar/:id_periodo_contable",PeriodoContableController.save)
-  .delete("/mc_periodo/eliminar/:id_periodo_contable",PeriodoContableController.delete)
+  .get(
+    "/mc_periodo/getone/:id_periodo_contable",
+    PeriodoContableController.getOne
+  )
+  .put(
+    "/mc_periodo/actualizar-insertar/:id_periodo_contable",
+    PeriodoContableController.save
+  )
+  .delete(
+    "/mc_periodo/eliminar/:id_periodo_contable",
+    PeriodoContableController.delete
+  )
   //LIBRO MAYOR
   .get("/mc_libromayor/getall", LibroMayorController.getAll)
   .get("/mc_libromayor/getone/:id_libro_mayor", LibroMayorController.getOne)
-  .put("/mc_libromayor/actualizar-insertar/:id_libro_mayor",LibroMayorController.save)
-  .delete("/mc_libromayor/eliminar/:id_libro_mayor",LibroMayorController.delete)
+  .put(
+    "/mc_libromayor/actualizar-insertar/:id_libro_mayor",
+    LibroMayorController.save
+  )
+  .put(
+    "/mc_libromayor/actualizar-insertar/:id_libro_mayor",
+    LibroMayorController.save
+  )
+  .post("/mc_libromayor/mayorizar/", LibroMayorController.mayorizar)
+  .delete(
+    "/mc_libromayor/eliminar/:id_libro_mayor",
+    LibroMayorController.delete
+  )
   //CATEGORIA CONTABLE
   .get("/mc_categoriacont/getall", CategoriaContController.getAll)
   .get("/mc_categoriacont/getone/:id_categoria", CategoriaContController.getOne)
-  .put("/mc_categoriacont/actualizar-insertar/:id_categoria",CategoriaContController.save)
-  .delete("/mc_categoriacont/eliminar/:id_categoria",CategoriaContController.delete)
+  .put(
+    "/mc_categoriacont/actualizar-insertar/:id_categoria",
+    CategoriaContController.save
+  )
+  .delete(
+    "/mc_categoriacont/eliminar/:id_categoria",
+    CategoriaContController.delete
+  )
   //CATALOGO DE CUENTAS
   .get("/mc_catalogo/getall", CatalogoController.getAll)
   .get("/mc_catalogo/getone/:id_cuenta", CatalogoController.getOne)
@@ -286,13 +348,28 @@ router
   //DESTINO DE CUENTAS
   .get("/mc_destino/getall", DestinoCuentaController.getAll)
   .get("/mc_destino/getone/:id_destino_cuenta", DestinoCuentaController.getOne)
-  .put("/mc_destino/actualizar-insertar/:id_destino_cuenta",DestinoCuentaController.save)
-  .delete("/mc_destino/eliminar/:id_destino_cuenta",DestinoCuentaController.delete)
+  .put(
+    "/mc_destino/actualizar-insertar/:id_destino_cuenta",
+    DestinoCuentaController.save
+  )
+  .delete(
+    "/mc_destino/eliminar/:id_destino_cuenta",
+    DestinoCuentaController.delete
+  )
   //INFORME FINANCIERO
   .get("/mc_informefinanciero/getall", InformeFinancieroController.getAll)
-  .get("/mc_informefinanciero/getone/:id_informe_financiero",InformeFinancieroController.getOne)
-  .put("/mc_informefinanciero/actualizar-insertar/:id_informe_financiero",InformeFinancieroController.save)
-  .delete("/mc_informefinanciero/eliminar/:id_informe_financiero",InformeFinancieroController.delete)
+  .get(
+    "/mc_informefinanciero/getone/:id_informe_financiero",
+    InformeFinancieroController.getOne
+  )
+  .put(
+    "/mc_informefinanciero/actualizar-insertar/:id_informe_financiero",
+    InformeFinancieroController.save
+  )
+  .delete(
+    "/mc_informefinanciero/eliminar/:id_informe_financiero",
+    InformeFinancieroController.delete
+  )
 
   .use(CategoriaController.error404);
 

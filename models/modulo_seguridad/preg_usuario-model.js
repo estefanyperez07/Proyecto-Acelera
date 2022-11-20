@@ -3,10 +3,10 @@
 var conn = require("../db-connection"),
   PreguntasUsuarioModel = () => {};
 
-PreguntasUsuarioModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.tbl_ms_preguntas_usuario", cb);
+PreguntasUsuarioModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.ft_select_preguntas_usuario()", cb);
 
 PreguntasUsuarioModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM seguridad.tbl_ms_preguntas_usuario WHERE id_preguntas_usuario = $1", [id], cb);
+  conn.query("SELECT * FROM seguridad.ft_getone_pregunta_usuario($1)", [id], cb);
 
 PreguntasUsuarioModel.save = (data, cb) => {
   conn.query(
@@ -21,21 +21,18 @@ PreguntasUsuarioModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "SELECT seguridad.ft_actualizar_preguntas_usuario($1,$2,$3,$4)",
+              "SELECT seguridad.ft_actualizar_preguntas_usuario($1,$2)",
               [
                 data.id_preguntas_usuario,
-                data.id_usuario,
-                data.id_pregunta,
+          
                 data.respuesta 
               ],
               cb
             )
           : conn.query(
-            "SELECT seguridad.sp_insert_preguntas_usuario($1,$2,$3)",
+            "SELECT seguridad.",
               [
-                data.id_usuario,
-                data.id_pregunta,
-                data.respuesta
+                
               ],
               cb
             );

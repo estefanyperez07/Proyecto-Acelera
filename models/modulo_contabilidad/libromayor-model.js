@@ -7,7 +7,7 @@ LibroMayorModel.getAll = (cb) =>
   conn.query("SELECT * FROM contabilidad.ft_select_libro_mayor()", cb);
 
 LibroMayorModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_libro_mayor WHERE id_libro_mayor = $1 ", [cod], cb);
+  conn.query("SELECT * FROM contabilidad.ft_getone_libro_mayor($1)", [cod], cb);
 
 //FUNCIONA-------------------------------
 

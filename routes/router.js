@@ -40,6 +40,9 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   CatalogoController = require("../controllers/modulo_contabilidad/catalogo_cuentas-controller"),
   DestinoCuentaController = require("../controllers/modulo_contabilidad/destino_cuenta-controller"),
   InformeFinancieroController = require("../controllers/modulo_contabilidad/informe_financiero-controller"),
+  BalanceController = require("../controllers/modulo_contabilidad/balance-controller"),
+  IGController = require("../controllers/modulo_contabilidad/ig-controller"),
+  EstadoResultadoController = require("../controllers/modulo_contabilidad/estado_resultado-controller"),
   express = require("express"),
   router = express.Router();
 
@@ -370,6 +373,13 @@ router
     "/mc_informefinanciero/eliminar/:id_informe_financiero",
     InformeFinancieroController.delete
   )
+
+  //BALANCE GENERAL
+  .get("/mc_balance/getall", BalanceController.getAll)
+  //INGRESOS Y EGRESOS
+  .get("/mc_ingresos/getall", IGController.getAll)
+  //ESTADO DE RESULTADO
+  .get("/mc_estado_resultado/getall", EstadoResultadoController.getAll)
 
   .use(CategoriaController.error404);
 

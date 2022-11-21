@@ -25,7 +25,7 @@ VentaController.getAll = (req, res, next) => {
 };
 
 VentaController.facturasPorFecha = (req, res, next) => {
-  let fecha = req.params.fecha;
+  let fecha = req.body.fecha;
   console.log(fecha);
   VentaModel.facturasPorFecha(fecha, (err, rows) => {
     if (err) {
@@ -42,10 +42,7 @@ VentaController.facturasPorFecha = (req, res, next) => {
         data: rows,
       };
       let venta = rows.rows;
-      venta[0].detalle = VentaModel.facturasPorFecha;
-      console.log(venta[0]);
       res.status(200).send(rows.rows);
-      //res.render('index', locals)
     }
   });
 };
@@ -111,6 +108,8 @@ VentaController.post = (req, res, next) => {
     correlativo: req.body.correlativo,
     rtn: req.body.rtn,
     nombre_cliente: req.body.nombre_cliente,
+    id_usuario: req.body.id_usuario,
+    id_pos: req.body.id_pos,
     detalle: req.body.detalle,
     detalle_pago: req.body.detalle_pago,
     detalle_promo: req.body.detalle_promo,
@@ -128,7 +127,7 @@ VentaController.post = (req, res, next) => {
       };
       res.status(520).json(err);
     } else {
-      res.status(200).json(rows.rows);
+      res.status(200).json(rows.rows[0].fcn_venta_enca_insert[0]);
       //res.redirect('/')
     }
   });

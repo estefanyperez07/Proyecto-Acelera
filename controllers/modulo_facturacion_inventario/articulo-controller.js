@@ -68,6 +68,28 @@ ArticuloController.getAllActive = (req, res, next) => {
   });
 };
 
+ArticuloController.getAllActiveInv = (req, res, next) => {
+  let id_categoria = req.params.id_categoria;
+  ArticuloModel.getAllActiveInv((err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+      //res.render('index', locals)
+    }
+  });
+};
+
 ArticuloController.getOne = (req, res, next) => {
   let cod_articulo = req.params.cod_articulo;
   console.log(cod_articulo);

@@ -19,6 +19,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   ListaMaterialesController = require("../controllers/modulo_facturacion_inventario/lista_materiales-controller"),
   BitacoraController = require("../controllers/modulo_facturacion_inventario/bitacora-controller"),
   VentaController = require("../controllers/modulo_facturacion_inventario/venta-controller"),
+  ComprasController = require("../controllers/modulo_facturacion_inventario/compras-controller"),
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoController = require("../controllers/modulo_seguridad/estado-controller"),
@@ -72,6 +73,7 @@ router
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
   .get("/articulo/getallactive", ArticuloController.getAllActive)
+  .get("/articulo/getallactiveinv", ArticuloController.getAllActiveInv)
   .get(
     "/articulo/getallbycategoria/:id_categoria",
     ArticuloController.getAllByCategoria
@@ -194,6 +196,12 @@ router
   .get("/venta/secuencia_enc_getone/", VentaController.secuencia_enc_getone)
   .get("/venta/secuencia_det_getone/", VentaController.secuencia_det_getone)
   .get("/venta/venta_por_fecha/", VentaController.facturasPorFecha)
+
+  //******COMPRAS*******/
+  .post("/compras/insertar/", ComprasController.post)
+  .get("/compras/secuencia_enc_getone/", ComprasController.secuencia_enc_getone)
+  .get("/compras/secuencia_det_getone/", ComprasController.secuencia_det_getone)
+  .get("/compras/compras_por_fecha/", ComprasController.comprasPorFecha)
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login

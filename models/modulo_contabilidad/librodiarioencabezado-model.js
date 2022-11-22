@@ -3,9 +3,10 @@
 var conn = require("../db-connection"),
   LibroEncabezadoModel = () => {};
 
-LibroEncabezadoModel.getAll = (cb) =>
+LibroEncabezadoModel.getAllPorPeriodo = (id_periodo_contable, cb) =>
   conn.query(
-    "SELECT * FROM contabilidad.ft_select_libro_diario_encabezado()",
+    "select * from contabilidad.ft_select_libro_diario_encabezado($1)",
+    [id_periodo_contable],
     cb
   );
 

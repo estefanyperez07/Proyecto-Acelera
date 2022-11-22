@@ -25,14 +25,14 @@ LibroDetalleController.getAll = (req, res, next) => {
 };
 
 LibroDetalleController.getOne = (req, res, next) => {
-  let id_libro_diario_deta = req.params.id_libro_diario_deta;
-  console.log(id_libro_diario_deta);
+  let id_libro_diario_enca = req.params.id_libro_diario_enca;
+  console.log(id_libro_diario_enca);
 
-  LibroDetalleModel.getOne(id_libro_diario_deta, (err, rows) => {
+  LibroDetalleModel.getOne(id_libro_diario_enca, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_libro_diario_deta}`,
+        title: `Error al buscar el registro con el id: ${id_libro_diario_enca}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -43,13 +43,14 @@ LibroDetalleController.getOne = (req, res, next) => {
         title: "Editar libro diario detalle",
         data: rows,
       };
-      res.status(200).send(rows.rows[0]);
+      res.status(200).send(rows.rows);
       //res.render('edit-movie', locals)
     }
   });
 };
 
-LibroDetalleController.save = (req, res, next) => {  //REVISAR TABLA EN BASE DE DATOS
+LibroDetalleController.save = (req, res, next) => {
+  //REVISAR TABLA EN BASE DE DATOS
   let librodiariodetalle = {
     id_libro_diario_deta: req.params.id_libro_diario_deta,
     id_libro_diario_enca: req.body.id_libro_diario_enca,
@@ -65,8 +66,8 @@ LibroDetalleController.save = (req, res, next) => {  //REVISAR TABLA EN BASE DE 
 
   console.log(librodiariodetalle);
 
-//FUNCIONA----------------------------
-  
+  //FUNCIONA----------------------------
+
   LibroDetalleModel.save(librodiariodetalle, (err) => {
     if (err) {
       let locals = {
@@ -103,7 +104,5 @@ LibroDetalleController.delete = (req, res, next) => {
     }
   });
 };
-
-
 
 module.exports = LibroDetalleController;

@@ -3,8 +3,9 @@
 var LibroEncabezadoModel = require("../../models/modulo_contabilidad/librodiarioencabezado-model"),
   LibroEncabezadoController = () => {};
 
-LibroEncabezadoController.getAll = (req, res, next) => {
-  LibroEncabezadoModel.getAll((err, rows) => {
+LibroEncabezadoController.getAllPorPeriodo = (req, res, next) => {
+  let id_periodo_contable = req.params.id_periodo_contable;
+  LibroEncabezadoModel.getAllPorPeriodo(id_periodo_contable, (err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",

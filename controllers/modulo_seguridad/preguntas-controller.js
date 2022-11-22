@@ -16,12 +16,20 @@ var PreguntasModel = require('../../models/modulo_seguridad/preguntas-model'),
 		}
 		else
 		{
-			let locals = {
-				title : 'Lista de Preguntas',
-				data : rows
-			}
-			res.status(200).send(rows.rows)
-			//res.render('index', locals)
+			// let locals = {
+			// 	title : 'Lista de Preguntas',
+			// 	data : rows
+			// }
+			// res.status(200).send(rows.rows)
+			// //res.render('index', locals)
+			res.status(200).json(
+				{
+					status:true,
+					code:200,
+					message:"Información encontrada exitosamente",
+					object:rows.rows,
+				}
+			)
 		}
 	})
 }
@@ -72,11 +80,13 @@ PreguntasController.save = (req, res, next) => {
 			}
 
 			res.render('error', locals)
-		}
-		else
-		{
-			res.send('Success')
-			//res.redirect('/')
+		}else{
+			res.status(200).send({
+				status: true,
+				code: 200,
+				message: "Datos almacenados correctamente",
+				object: [],
+			  });
 		}
 	})
 }

@@ -1,11 +1,11 @@
 'use strict'
 
-var EstadoModel = require('../../models/modulo_seguridad/estado-model'),
-	EstadoController = () => {}
+var EstadoUserModel = require('../../models/modulo_seguridad/estado-model'),
+	EstadoUserController = () => {}
 
     //Obtener todos los registros
-    EstadoController.getAll = (req, res, next) => {
-    EstadoModel.getAll((err, rows) => {
+    EstadoUserController.getAll = (req, res, next) => {
+    EstadoUserModel.getAll((err, rows) => {
         if(err)
         {
             let locals = {
@@ -18,22 +18,24 @@ var EstadoModel = require('../../models/modulo_seguridad/estado-model'),
         }
         else
         {
-            let locals = {
-                title : 'Lista de estados',
-                data : rows
-            }
-            res.status(200).send(rows.rows)
-            res.render('index', locals)
+            res.status(200).json(
+				{
+					status:true,
+					code:200,
+					message:"Información encontrada exitosamente",
+					object:rows.rows,
+				}
+			)
         }
     })
 }
 
 //Obtener un registro específico
-EstadoController.getOne = (req, res, next) => {
+EstadoUserController.getOne = (req, res, next) => {
 	let id = req.params.id
 	console.log(id)
 
-	EstadoModel.getOne(id, (err, rows) => {
+	EstadoUserModel.getOne(id, (err, rows) => {
 		console.log(err, '---', rows)
 		if(err)
 		{
@@ -47,18 +49,26 @@ EstadoController.getOne = (req, res, next) => {
 		}
 		else
 		{
-			let locals = {
-				title : 'Editar estado',
-				data : rows
-			}
-			res.status(200).send(rows.rows)
+			res.status(200).json(
+				{
+					status:true,
+					code:200,
+					message:"Información encontrada exitosamente",
+					object:rows.rows,
+				}
+			)
+			// let locals = {
+			// 	title : 'Editar estado',
+			// 	data : rows
+			// }
+			// res.status(200).send(rows.rows)
 			//res.render('edit-movie', locals)
 		}
 	})
 }
 
 //Guardar registro
-EstadoController.save = (req, res, next) => {
+EstadoUserController.save = (req, res, next) => {
 	let estado = {
         id : req.body.id,
         descripcion : req.body.descripcion
@@ -66,7 +76,7 @@ EstadoController.save = (req, res, next) => {
 
 	console.log(estado)
 
-	EstadoModel.save(estado, (err) => {
+	EstadoUserModel.save(estado, (err) => {
 		if(err)
 		{
 			let locals = {
@@ -86,11 +96,11 @@ EstadoController.save = (req, res, next) => {
 }
 
 //Borrar registro
-EstadoController.delete = (req, res, next) => {
+EstadoUserController.delete = (req, res, next) => {
 	let id = req.params.id
 	console.log(id)
 
-	EstadoModel.delete(id, (err, rows) => {
+	EstadoUserModel.delete(id, (err, rows) => {
 		console.log(err, '---', rows)
 		if(err)
 		{
@@ -110,7 +120,7 @@ EstadoController.delete = (req, res, next) => {
 	})
 }
 
-EstadoController.error404 = (req, res, next) => {
+EstadoUserController.error404 = (req, res, next) => {
 	let error = new Error(),
 		locals = {
 			title : 'Error 404',
@@ -125,4 +135,4 @@ EstadoController.error404 = (req, res, next) => {
 	next()
 }
 
-module.exports = EstadoController
+module.exports = EstadoUserController

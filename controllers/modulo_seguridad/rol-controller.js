@@ -18,12 +18,20 @@ var RolModel = require('../../models/modulo_seguridad/rol-model'),
         }
         else
         {
-            let locals = {
-                title : 'Lista de roles',
-                data : rows
-            }
-            res.status(200).send(rows.rows)
-            res.render('index', locals)
+            // let locals = {
+            //     title : 'Lista de roles',
+            //     data : rows
+            // }
+            // res.status(200).send(rows.rows)
+            // res.render('index', locals)
+			res.status(200).json(
+				{
+					status:true,
+					code:200,
+					message:"Información encontrada exitosamente",
+					object:rows.rows,
+				}
+			)
         }
     })
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 var conn = require("../db-connection"),
-  PreguntasUsuarioModel = () => {};
+  PreguntasUsuarioModel = () => { };
 
 PreguntasUsuarioModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.ft_select_preguntas_usuario()", cb);
 
@@ -9,6 +9,18 @@ PreguntasUsuarioModel.getOne = (id, cb) =>
   conn.query("SELECT * FROM seguridad.ft_getone_pregunta_usuario($1)", [id], cb);
 
 PreguntasUsuarioModel.save = (data, cb) => {
+  conn.query(
+    "SELECT seguridad.sp_insert_preguntas_usuario($1,$2,$3)",
+    [
+      data.id_usuario,
+      data.id_pregunta,
+      data.respuesta
+    ],
+    cb
+  );
+};
+
+PreguntasUsuarioModel.update = (data, cb) => {
   conn.query(
     "SELECT * FROM seguridad.tbl_ms_preguntas_usuario WHERE id_preguntas_usuario = $1",
     [data.id_preguntas_usuario],

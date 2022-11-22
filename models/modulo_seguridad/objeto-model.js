@@ -21,7 +21,7 @@ ObjetoModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "SELECT seguridad.ft_actualizar_objetos($1,$2,$3,$4)", //REVISAR FUNCION
+              "SELECT seguridad.ft_actualizar_objetos($1,$2,$3,$4)", 
               [
                 data.id_objeto,
                 data.objeto,
@@ -46,6 +46,6 @@ ObjetoModel.save = (data, cb) => {
 };
 
 ObjetoModel.delete = (id, cb) =>
-  conn.query("SELECT seguridad.d_delete_objeto ($1)", [id], cb); //REVISAR
+  conn.query("SELECT seguridad.d_delete_objeto ($1)", [id], cb); 
 
 module.exports = ObjetoModel;

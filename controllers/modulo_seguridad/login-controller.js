@@ -39,7 +39,6 @@ LoginController.getOne = (req, res, next) => {
 LoginController.login = async (req, res, next) => {
   let response = null;
   const { paramSettings } = req;
-  Object.entries(paramSettings);
 
   const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");
   const JWT_SECRET = paramJwtSecret.valor;

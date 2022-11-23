@@ -39,19 +39,21 @@ LoginController.getOne = (req, res, next) => {
 LoginController.login = async (req, res, next) => {
   let response = null;
   const { paramSettings } = req;
-	const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");
-  const  JWT_SECRET = paramJwtSecret.valor;
-	// const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
+  console.log(req);
+  console.log(paramSettings);
+  const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");
+  const JWT_SECRET = paramJwtSecret.valor;
+  // const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
   // const urlPanel = paramUrlPanel.valor;
-	const paramTimeExpired = filterParamUtil(paramSettings, "JWT_TIME_EXPIRED");
+  const paramTimeExpired = filterParamUtil(paramSettings, "JWT_TIME_EXPIRED");
   const timeExpired = paramTimeExpired.valor;
-	// const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
-	// const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");
-	// const paramSettingPhone = filterParamUtil(paramSettings, "SYS_PHONE");
-	// const paramSettingUser = filterParamUtil(paramSettings, "ADMIN_CUSER");
-	
-	// const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
-	// var urlPanel = paramUrlPanel.valor;	
+  // const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
+  // const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");
+  // const paramSettingPhone = filterParamUtil(paramSettings, "SYS_PHONE");
+  // const paramSettingUser = filterParamUtil(paramSettings, "ADMIN_CUSER");
+
+  // const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
+  // var urlPanel = paramUrlPanel.valor;
 
   const bodyParams = req.body;
   try {
@@ -82,7 +84,7 @@ LoginController.login = async (req, res, next) => {
         contrasena: bodyParams.contrasena,
       };
       console.log(usuario);
-      
+
       LoginModel.login(usuario, (err, row) => {
         if (err) {
           res.status(300).send({
@@ -155,22 +157,22 @@ LoginController.resetPassUser = async (req, res, next) => {
   const bodyParams = req.body;
   const { paramSettings } = req;
   const paramSettingCorreo = filterParamUtil(paramSettings, "ADMIN_CORREO");
-	const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
-	const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");
-	const paramSettingPhone = filterParamUtil(paramSettings, "SYS_PHONE");
-	const paramSettingUser = filterParamUtil(paramSettings, "ADMIN_CUSER");
+  const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
+  const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");
+  const paramSettingPhone = filterParamUtil(paramSettings, "SYS_PHONE");
+  const paramSettingUser = filterParamUtil(paramSettings, "ADMIN_CUSER");
 
-	const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");
-  const  JWT_SECRET = paramJwtSecret.valor;
-	const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
+  const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");
+  const JWT_SECRET = paramJwtSecret.valor;
+  const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
   const urlPanel = paramUrlPanel.valor;
-	const paramTimeExpired = filterParamUtil(paramSettings, "JWT_TIME_EXPIRED");
+  const paramTimeExpired = filterParamUtil(paramSettings, "JWT_TIME_EXPIRED");
   const timeExpired = paramTimeExpired.valor;
 
   const mailConfigSender = {
-	  user: paramSettingCorreo.valor,
-	  pass: paramSettingPass.valor,
-	};
+    user: paramSettingCorreo.valor,
+    pass: paramSettingPass.valor,
+  };
   try {
     if (bodyParams.nombre_usuario) {
       const regex_texto = new RegExp(regexText);
@@ -225,7 +227,7 @@ LoginController.resetPassUser = async (req, res, next) => {
         // let html = `
         //     <span>
         //     <br>
-        //     Hola <strong > <span style="text-transform: capitalize;">${dataUsuario.nombre_usuario}</span></strong> 
+        //     Hola <strong > <span style="text-transform: capitalize;">${dataUsuario.nombre_usuario}</span></strong>
         //     <br/>
         //     Se ha creado una solicitud para cambiar tu contraseña en la <strong > plataforma administrativa de BURRI DOGS S.A.</strong>
         //     <br/>
@@ -239,8 +241,7 @@ LoginController.resetPassUser = async (req, res, next) => {
 
         //     </span>`;
 
-
-            let html = `
+        let html = `
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
               <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="font-family:arial, 'helvetica neue', helvetica, sans-serif">
               <head>
@@ -536,9 +537,8 @@ LoginController.validateUser = async (req, res, next) => {
 
   const { paramSettings } = req;
   const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");
-  const  JWT_SECRET = paramJwtSecret.valor;
+  const JWT_SECRET = paramJwtSecret.valor;
 
-  
   try {
     let userValidation = await LoginModel.getOne(id);
     // console.log("userValidation",userValidation)
@@ -552,55 +552,56 @@ LoginController.validateUser = async (req, res, next) => {
     }
     // validaodn que el tolen no haya sido usado anteriormente
     let tonkenValidation = await LoginModel.searchToken(token);
-    console.log('tonkenValidation',tonkenValidation.rows[0])
+    console.log("tonkenValidation", tonkenValidation.rows[0]);
     if (tonkenValidation.rows[0]) {
       return res.status(403).send({
         ok: false,
         code: 403,
-        message: "El enlace que estas visitando ya no esta disponible o no es válido",
+        message:
+          "El enlace que estas visitando ya no esta disponible o no es válido",
         object: [],
       });
     }
-    
-   await LoginModel.saveToken(token,(err, row) => {
-    if (err) {
-        console.log('err',err)
-    }
-    console.log('row',row.rows[0])
-  });
+
+    await LoginModel.saveToken(token, (err, row) => {
+      if (err) {
+        console.log("err", err);
+      }
+      console.log("row", row.rows[0]);
+    });
 
     // const payload = await jwt.verify(token, secret);
-    await jwt.verify(token, JWT_SECRET, async (err, decoded)=>{
-        if (err) {
-          return res.status(404).json({
-            status: false,
-            code: 404,
-            message: "Token NO válido",
-            object: [],
-          });
-        }
-        // guardando el token en la tabla historica
-        // UsuarioModel.save = (data) => {
-        //   conn.query(
-        //     "SELECT * FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1",
-        //     [data.id_usuario],
-        //     (err, rows) => {
-        //       console.log(`Número de registros: ${rows.rows.length}`);
-        //       console.log(`Número de registros: ${err}`);
-        
-        //     }
-        //   );
-        // };
-
-        res.status(200).json({
-          status: true,
-          code: 200,
-          message: "Usuario encontrado",
+    await jwt.verify(token, JWT_SECRET, async (err, decoded) => {
+      if (err) {
+        return res.status(404).json({
+          status: false,
+          code: 404,
+          message: "Token NO válido",
           object: [],
         });
+      }
+      // guardando el token en la tabla historica
+      // UsuarioModel.save = (data) => {
+      //   conn.query(
+      //     "SELECT * FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1",
+      //     [data.id_usuario],
+      //     (err, rows) => {
+      //       console.log(`Número de registros: ${rows.rows.length}`);
+      //       console.log(`Número de registros: ${err}`);
+
+      //     }
+      //   );
+      // };
+
+      res.status(200).json({
+        status: true,
+        code: 200,
+        message: "Usuario encontrado",
+        object: [],
       });
+    });
   } catch (error) {
-    console.log('error',error)
+    console.log("error", error);
     return res.status(500).send({
       ok: false,
       code: 500,
@@ -610,61 +611,63 @@ LoginController.validateUser = async (req, res, next) => {
   }
 };
 LoginController.changePassUser = async (req, res, next) => {
-    let response = null;
-    const bodyParams = req.body;
-  
-    try {
-      if (
-          bodyParams.newPassword && 
-          bodyParams.confirmPassword && 
-          bodyParams.id_user){
-              LoginModel.changuePassById(
-                bodyParams.newPassword,
-                bodyParams.id_user,
-                 (err, row) => {
-                if (err) {
-                    console.log('err',err)
-                  return res.status(300).send({
-                    status: false,
-                    code: 300,
-                    message: "Ha ocurrido un error al ejecutar acción",
-                    object: [],
-                  });
-                }
-                response = res.status(200).send({
-                  status: true,
-                  code: 200,
-                  message: "Datos actualizados correctamente",
-                  object: row.rows
-                });
-              });
-        return response;
-      }
-  
-      let emptyParam = "";
-      if (!bodyParams.confirmPassword) {
-        emptyParam = "confirmPassword";
-      }
-      if (!bodyParams.newPassword) {
-        emptyParam = "newPassword";
-      }
-      if (!bodyParams.id_user) {
-        emptyParam = "id_user";
-      }
-      response = res.status(400).send({
-        ok: false,
-        code: 400,
-        message: "No se enviarón algunos parámetros de consulta",
-        object: [emptyParam],
-      });
+  let response = null;
+  const bodyParams = req.body;
+
+  try {
+    if (
+      bodyParams.newPassword &&
+      bodyParams.confirmPassword &&
+      bodyParams.id_user
+    ) {
+      LoginModel.changuePassById(
+        bodyParams.newPassword,
+        bodyParams.id_user,
+        (err, row) => {
+          if (err) {
+            console.log("err", err);
+            return res.status(300).send({
+              status: false,
+              code: 300,
+              message: "Ha ocurrido un error al ejecutar acción",
+              object: [],
+            });
+          }
+          response = res.status(200).send({
+            status: true,
+            code: 200,
+            message: "Datos actualizados correctamente",
+            object: row.rows,
+          });
+        }
+      );
       return response;
-    } catch (e) {
-      return res.status(500).send({
-        ok: false,
-        code: 500,
-        message: "error en el servidor",
-        object: e,
-      });
     }
+
+    let emptyParam = "";
+    if (!bodyParams.confirmPassword) {
+      emptyParam = "confirmPassword";
+    }
+    if (!bodyParams.newPassword) {
+      emptyParam = "newPassword";
+    }
+    if (!bodyParams.id_user) {
+      emptyParam = "id_user";
+    }
+    response = res.status(400).send({
+      ok: false,
+      code: 400,
+      message: "No se enviarón algunos parámetros de consulta",
+      object: [emptyParam],
+    });
+    return response;
+  } catch (e) {
+    return res.status(500).send({
+      ok: false,
+      code: 500,
+      message: "error en el servidor",
+      object: e,
+    });
+  }
 };
 module.exports = LoginController;

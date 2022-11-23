@@ -6,12 +6,21 @@ var conn = require("../db-connection"),
 SocioNegocioModel.getAll = (cb) =>
   conn.query("SELECT * FROM tbl_socio_negocio", cb);
 
+SocioNegocioModel.getAllClientes = (cb) =>
+  conn.query("SELECT * FROM tbl_socio_negocio where tipo='C'", cb);
+
+SocioNegocioModel.getAllProveedores = (cb) =>
+  conn.query("SELECT * FROM tbl_socio_negocio where tipo='P'", cb);
+
 SocioNegocioModel.getOne = (cod, cb) =>
   conn.query(
     "SELECT * FROM tbl_socio_negocio WHERE cod_socio_negocio = $1",
     [cod],
     cb
   );
+
+SocioNegocioModel.getOneRTN = (rtn, cb) =>
+  conn.query("SELECT * FROM tbl_socio_negocio WHERE rtn = $1", [rtn], cb);
 
 SocioNegocioModel.save = (data, cb) => {
   conn.query(
@@ -58,6 +67,43 @@ SocioNegocioModel.save = (data, cb) => {
                 data.balance,
                 data.cuenta_contable,
                 data.activo,
+                data.creado_por,
+                data.fecha_creacion,
+              ],
+              cb
+            );
+      }
+    }
+  );
+};
+
+SocioNegocioModel.savePorRTNNombre = (data, cb) => {
+  conn.query(
+    "SELECT * FROM tbl_socio_negocio WHERE rtn = $1",
+    [data.rtn],
+    (err, rows) => {
+      console.log(`Número de registros: ${rows.rows.length}`);
+      console.log(`Número de registros: ${err}`);
+
+      if (err) {
+        return err;
+      } else {
+        return rows.rows.length === 1
+          ? conn.query(
+              "select fcn_socio_negocio_update_por_rtn ($1,$2,$3,$4)",
+              [
+                data.descripcion,
+                data.rtn,
+                data.modificado_por,
+                data.fecha_modificacion,
+              ],
+              cb
+            )
+          : conn.query(
+              "select fcn_socio_negocio_insert_por_rtn ($1,$2,$3,$4)",
+              [
+                data.descripcion,
+                data.rtn,
                 data.creado_por,
                 data.fecha_creacion,
               ],

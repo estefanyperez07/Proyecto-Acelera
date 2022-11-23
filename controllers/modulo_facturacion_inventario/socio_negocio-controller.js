@@ -24,6 +24,48 @@ SocioNegocioController.getAll = (req, res, next) => {
   });
 };
 
+SocioNegocioController.getAllClientes = (req, res, next) => {
+  SocioNegocioModel.getAllClientes((err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+      //res.render('index', locals)
+    }
+  });
+};
+
+SocioNegocioController.getAllProveedores = (req, res, next) => {
+  SocioNegocioModel.getAllProveedores((err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+      //res.render('index', locals)
+    }
+  });
+};
+
 SocioNegocioController.getOne = (req, res, next) => {
   let cod_socio_negocio = req.params.cod_socio_negocio;
   console.log(cod_socio_negocio);
@@ -33,6 +75,31 @@ SocioNegocioController.getOne = (req, res, next) => {
     if (err) {
       let locals = {
         title: `Error al buscar el registro con el id: ${cod_socio_negocio}`,
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Editar Película",
+        data: rows,
+      };
+      res.status(200).send(rows.rows[0]);
+      //res.render('edit-movie', locals)
+    }
+  });
+};
+
+SocioNegocioController.getOneRTN = (req, res, next) => {
+  let rtn = req.params.rtn;
+  console.log(rtn);
+
+  SocioNegocioModel.getOneRTN(rtn, (err, rows) => {
+    console.log(err, "---", rows);
+    if (err) {
+      let locals = {
+        title: `Error al buscar el registro con el id: ${rtn}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };
@@ -74,6 +141,34 @@ SocioNegocioController.save = (req, res, next) => {
     if (err) {
       let locals = {
         title: `Error al salvar el registro con el id: ${socio_negocio.cod_socio_negocio}`,
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      res.status(200).json("Success");
+      //res.redirect('/')
+    }
+  });
+};
+
+SocioNegocioController.savePorRTNNombre = (req, res, next) => {
+  let socio_negocio = {
+    descripcion: req.body.descripcion,
+    rtn: req.body.rtn,
+    creado_por: req.body.creado_por,
+    fecha_creacion: req.body.fecha_creacion,
+    modificado_por: req.body.modificado_por,
+    fecha_modificacion: req.body.fecha_modificacion,
+  };
+
+  console.log(socio_negocio);
+
+  SocioNegocioModel.savePorRTNNombre(socio_negocio, (err) => {
+    if (err) {
+      let locals = {
+        title: `Error al salvar el registro con el id: ${socio_negocio}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

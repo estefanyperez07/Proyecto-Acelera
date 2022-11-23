@@ -167,13 +167,23 @@ router
   .delete("/promo/eliminar/:cod_promo", PromoController.delete)
   //****SOCIO NEGOCIO****
   .get("/socio_negocio/getall", SocioNegocioController.getAll)
+  .get("/socio_negocio/getallclientes", SocioNegocioController.getAllClientes)
+  .get(
+    "/socio_negocio/getallproveedores",
+    SocioNegocioController.getAllProveedores
+  )
   .get(
     "/socio_negocio/getone/:cod_socio_negocio",
     SocioNegocioController.getOne
   )
+  .get("/socio_negocio/getonertn/:rtn", SocioNegocioController.getOneRTN)
   .put(
     "/socio_negocio/actualizar-insertar/:cod_socio_negocio",
     SocioNegocioController.save
+  )
+  .put(
+    "/socio_negocio/actualizar-insertar_por_rtn/",
+    SocioNegocioController.savePorRTNNombre
   )
   .delete(
     "/socio_negocio/eliminar/:cod_socio_negocio",

@@ -47,6 +47,29 @@ VentaController.facturasPorFecha = (req, res, next) => {
   });
 };
 
+VentaController.detallePorEncabezado = (req, res, next) => {
+  let enc = req.params.enc;
+  console.log(enc);
+  VentaModel.detallePorEncabezado(enc, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      let venta = rows.rows;
+      res.status(200).send(rows.rows[0].ft_json_venta[0]);
+    }
+  });
+};
+
 VentaController.secuencia_enc_getone = (req, res, next) => {
   VentaModel.secuencia_enc_getone((err, rows) => {
     console.log(err, "---", rows);

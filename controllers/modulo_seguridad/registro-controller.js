@@ -563,7 +563,7 @@ UsuarioController.save = (req, res, next) => {
 };
 
 UsuarioController.autoregistro = (req, res, next) => {
-  const { paramSettings } = req;
+  const paramSettings = req.body.paramSetting;
   const paramSettingCorreo = filterParamUtil(paramSettings, "ADMIN_CORREO");
   const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
   const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");

@@ -181,7 +181,7 @@ UsuarioController.edit = (req, res, next) => {
         error: err,
       };
 
-      res.status(500).send("ERROR DE BACKEND EN API", err);
+      res.status(500).json(err);
     } else {
       // let locals = {
       // 	title : 'Editar Usuario',

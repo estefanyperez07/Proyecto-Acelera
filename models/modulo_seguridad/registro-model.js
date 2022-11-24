@@ -3,12 +3,17 @@
 var conn = require("../db-connection"),
   UsuarioModel = () => {};
 
-
-UsuarioModel.getOne = (usuario,id_usuario, cb) =>
-  conn.query("SELECT * FROM seguridad.tbl_ms_usuario WHERE usuario = $1 AND id_usuario = $2", [usuario,id_usuario], cb);
+UsuarioModel.getOne = (usuario, id_usuario, cb) =>
+  conn.query(
+    "SELECT * FROM seguridad.tbl_ms_usuario WHERE usuario = $1 AND id_usuario = $2",
+    [usuario, id_usuario],
+    cb
+  );
 
 // UsuarioModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.tbl_ms_usuario WHERE nombre_usuario != 'SYSTEMUSER' ", cb);
-UsuarioModel.getAll = (cb) => conn.query(`
+UsuarioModel.getAll = (cb) =>
+  conn.query(
+    `
 SELECT 
 u.id_usuario,
 u.usuario,
@@ -36,23 +41,37 @@ ON u.estado_usuario = e.id
 WHERE nombre_usuario != 'SYSTEMUSER' 
 OR usuario != 'SYSTEMUSER' 
 ORDER BY u.id_usuario DESC 
-`, cb);
+`,
+    cb
+  );
 
+UsuarioModel.validateUserState = (id, cb) =>
+  conn.query(
+    "SELECT id_usuario,estado_usuario,id_rol,fecha_vencimiento FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1",
+    [id],
+    cb
+  );
 
-UsuarioModel.validateUserState = (id ,cb) => conn.query("SELECT id_usuario,estado_usuario,id_rol,fecha_vencimiento FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1",[id], cb);
+UsuarioModel.updateUserState = (id, preguntas_contestadas, cb) =>
+  conn.query(
+    "UPDATE seguridad.tbl_ms_usuario SET estado_usuario=2, preguntas_contestadas =$2 WHERE id_usuario = $1",
+    [id, preguntas_contestadas],
+    cb
+  );
 
-
-UsuarioModel.updateUserState = (id,preguntas_contestadas ,cb) => conn.query("UPDATE seguridad.tbl_ms_usuario SET estado_usuario=2, preguntas_contestadas =$2 WHERE id_usuario = $1",[id,preguntas_contestadas], cb);
-
-UsuarioModel.saveHistoricPassword = (id_usuario,contrasena) => conn.query(
-  `INSERT INTO seguridad.tbl_ms_hist_contrasena(
+UsuarioModel.saveHistoricPassword = (id_usuario, contrasena) =>
+  conn.query(
+    `INSERT INTO seguridad.tbl_ms_hist_contrasena(
 	id_usuario,
 	contrasena,
 	fecha)
 	VALUES ($1,$2, NOW());`,
-  [id_usuario,contrasena]);
+    [id_usuario, contrasena]
+  );
 
-UsuarioModel.updateUserbyId = (data ,cb) => conn.query(`
+UsuarioModel.updateUserbyId = (data, cb) =>
+  conn.query(
+    `
 UPDATE seguridad.tbl_ms_usuario
 	SET 
   nombre_usuario=$1,
@@ -62,23 +81,28 @@ UPDATE seguridad.tbl_ms_usuario
 	fecha_modificacion= NOW()
 	WHERE id_usuario=$5
 
-  `,[
-    data.nombre_usuario,
-    data.estado_usuario,
-    data.id_rol,
-    data.modificado_por,
-    data.id_usuario,
-  ], cb);
-
+  `,
+    [
+      data.nombre_usuario,
+      data.estado_usuario,
+      data.id_rol,
+      data.modificado_por,
+      data.id_usuario,
+    ],
+    cb
+  );
 
 UsuarioModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1", [id], cb);
+  conn.query(
+    "SELECT * FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1",
+    [id],
+    cb
+  );
 
 UsuarioModel.save = (data, cb) => {
-console.log('data',data)
+  console.log("data", data);
 
-
-const text = `
+  const text = `
 INSERT INTO seguridad.tbl_ms_usuario(
   usuario, 
   nombre_usuario, 
@@ -108,31 +132,28 @@ INSERT INTO seguridad.tbl_ms_usuario(
     0
     )
     RETURNING *
-     `
-    const values = [
-      data.usuario,
-      data.nombre_usuario,
-      data.contrasena,
-      data.id_rol,
-      data.correo_electronico,
-      data.creado_por,
-    ]
+     `;
+  const values = [
+    data.usuario,
+    data.nombre_usuario,
+    data.contrasena,
+    data.id_rol,
+    data.correo_electronico,
+    data.creado_por,
+  ];
+  conn.query(text, values, (err, res) => {
+    console.log("err", err);
+    console.log("res.rows[0]", res.rows[0]);
     conn.query(
-      text,
-      values,
-      (err,res)=>{
-        console.log('err',err)
-        console.log('res.rows[0]',res.rows[0])
-        conn.query(
-          `INSERT INTO seguridad.tbl_ms_hist_contrasena(
+      `INSERT INTO seguridad.tbl_ms_hist_contrasena(
           id_usuario,
           contrasena,
           fecha)
           VALUES ($1,$2, NOW());`,
-          [res.rows[0].id_usuario,data.contrasena],cb)
-      }
+      [res.rows[0].id_usuario, data.contrasena],
+      cb
     );
- 
+  });
 
   // conn.query(
   //   "SELECT * FROM seguridad.tbl_ms_usuario WHERE id_usuario = $1",
@@ -176,8 +197,7 @@ INSERT INTO seguridad.tbl_ms_usuario(
 };
 
 UsuarioModel.autoregistro = async (data, cb) => {
-
-await  conn.query(
+  await conn.query(
     `
     INSERT INTO seguridad.tbl_ms_usuario(
       usuario, 
@@ -209,23 +229,25 @@ await  conn.query(
         )
         RETURNING *
         `,
-      [
-        data.usuario,
-        data.nombre_usuario,
-        data.contrasena,
-        data.correo_electronico,
-      ],
-      (err,res)=>{
-        console.log('err',err)
-        console.log('res',res.rows[0])
-        conn.query(
-          `INSERT INTO seguridad.tbl_ms_hist_contrasena(
+    [
+      data.usuario,
+      data.nombre_usuario,
+      data.contrasena,
+      data.correo_electronico,
+    ],
+    (err, res) => {
+      console.log("err", err);
+      console.log("res", res.rows[0]);
+      conn.query(
+        `INSERT INTO seguridad.tbl_ms_hist_contrasena(
           id_usuario,
           contrasena,
           fecha)
           VALUES ($1,$2, NOW());`,
-          [res.rows[0].id_usuario,data.contrasena],cb)
-      }
+        [res.rows[0].id_usuario, data.contrasena],
+        cb
+      );
+    }
   );
 };
 // UsuarioModel.autoregistro = (data, cb) => {
@@ -243,7 +265,7 @@ await  conn.query(
 //           ? conn.query(
 //             "SELECT seguridad.()",
 //             [
-              
+
 //             ],
 //             cb
 //             )
@@ -254,7 +276,7 @@ await  conn.query(
 //                 data.nombre_usuario,
 //                 data.correo_electronico,
 //                 data.contrasena,
-                      
+
 //                 ],
 //                 cb
 //             );

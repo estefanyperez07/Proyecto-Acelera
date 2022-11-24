@@ -158,7 +158,7 @@ LoginController.login = async (req, res, next) => {
 LoginController.resetPassUser = async (req, res, next) => {
   let response = null;
   const bodyParams = req.body;
-  const { paramSettings } = req;
+  const paramSettings = req.body.paramSetting;
   const paramSettingCorreo = filterParamUtil(paramSettings, "ADMIN_CORREO");
   const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
   const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");

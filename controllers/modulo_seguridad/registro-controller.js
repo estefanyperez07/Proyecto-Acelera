@@ -136,6 +136,7 @@ UsuarioController.updateUserState = (req, res, next) => {
 
 UsuarioController.edit = (req, res, next) => {
   let id_usuario = req.params.id_usuario;
+  console.log(id_usuario);
   //   let usuario=req.body.usuario
   //validando que el usaurio no exista
   //    UsuarioModel.getOne(usuario,id_usuario, (err, row) => {
@@ -170,7 +171,7 @@ UsuarioController.edit = (req, res, next) => {
     modificado_por: req.body.modificado_por,
     id_usuario: id_usuario,
   };
-
+  console.log(data);
   UsuarioModel.updateUserbyId(data, (err, row) => {
     // console.log(err, '---', row)
     if (err) {

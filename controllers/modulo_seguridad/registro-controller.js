@@ -181,7 +181,7 @@ UsuarioController.edit = (req, res, next) => {
         error: err,
       };
 
-      res.status(500).jason(err);
+      res.status(500).json(err);
     } else {
       // let locals = {
       // 	title : 'Editar Usuario',

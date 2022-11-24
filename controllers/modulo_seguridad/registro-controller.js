@@ -9,10 +9,8 @@ var UsuarioModel = require("../../models/modulo_seguridad/registro-model"),
 
 const nodemailer = require("nodemailer");
 
-
 // const JWT_SECRET = "PR0Y3CT0_M0DUL0_D3_S3GUR1D4D";
 // const timeExpired = "24h";
-
 
 UsuarioController.validateUserState = (req, res, next) => {
   let id = req.body.id_usuario;
@@ -104,7 +102,76 @@ UsuarioController.updateUserState = (req, res, next) => {
   let preguntas_contestadas = req.body.preguntas_contestadas;
   // console.log(id_usuario)
 
-  UsuarioModel.updateUserState(id_usuario,preguntas_contestadas, (err, row) => {
+  UsuarioModel.updateUserState(
+    id_usuario,
+    preguntas_contestadas,
+    (err, row) => {
+      // console.log(err, '---', row)
+      if (err) {
+        let locals = {
+          title: `Error al buscar el registro con el id: ${id_usuario}`,
+          description: "Error de Sintaxis SQL",
+          error: err,
+        };
+
+        res.render("error", locals);
+      } else {
+        // let locals = {
+        // 	title : 'Editar Usuario',
+        // 	data : row
+        // }
+        console.log(row.rows);
+        // res.status(200).send(rows.rows)
+        res.status(200).json({
+          status: true,
+          code: 200,
+          message: "Información actualizada exitosamente",
+          object: row.rows[0],
+        });
+        //res.render('edit-movie', locals)
+      }
+    }
+  );
+};
+
+UsuarioController.edit = (req, res, next) => {
+  let id_usuario = req.params.id_usuario;
+  //   let usuario=req.body.usuario
+  //validando que el usaurio no exista
+  //    UsuarioModel.getOne(usuario,id_usuario, (err, row) => {
+  // 	if (err) {
+  // 		res.status(400).json({
+  // 			status: false,
+  // 			code: 400,
+  // 			message: "ah ocurrido un erroe al consultar",
+  // 			object: [],
+  // 		  });
+  // 	}
+  // 	console.log("id_usuario",id_usuario)
+  // 	console.log("usuario",usuario)
+  // 	console.log("row",row.rows[0])
+
+  // 	// usaurio existe y e sdistinto de id de usuario)
+  // 	if(row.rows.length === 1){
+  // 	 	res.status(400).json({
+  // 			status: false,
+  // 			code: 303,
+  // 			message: "Este usaurio ya existe en BD",
+  // 			object: [],
+  // 		  });
+  // 	}
+  // });
+
+  let data = {
+    //   usuario:req.body.usuario,
+    nombre_usuario: req.body.nombre_usuario,
+    estado_usuario: req.body.estado_usuario,
+    id_rol: req.body.id_rol,
+    modificado_por: req.body.modificado_por,
+    id_usuario: id_usuario,
+  };
+
+  UsuarioModel.updateUserbyId(data, (err, row) => {
     // console.log(err, '---', row)
     if (err) {
       let locals = {
@@ -123,106 +190,40 @@ UsuarioController.updateUserState = (req, res, next) => {
       // res.status(200).send(rows.rows)
       res.status(200).json({
         status: true,
-        code: 200,
+        code: 201,
         message: "Información actualizada exitosamente",
-        object: row.rows[0],
+        object: row.rows,
       });
       //res.render('edit-movie', locals)
     }
   });
 };
 
-UsuarioController.edit =  (req, res, next) => {
-  let id_usuario = req.params.id_usuario
-//   let usuario=req.body.usuario
-  //validando que el usaurio no exista
-//    UsuarioModel.getOne(usuario,id_usuario, (err, row) => {
-// 	if (err) {
-// 		res.status(400).json({
-// 			status: false,
-// 			code: 400,
-// 			message: "ah ocurrido un erroe al consultar",
-// 			object: [],
-// 		  });
-// 	}
-// 	console.log("id_usuario",id_usuario)
-// 	console.log("usuario",usuario)
-// 	console.log("row",row.rows[0])
-
-// 	// usaurio existe y e sdistinto de id de usuario)
-// 	if(row.rows.length === 1){
-// 	 	res.status(400).json({
-// 			status: false,
-// 			code: 303,
-// 			message: "Este usaurio ya existe en BD",
-// 			object: [],
-// 		  });
-// 	}
-// });
-
-let data = {
-//   usuario:req.body.usuario,
-  nombre_usuario: req.body.nombre_usuario,
-  estado_usuario: req.body.estado_usuario,
-  id_rol: req.body.id_rol,
-  modificado_por: req.body.modificado_por,
-  id_usuario: id_usuario,
-};
-
-UsuarioModel.updateUserbyId(data, (err, row) => {
-  // console.log(err, '---', row)
-  if (err) {
-	let locals = {
-	  title: `Error al buscar el registro con el id: ${id_usuario}`,
-	  description: "Error de Sintaxis SQL",
-	  error: err,
-	};
-
-	res.render("error", locals);
-  } else {
-	// let locals = {
-	// 	title : 'Editar Usuario',
-	// 	data : row
-	// }
-	console.log(row.rows);
-	// res.status(200).send(rows.rows)
-	res.status(200).json({
-	  status: true,
-	  code: 201,
-	  message: "Información actualizada exitosamente",
-	  object: row.rows,
-	});
-	//res.render('edit-movie', locals)
-  }
-});
-
-
-};
-
 UsuarioController.save = (req, res, next) => {
-	const { paramSettings } = req;
-	const paramSettingCorreo = filterParamUtil(paramSettings, "ADMIN_CORREO");
-	const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
-	const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");
-	const paramSettingPhone = filterParamUtil(paramSettings, "SYS_PHONE");
-	const paramSettingUser = filterParamUtil(paramSettings, "ADMIN_CUSER");
-	const paramVigenciaUser = filterParamUtil(paramSettings, "ADMIN_VIGENCIA");
-	
-	const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
-	var urlPanel = paramUrlPanel.valor;	
-	  
-	const mailConfigSender = {
-	  user: paramSettingCorreo.valor,
-	  pass: paramSettingPass.valor,
-	};
+  const paramSettings = req.body.paramSetting;
+
+  const paramSettingCorreo = filterParamUtil(paramSettings, "ADMIN_CORREO");
+  const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
+  const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");
+  const paramSettingPhone = filterParamUtil(paramSettings, "SYS_PHONE");
+  const paramSettingUser = filterParamUtil(paramSettings, "ADMIN_CUSER");
+  const paramVigenciaUser = filterParamUtil(paramSettings, "ADMIN_VIGENCIA");
+  const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
+
+  var urlPanel = paramUrlPanel.valor;
+
+  const mailConfigSender = {
+    user: paramSettingCorreo.valor,
+    pass: paramSettingPass.valor,
+  };
 
   // console.log('req.usuario',req.usuario)
-  let otp = req.body.otp
-//   let otp = newOTP.generate(8, {
-//     alphabets: true,
-//     upperCase: true,
-//     specialChar: true,
-//   });
+  let otp = req.body.otp;
+  //   let otp = newOTP.generate(8, {
+  //     alphabets: true,
+  //     upperCase: true,
+  //     specialChar: true,
+  //   });
 
   // var x = Math.floor(Math.random() * (100 - 1) + 1);
   // let name_user=(req.body.nombre_usuario).toString()
@@ -259,7 +260,6 @@ UsuarioController.save = (req, res, next) => {
 
       res.render("error", locals);
     } else {
-	  
       const link = `${urlPanel}/login`;
 
       const transporter = nodemailer.createTransport({
@@ -267,30 +267,30 @@ UsuarioController.save = (req, res, next) => {
         auth: mailConfigSender,
       });
 
-    //   let html = `
-	// 		<span>
-	// 			<br>
-	// 			Hola <strong > <span style="text-transform: capitalize;">${usuario.nombre_usuario}</span></strong> 
-	// 			<br/>
-	// 			Se ha creado tu cuenta en <strong > plataforma administrativa de ${paramSettingCompany.valor}</strong>
-	// 			<br/>
-	// 			Para ingresar da clic <a href="${link}">aquí</a>
-	// 			<br/>
-	// 			Tus credenciales de acceso son
-	// 			<br>
-	// 			Usuario: <strong>${usuario.usuario}</strong>
-	// 			<br />
-	// 			OTP: <strong>${otp}</strong>
-	// 					<br>
-	// 			Recuerda cambiar tu contraseña
-	// 					<br>
-	// 					<br>
-	// 						Módulo desarrollado por el equipo (2)
-			
-	// 					</span>	
-	// 		`;
+      //   let html = `
+      // 		<span>
+      // 			<br>
+      // 			Hola <strong > <span style="text-transform: capitalize;">${usuario.nombre_usuario}</span></strong>
+      // 			<br/>
+      // 			Se ha creado tu cuenta en <strong > plataforma administrativa de ${paramSettingCompany.valor}</strong>
+      // 			<br/>
+      // 			Para ingresar da clic <a href="${link}">aquí</a>
+      // 			<br/>
+      // 			Tus credenciales de acceso son
+      // 			<br>
+      // 			Usuario: <strong>${usuario.usuario}</strong>
+      // 			<br />
+      // 			OTP: <strong>${otp}</strong>
+      // 					<br>
+      // 			Recuerda cambiar tu contraseña
+      // 					<br>
+      // 					<br>
+      // 						Módulo desarrollado por el equipo (2)
 
-	let html = `
+      // 					</span>
+      // 		`;
+
+      let html = `
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="font-family:arial, 'helvetica neue', helvetica, sans-serif">
 		<head>
@@ -572,7 +572,7 @@ UsuarioController.autoregistro = (req, res, next) => {
   const paramVigenciaUser = filterParamUtil(paramSettings, "ADMIN_VIGENCIA");
 
   const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
-  var urlPanel = paramUrlPanel.valor;	
+  var urlPanel = paramUrlPanel.valor;
 
   const mailConfigSender = {
     user: paramSettingCorreo.valor,
@@ -585,7 +585,7 @@ UsuarioController.autoregistro = (req, res, next) => {
     correo_electronico: req.body.correo_electronico,
     contrasena: req.body.contrasena,
     otp: req.body.otp,
-	paramVigencia: paramVigenciaUser.valor,
+    paramVigencia: paramVigenciaUser.valor,
   };
 
   console.log(usuario);
@@ -600,8 +600,8 @@ UsuarioController.autoregistro = (req, res, next) => {
 
       res.render("error", locals);
     } else {
-		// console.log('row==>>>',row.rows)
-		// await UsuarioModel.saveHistoricPassword(row.rows[0].id_usuario,req.body.contrasena)
+      // console.log('row==>>>',row.rows)
+      // await UsuarioModel.saveHistoricPassword(row.rows[0].id_usuario,req.body.contrasena)
       const link = `${urlPanel}/login`;
 
       const transporter = nodemailer.createTransport({

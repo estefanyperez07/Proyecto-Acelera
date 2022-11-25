@@ -60,6 +60,8 @@ ArticuloModel.getAllActiveInv = (cb) =>
 			,c.porcentaje
 			,a.id_categoria
 			,a.precio
+      ,a.inventario_minimo
+      ,a.inventario_maximo
 			,a.codigo_barra
   FROM 		tbl_articulo a 
   inner join 	tbl_categoria b on a.id_categoria=b.id_categoria and b.activo='1'
@@ -86,7 +88,7 @@ ArticuloModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "call prc_articulo_update ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)",
+              "call prc_articulo_update ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
               [
                 data.cod_articulo,
                 data.tipo,
@@ -95,9 +97,8 @@ ArticuloModel.save = (data, cb) => {
                 data.id_impuesto,
                 data.id_categoria,
                 data.precio,
-                data.id_unidad_venta,
-                data.id_socio_negocio,
-                data.id_unidad_compra,
+                data.inventario_minimo,
+                data.inventario_maximo,
                 data.codigo_barra,
                 data.id_unidad_medida,
                 data.activo,
@@ -107,7 +108,7 @@ ArticuloModel.save = (data, cb) => {
               cb
             )
           : conn.query(
-              "call prc_articulo_insert ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)",
+              "call prc_articulo_insert ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
               [
                 data.cod_articulo,
                 data.tipo,
@@ -116,9 +117,8 @@ ArticuloModel.save = (data, cb) => {
                 data.id_impuesto,
                 data.id_categoria,
                 data.precio,
-                data.id_unidad_venta,
-                data.id_socio_negocio,
-                data.id_unidad_compra,
+                data.inventario_minimo,
+                data.inventario_maximo,
                 data.codigo_barra,
                 data.id_unidad_medida,
                 data.activo,

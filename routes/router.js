@@ -54,13 +54,13 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
 
 router
   //--------------------------------COMENTARIOS DE SEGURIDAD -----------------
-  .get("/", (req, res) => {
+  /*.get("/", (req, res) => {
     res.status(200).json({
       ok: true,
       object: "API PROYECTO SEGURIDAD",
       message: "API corriendo correctamente",
     });
-  })
+  })*/
 
   // CONFIG OPTIONS
   .options("/", (req, res) => {

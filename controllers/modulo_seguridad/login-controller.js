@@ -539,7 +539,7 @@ LoginController.validateUser = async (req, res, next) => {
   const { id, token } = req.body;
   console.log(id, token);
 
-  const { paramSettings } = req;
+  const paramSettings = req.body.paramJwtSecret;
   const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");
   const JWT_SECRET = paramJwtSecret.valor;
 

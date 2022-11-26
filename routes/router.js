@@ -49,7 +49,6 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   PasivosController = require("../controllers/modulo_contabilidad/pasivos-controller"),
   PatrimoniosController = require("../controllers/modulo_contabilidad/patrimonios-controller"),
   IngresosController = require("../controllers/modulo_contabilidad/ingresos-controller"),
-  
   express = require("express"),
   router = express.Router();
 
@@ -109,6 +108,7 @@ router
   .delete("/impuesto/eliminar/:cod_impuesto", ImpuestoController.delete)
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
+  .get("/articulo/getallporbodega", ArticuloController.getAllPorBodega)
   .get("/articulo/getallactive", ArticuloController.getAllActive)
   .get("/articulo/getallactiveinv", ArticuloController.getAllActiveInv)
   .get(
@@ -457,7 +457,6 @@ router
   //INGRESOS
   .get("/mc_ingresos/getall", IngresosController.getAll)
 
-  
   .use(CategoriaController.error404);
 
 module.exports = router;

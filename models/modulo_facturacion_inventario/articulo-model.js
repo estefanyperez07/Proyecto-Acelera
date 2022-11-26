@@ -6,6 +6,9 @@ var conn = require("../db-connection"),
 ArticuloModel.getAll = (cb) =>
   conn.query("SELECT * FROM ft_articulo_getall()", cb);
 
+ArticuloModel.getAllPorBodega = (cb) =>
+  conn.query("SELECT * FROM public.ft_articulo_por_bodega_getall()", cb);
+
 ArticuloModel.getAllByCategoria = (id_categoria, cb) =>
   conn.query(
     `SELECT 		a.id_articulo

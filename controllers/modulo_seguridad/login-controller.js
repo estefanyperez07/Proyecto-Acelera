@@ -538,7 +538,7 @@ LoginController.resetPassUser = async (req, res, next) => {
 LoginController.validateUser = async (req, res, next) => {
   const id = req.body.id;
   const token = req.body.token;
-  const paramSettings = req.body.paramJwtSecret;
+  const paramSettings = req.body.paramSetting;
   console.log(id, token, paramSettings);
 
   const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");

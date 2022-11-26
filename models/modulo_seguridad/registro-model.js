@@ -218,7 +218,7 @@ UsuarioModel.autoregistro = async (data, cb) => {
         $2, 
         1,
         $3, 
-        1,
+        5,
         0,
         1,
         (NOW() + interval '${data.paramVigencia} days'), 

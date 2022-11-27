@@ -36,6 +36,28 @@ var RolModel = require('../../models/modulo_seguridad/rol-model'),
     })
 }
 
+//TRAER ROL
+RolController.treaerroles = (req, res, next) => {
+    RolModel.treaerroles((err, rows) => {
+      if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+    
+      res.status(520).json(err);
+      } else {
+      let locals = {
+        title: "Lista de roles",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+      //res.render('index', locals)
+      }
+    });
+    };
+
 //Obtener un registro específico
 RolController.getOne = (req, res, next) => {
 	let id_rol = req.params.id_rol

@@ -6,6 +6,9 @@ var conn = require("../db-connection"),
 //SELECT DE TODOS LOS REGISTROS DE LA TABLA ROLES
 RolModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.tbl_ms_roles", cb);
 
+//TRAER LOS ROLES 
+RolModel.traerroles = (cb) => conn.query("SELECT * FROM ft_select_roles()", cb);
+
 //SELECT PARA UN REGISTRO ESPECIFICO DE LA TABLA ROLES
 RolModel.getOne = (id, cb) =>
   conn.query("SELECT * FROM seguridad.tbl_ms_roles WHERE id_rol = $1", [id], cb);
@@ -35,11 +38,12 @@ RolModel.save = (data, cb) => {
               cb
             )
           : conn.query(
-            "SELECT seguridad.sp_insert_rol($1,$2,$3)",
+            "SELECT seguridad.sp_insert_rol($1,$2,$3,$4)",
               [
                 data.rol,
                 data.descripcion,
-                data.creado_por
+                data.creado_por,
+                data.fecha_creacion
               ],
               cb
             );

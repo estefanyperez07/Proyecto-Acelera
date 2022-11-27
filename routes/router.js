@@ -248,6 +248,7 @@ router
   .get("/venta/secuencia_enc_getone/", VentaController.secuencia_enc_getone)
   .get("/venta/secuencia_det_getone/", VentaController.secuencia_det_getone)
   .post("/venta/venta_por_fecha/", VentaController.facturasPorFecha)
+  .post("/venta/getcorte/", VentaController.getCorte)
   .get(
     "/venta/detalle_por_encabezado/:enc",
     VentaController.detallePorEncabezado

@@ -18,6 +18,17 @@ PreguntaModel.save = (data, cb) => {
     );
 };
 
+PreguntaModel.actualizar = (data, cb) => {
+  conn.query(
+    "SELECT seguridad.ft_actualizar_pregunta($1,$2)",
+      [
+        data.id_pregunta,
+        data.pregunta,
+      ],
+      cb
+    );
+};
+
 PreguntaModel.delete = (id, cb) =>
   conn.query("SELECT seguridad.d_delete_pregunta($1)", [id], cb);
 

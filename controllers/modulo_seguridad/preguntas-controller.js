@@ -9,10 +9,10 @@ var PreguntasModel = require('../../models/modulo_seguridad/preguntas-model'),
 			let locals = {
 				title : 'Error al consultar la base de datos',
 				description : 'Error de Sintaxis SQL',
-				error : err
-			}
+				error : err,
+			};
 
-			res.render('error', locals)
+			res.render('error', locals);
 		}
 		else
 		{
@@ -31,44 +31,44 @@ var PreguntasModel = require('../../models/modulo_seguridad/preguntas-model'),
 				}
 			)
 		}
-	})
-}
+	});
+};
 
 PreguntasController.getOne = (req, res, next) => {
-	let id_pregunta = req.params.id_pregunta
-	console.log(id_pregunta)
+	let id_pregunta = req.params.id_pregunta;
+	console.log(id_pregunta);
 
 	PreguntasModel.getOne(id_pregunta, (err, rows) => {
-		console.log(err, '---', rows)
+		console.log(err, '---', rows);
 		if(err)
 		{
 			let locals = {
 				title : `Error al buscar el registro con el id: ${id_pregunta}`,
 				description : "Error de Sintaxis SQL",
-				error : err
-			}
+				error : err,
+			};
 			
-			res.render('error', locals)
+			res.render('error', locals);
 		}
 		else
 		{
 			let locals = {
 				title : 'Editar Pregunta',
-				data : rows
-			}
-			res.status(200).send(rows.rows)
+				data : rows,
+			};
+			res.status(200).send(rows.rows[0]);
 			//res.render('edit-movie', locals)
 		}
-	})
-}
+	});
+};
 
 PreguntasController.save = (req, res, next) => {
 	let pregunta = {
         id_pregunta : req.body.id_pregunta,
         pregunta : req.body.pregunta
-	}
+	};
 
-	console.log(pregunta)
+	console.log(pregunta);
 
 	PreguntasModel.save(pregunta, (err) => {
 		if(err)
@@ -76,10 +76,10 @@ PreguntasController.save = (req, res, next) => {
 			let locals = {
 				title : `Error al salvar el registro con el id: ${pregunta.id_pregunta}`,
 				description : "Error de Sintaxis SQL",
-				error : err
-			}
+				error : err,
+			};
 
-			res.render('error', locals)
+			res.render('error', locals);
 		}else{
 			res.status(200).send({
 				status: true,
@@ -88,32 +88,63 @@ PreguntasController.save = (req, res, next) => {
 				object: [],
 			  });
 		}
-	})
-}
+	});
+};
+
+
+PreguntasController.actualizar = (req, res, next) => {
+	let pregunta = {
+        id_pregunta : req.params.id_pregunta,
+        pregunta : req.body.pregunta
+	};
+
+	console.log(pregunta);
+
+	PreguntasModel.actualizar(pregunta, (err) => {
+		if(err)
+		{
+			let locals = {
+				title : `Error al salvar el registro con el id: ${pregunta.id_pregunta}`,
+				description : "Error de Sintaxis SQL",
+				error : err,
+			};
+
+			res.render('error', locals);
+		}else{
+			res.status(200).send({
+				status: true,
+				code: 200,
+				message: "Datos actualizados correctamente",
+				object: [],
+			  });
+		}
+	});
+};
+
 
 PreguntasController.delete = (req, res, next) => {
-	let id_pregunta = req.params.id_pregunta
-	console.log(id_pregunta)
+	let id_pregunta = req.params.id_pregunta;
+	console.log(id_pregunta);
 
 	PreguntasModel.delete(id_pregunta, (err, rows) => {
-		console.log(err, '---', rows)
+		console.log(err, '---', rows);
 		if(err)
 		{
 			let locals = {
 				title : `Error al eliminar el registro con el id: ${id_pregunta}`,
 				description : "Error de Sintaxis SQL",
 				error : err
-			}
+			};
 
-			res.render('error', locals)
+			res.render('error', locals);
 		}
 		else
 		{
-			res.send('Success')
+			res.send('Success');
 			//res.redirect('/')
 		}
-	})
-}
+	});
+};
 
 PreguntasController.error404 = (req, res, next) => {
 	let error = new Error(),
@@ -130,5 +161,5 @@ PreguntasController.error404 = (req, res, next) => {
 	next()
 }
 
-module.exports = PreguntasController
+module.exports = PreguntasController;
 

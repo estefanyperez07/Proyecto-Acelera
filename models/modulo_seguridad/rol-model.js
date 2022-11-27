@@ -58,7 +58,7 @@ RolModel.save = (data, cb) => {
 };
 
 //BORRAR ROLES
-RolModel.delete = (id, cb) =>
-  conn.query("SELECT seguridad.d_delete_rol($1)", [id], cb);
+RolModel.delete = (cod, cb) =>
+  conn.query("SELECT seguridad.d_delete_rol($1)", [cod], cb);
 
 module.exports = RolModel;

@@ -307,6 +307,10 @@ router
   .delete("/ms_rol/eliminar/:id_rol", RolController.delete)
   //Permisos
   .get("/ms_permisos/getall", PermisosController.getAll)
+  .get(
+    "/ms_permisos/getallporusuario/:usuario",
+    PermisosController.getAllPorUsuario
+  )
   .get("/ms_permisos/getone/:id_permiso", PermisosController.getOne)
   .put("/ms_permisos/actualizar-insertar/:id_permiso", PermisosController.save)
   .delete("/ms_permisos/eliminar/:id_permiso", PermisosController.delete)

@@ -3,10 +3,18 @@
 var conn = require("../db-connection"),
   PermisosModel = () => {};
 
-PermisosModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.ft_select_permisos()", cb);
+PermisosModel.getAll = (cb) =>
+  conn.query("SELECT * FROM seguridad.ft_select_permisos()", cb);
 
 PermisosModel.getOne = (id, cb) =>
   conn.query("SELECT * FROM seguridad.ft_getone_permiso($1)", [id], cb);
+
+PermisosModel.getAllPorUsuario = (usuario, cb) =>
+  conn.query(
+    "SELECT * FROM seguridad.ft_getall_permisos_por_usuario($1)",
+    [usuario],
+    cb
+  );
 
 PermisosModel.save = (data, cb) => {
   conn.query(
@@ -21,7 +29,7 @@ PermisosModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "SELECT seguridad.ft_actualizar_permiso($1,$2,$3,$4,$5,$6,$7,$8,$9)", 
+              "SELECT seguridad.ft_actualizar_permiso($1,$2,$3,$4,$5,$6,$7,$8,$9)",
               [
                 data.id_permiso,
                 data.id_rol,
@@ -36,7 +44,7 @@ PermisosModel.save = (data, cb) => {
               cb
             )
           : conn.query(
-            "SELECT seguridad.sp_insert_permisos($1,$2,$3,$4,$5,$6,$7,$8)", 
+              "SELECT seguridad.sp_insert_permisos($1,$2,$3,$4,$5,$6,$7,$8)",
               [
                 data.permiso_insercion,
                 data.permiso_eliminacion,
@@ -45,7 +53,7 @@ PermisosModel.save = (data, cb) => {
                 data.creado_por,
                 data.fecha_creacion,
                 data.id_rol,
-                data.id_objeto
+                data.id_objeto,
               ],
               cb
             );

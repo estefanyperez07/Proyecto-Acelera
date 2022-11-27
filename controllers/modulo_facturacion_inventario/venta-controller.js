@@ -25,9 +25,12 @@ VentaController.getAll = (req, res, next) => {
 };
 
 VentaController.facturasPorFecha = (req, res, next) => {
-  let fecha = req.body.fecha;
+  let fechas = {
+    fecha_inicial: req.body.fecha_inicial,
+    fecha_final: req.body.fecha_final,
+  };
   console.log(fecha);
-  VentaModel.facturasPorFecha(fecha, (err, rows) => {
+  VentaModel.facturasPorFecha(fechas, (err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",

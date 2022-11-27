@@ -685,24 +685,7 @@ LoginController.validatecurrentpassword = async (req, res, next) => {
     if (bodyParams.id_usuario && bodyParams.contrasena) {
       const regex_texto = new RegExp(regexText);
       //= =======
-      if (!regex_texto.test(bodyParams.id_usuario)) {
-        return res.status(400).send({
-          ok: false,
-          code: 400,
-          message: "usuario y/o contrasena incorrectos",
-          object: {},
-        });
-      }
       // console.log('asdasd')
-
-      if (!validator.isMD5(bodyParams.contrasena)) {
-        return res.status(400).send({
-          ok: false,
-          code: 400,
-          message: "usuario y/o contrasena incorrectos",
-          object: {},
-        });
-      }
 
       let usuario = {
         id_usuario: bodyParams.id_usuario,

@@ -100,7 +100,7 @@ LoginController.login = async (req, res, next) => {
         let dataUser = row.rows[0].ft_login;
         dataUser = dataUser.split(",");
         let statusUser = dataUser[2];
-        // console.log("statusUser", statusUser)
+        console.log("statusUser", statusUser);
         if (statusUser.toString() !== '"DATOS CORRECTOS"'.toString()) {
           return res.status(400).send({
             status: false,
@@ -659,6 +659,125 @@ LoginController.changePassUser = async (req, res, next) => {
     if (!bodyParams.id_user) {
       emptyParam = "id_user";
     }
+    response = res.status(400).send({
+      ok: false,
+      code: 400,
+      message: "No se enviarón algunos parámetros de consulta",
+      object: [emptyParam],
+    });
+    return response;
+  } catch (e) {
+    return res.status(500).send({
+      ok: false,
+      code: 500,
+      message: "error en el servidor",
+      object: e,
+    });
+  }
+};
+
+LoginController.validatecurrentpassword = async (req, res, next) => {
+  let response = null;
+  console.log(req.body);
+
+  const paramSettings = req.body.parametros;
+
+  console.log(paramSettings);
+  const paramJwtSecret = filterParamUtil(paramSettings, "JWT_SECRET");
+  const JWT_SECRET = paramJwtSecret.valor;
+  // const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
+  // const urlPanel = paramUrlPanel.valor;
+  const paramTimeExpired = filterParamUtil(paramSettings, "JWT_TIME_EXPIRED");
+  const timeExpired = paramTimeExpired.valor;
+  // const paramSettingPass = filterParamUtil(paramSettings, "ADMIN_CPASS");
+  // const paramSettingCompany = filterParamUtil(paramSettings, "SYS_NOMBRE");
+  // const paramSettingPhone = filterParamUtil(paramSettings, "SYS_PHONE");
+  // const paramSettingUser = filterParamUtil(paramSettings, "ADMIN_CUSER");
+
+  // const paramUrlPanel = filterParamUtil(paramSettings, "URL_PANEL");
+  // var urlPanel = paramUrlPanel.valor;
+
+  const bodyParams = req.body;
+  try {
+    if (bodyParams.nombre_usuario && bodyParams.contrasena) {
+      const regex_texto = new RegExp(regexText);
+      //= =======
+      if (!regex_texto.test(bodyParams.nombre_usuario)) {
+        return res.status(400).send({
+          ok: false,
+          code: 400,
+          message: "usuario y/o contrasena incorrectos",
+          object: {},
+        });
+      }
+      // console.log('asdasd')
+
+      if (!validator.isMD5(bodyParams.contrasena)) {
+        return res.status(400).send({
+          ok: false,
+          code: 400,
+          message: "usuario y/o contrasena incorrectos",
+          object: {},
+        });
+      }
+
+      let usuario = {
+        id_usuario: bodyParams.id_usuario,
+        contrasena: bodyParams.contrasena,
+      };
+      console.log(usuario);
+
+      LoginModel.validatecurrentpassword(usuario, (err, row) => {
+        if (err) {
+          res.status(300).send({
+            status: false,
+            code: 300,
+            message: "usuario y/o contrasena incorrectos",
+            object: [],
+          });
+        }
+        // console.log('rows.rows',row.rows)
+        let dataUser = row.rows[0].ft_login;
+        dataUser = dataUser.split(",");
+        let statusUser = dataUser[2];
+        console.log("statusUser", statusUser);
+        if (statusUser.toString() !== '"DATOS CORRECTOS"'.toString()) {
+          return res.status(400).send({
+            status: false,
+            code: 400,
+            message: statusUser,
+            object: [],
+          });
+        }
+
+        const payload = {
+          nameUser: dataUser[1].toUpperCase(),
+          id: Number(dataUser[0].replace("(", "") || 0),
+        };
+
+        const token = jwt.sign(payload, JWT_SECRET, { expiresIn: timeExpired });
+
+        response = res.status(200).send({
+          status: true,
+          code: 200,
+          message: "Login Exitoso",
+          "x-token": token,
+          data: payload,
+        });
+      });
+
+      return response;
+    }
+
+    let emptyParam = "";
+
+    if (!bodyParams.nombre_usuario) {
+      emptyParam = "nombre_usuario";
+    }
+    if (!bodyParams.contrasena) {
+      emptyParam = "contrasena";
+    }
+
     response = res.status(400).send({
       ok: false,
       code: 400,

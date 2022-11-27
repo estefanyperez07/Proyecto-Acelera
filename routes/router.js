@@ -205,6 +205,7 @@ router
   .delete("/sucursal/eliminar/:cod_sucursal", SucursalController.delete)
   //****UNIDAD MEDIDA****
   .get("/unidad_medida/getall", UnidadMedidaController.getAll)
+
   .get(
     "/unidad_medida/getone/:cod_unidad_medida",
     UnidadMedidaController.getOne
@@ -309,7 +310,7 @@ router
   .get("/ms_rol/getone/:id_rol", RolController.getOne)
   .put("/ms_rol/actualizar-insertar/:id_rol", RolController.save)
   .delete("/ms_rol/eliminar/:id_rol", RolController.delete)
-  .get("/ms_rol/traerrol",RolController.traerroles)
+  .get("/ms_rol/traerrol", RolController.traerroles)
   //Permisos
   .get("/ms_permisos/getall", PermisosController.getAll)
   .get(

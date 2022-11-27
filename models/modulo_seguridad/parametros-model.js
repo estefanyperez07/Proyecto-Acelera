@@ -3,10 +3,10 @@
 var conn = require("../db-connection"),
   ParametroModel = () => {};
 
-ParametroModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.tbl_ms_parametros", cb);
+ParametroModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.ft_select_parametros()", cb);
 
-ParametroModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM seguridad.tbl_ms_parametros WHERE id_parametro = $1", [id], cb);
+ParametroModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM seguridad.tbl_ms_parametros WHERE id_parametro = $1", [cod], cb);
 
 ParametroModel.save = (data, cb) => {
   conn.query(
@@ -21,8 +21,9 @@ ParametroModel.save = (data, cb) => {
       } else {
         return rows.rows.length === 1
           ? conn.query(
-              "SELECT seguridad.ft_actualizar_parametros($1,$2,$3,$4)",
+              "SELECT seguridad.ft_actualizar_parametros($1,$2,$3,$4,$5)",
               [
+                data.id_parametro,
                 data.parametro,
                 data.valor,
                 data.modificado_por,
@@ -35,7 +36,7 @@ ParametroModel.save = (data, cb) => {
               [
                 data.parametro,
                 data.valor,
-                data.creado_por
+                data.creado_por,
               ],
               cb
             );

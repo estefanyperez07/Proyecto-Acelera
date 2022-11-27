@@ -17,20 +17,12 @@ var ParametroModel = require('../../models/modulo_seguridad/parametros-model'),
 		}
 		else
 		{
-			// let locals = {
-			// 	title : 'Lista de Parámetros',
-			// 	data : rows
-			// }
-			// res.status(200).send(rows.rows)
+			 let locals = {
+				title : 'Lista de Parámetros',
+			 	data : rows
+			 }
+			 res.status(200).send(rows.rows)
 			// //res.render('index', locals)
-			res.status(200).json(
-				{
-					status:true,
-					code:200,
-					message:"Información encontrada exitosamente",
-					object:rows.rows,
-				}
-			)
 		}
 	})
 }
@@ -65,7 +57,7 @@ ParametroController.getOne = (req, res, next) => {
 
 ParametroController.save = (req, res, next) => {
 	let parametro = {
-        id_parametro : req.body.id_parametro,
+        id_parametro : req.params.id_parametro,
         parametro : req.body.parametro,
         valor : req.body.valor,
         creado_por : req.body.creado_por,

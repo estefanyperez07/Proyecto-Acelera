@@ -8,7 +8,7 @@ RolModel.getAll = (cb) =>
   conn.query("SELECT * FROM seguridad.tbl_ms_roles", cb);
 
 //TRAER LOS ROLES
-RolModel.traerroles = (cb) => conn.query("SELECT * FROM ft_select_roles()", cb);
+RolModel.traerroles = (cb) => conn.query("SELECT * FROM seguridad.ft_select_roles()", cb);
 
 //SELECT PARA UN REGISTRO ESPECIFICO DE LA TABLA ROLES
 RolModel.getOne = (id, cb) =>

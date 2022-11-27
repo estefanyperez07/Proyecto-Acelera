@@ -46,8 +46,12 @@ ArticuloController.getAllPorBodega = (req, res, next) => {
 };
 
 ArticuloController.getMovimientosPorArticulo = (req, res, next) => {
-  let id_articulo = req.params.id_articulo;
-  ArticuloModel.getMovimientosPorArticulo(id_articulo, (err, rows) => {
+  let params = {
+    id_centro_costo: req.body.id_centro_costo,
+    id_articulo: req.body.id_articulo,
+  };
+  console.log(params);
+  ArticuloModel.getMovimientosPorArticulo(params, (err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",

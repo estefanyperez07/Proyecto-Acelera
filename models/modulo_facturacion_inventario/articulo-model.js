@@ -9,10 +9,10 @@ ArticuloModel.getAll = (cb) =>
 ArticuloModel.getAllPorBodega = (cb) =>
   conn.query("SELECT * FROM public.ft_articulo_por_bodega_getall()", cb);
 
-ArticuloModel.getMovimientosPorArticulo = (id_articulo, cb) =>
+ArticuloModel.getMovimientosPorArticulo = (params, cb) =>
   conn.query(
-    "SELECT * FROM public.ft_articulo_movimientos($1)",
-    [id_articulo],
+    "SELECT * FROM public.ft_articulo_movimientos($1,$2)",
+    [params.id_centro_costo, params.id_articulo],
     cb
   );
 

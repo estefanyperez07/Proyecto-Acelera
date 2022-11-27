@@ -109,7 +109,7 @@ router
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
   .get(
-    "/articulo/movimientosporarticulo/:id_articulo",
+    "/articulo/movimientosporarticulo/",
     ArticuloController.getMovimientosPorArticulo
   )
   .get("/articulo/getallporbodega", ArticuloController.getAllPorBodega)

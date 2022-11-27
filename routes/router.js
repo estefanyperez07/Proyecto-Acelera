@@ -264,6 +264,7 @@ router
   .post("/login", LoginController.login)
   .post("/reset", LoginController.resetPassUser)
   .post("/validateUser", LoginController.validateUser)
+  .post("/validatecurrentpassword", LoginController.validatecurrentpassword)
   .post("/changePass", LoginController.changePassUser)
   //bitacoras
   .get("/logs/getall", LogsController.getAll)

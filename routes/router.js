@@ -108,6 +108,10 @@ router
   .delete("/impuesto/eliminar/:cod_impuesto", ImpuestoController.delete)
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
+  .get(
+    "/articulo/movimientosporarticulo/:id_articulo",
+    ArticuloController.getMovimientosPorArticulo
+  )
   .get("/articulo/getallporbodega", ArticuloController.getAllPorBodega)
   .get("/articulo/getallactive", ArticuloController.getAllActive)
   .get("/articulo/getallactiveinv", ArticuloController.getAllActiveInv)

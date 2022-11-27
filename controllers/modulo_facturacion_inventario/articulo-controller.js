@@ -45,6 +45,28 @@ ArticuloController.getAllPorBodega = (req, res, next) => {
   });
 };
 
+ArticuloController.getMovimientosPorArticulo = (req, res, next) => {
+  let id_articulo = req.params.id_articulo;
+  ArticuloModel.getMovimientosPorArticulo(id_articulo, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+      //res.render('index', locals)
+    }
+  });
+};
+
 ArticuloController.getAllByCategoria = (req, res, next) => {
   let id_categoria = req.params.id_categoria;
   ArticuloModel.getAllByCategoria(id_categoria, (err, rows) => {

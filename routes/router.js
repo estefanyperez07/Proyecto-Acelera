@@ -246,7 +246,7 @@ router
   .post("/venta/insertar/", VentaController.post)
   .get("/venta/secuencia_enc_getone/", VentaController.secuencia_enc_getone)
   .get("/venta/secuencia_det_getone/", VentaController.secuencia_det_getone)
-  .get("/venta/venta_por_fecha/", VentaController.facturasPorFecha)
+  .post("/venta/venta_por_fecha/", VentaController.facturasPorFecha)
   .get(
     "/venta/detalle_por_encabezado/:enc",
     VentaController.detallePorEncabezado

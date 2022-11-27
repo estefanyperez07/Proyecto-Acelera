@@ -286,10 +286,8 @@ router
   //Preguntas
   .get("/ms_pregunta/getall", PreguntasController.getAll)
   .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
-  .put(
-    "/ms_pregunta/actualizar-insertar/:id_pregunta",
-    PreguntasController.save
-  )
+  .put( "/ms_pregunta/actualizar-insertar/:id_pregunta", PreguntasController.save)
+  .put( "/ms_pregunta/actualizar/:id_pregunta", PreguntasController.actualizar)
   .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
   //Preguntas Usuario
   .get("/ms_pregunta_usuario/getall", PreguntasUsuarioController.getAll)

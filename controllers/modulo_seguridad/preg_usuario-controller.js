@@ -56,7 +56,7 @@ PreguntasUsuarioController.getOne = (req, res, next) => {
 
 PreguntasUsuarioController.save = (req, res, next) => {
 	let pregunta_usuario = {
-          //  id_preguntas_usuario : req.body.id_preguntas_usuario,
+          //id_preguntas_usuario : req.body.id_preguntas_usuario,
 		  id_usuario : Number(req.body.id_usuario),
 		  id_pregunta : Number(req.body.id_pregunta),
 		  respuesta : req.body.respuesta

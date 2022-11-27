@@ -3,10 +3,10 @@
 var conn = require("../db-connection"),
   PreguntasUsuarioModel = () => { };
 
-PreguntasUsuarioModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.ft_select_preguntas_usuario()", cb);
+PreguntasUsuarioModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.tbl_ms_preguntas_usuario", cb);
 
 PreguntasUsuarioModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM seguridad.ft_getone_pregunta_usuario($1)", [id], cb);
+  conn.query("SELECT * FROM seguridad.tbl_ms_preguntas_usuario WHERE id_preguntas_usuario = $1", [id], cb);
 
 PreguntasUsuarioModel.save = (data, cb) => {
   conn.query(

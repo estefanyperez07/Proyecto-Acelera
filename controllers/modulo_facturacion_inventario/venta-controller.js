@@ -29,7 +29,7 @@ VentaController.facturasPorFecha = (req, res, next) => {
     fecha_inicial: req.body.fecha_inicial,
     fecha_final: req.body.fecha_final,
   };
-  console.log(fecha);
+  console.log(fechas);
   VentaModel.facturasPorFecha(fechas, (err, rows) => {
     if (err) {
       let locals = {

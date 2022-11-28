@@ -259,6 +259,10 @@ router
   .get("/compras/secuencia_enc_getone/", ComprasController.secuencia_enc_getone)
   .get("/compras/secuencia_det_getone/", ComprasController.secuencia_det_getone)
   .get("/compras/compras_por_fecha/", ComprasController.comprasPorFecha)
+  .get(
+    "/compras/detalle_por_encabezado/:enc",
+    ComprasController.detallePorEncabezado
+  )
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login
@@ -287,8 +291,11 @@ router
   //Preguntas
   .get("/ms_pregunta/getall", PreguntasController.getAll)
   .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
-  .put( "/ms_pregunta/actualizar-insertar/:id_pregunta", PreguntasController.save)
-  .put( "/ms_pregunta/actualizar/:id_pregunta", PreguntasController.actualizar)
+  .put(
+    "/ms_pregunta/actualizar-insertar/:id_pregunta",
+    PreguntasController.save
+  )
+  .put("/ms_pregunta/actualizar/:id_pregunta", PreguntasController.actualizar)
   .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
   //Preguntas Usuario
   .get("/ms_pregunta_usuario/getall", PreguntasUsuarioController.getAll)

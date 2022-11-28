@@ -13,10 +13,10 @@ VentaModel.facturasPorFecha = (fechas, cb) =>
     cb
   );
 
-VentaModel.corte = (fechas, cb) =>
+VentaModel.getCorte = (datos, cb) =>
   conn.query(
-    "SELECT * FROM public.ft_facturas_por_fecha($1,$2)",
-    [fechas.fecha_inicial, fechas.fecha_final],
+    "SELECT * FROM public.ft_json_arqueo($1,$2,$3,$4)",
+    [datos.id_sucursal, datos.fecha, datos.id_usuario, datos.id_pos],
     cb
   );
 

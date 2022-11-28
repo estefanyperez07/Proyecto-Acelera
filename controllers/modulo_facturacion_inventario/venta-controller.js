@@ -50,6 +50,34 @@ VentaController.facturasPorFecha = (req, res, next) => {
   });
 };
 
+VentaController.getCorte = (req, res, next) => {
+  let datos = {
+    id_sucursal: req.body.id_sucursal,
+    fecha: req.body.fecha,
+    id_usuario: req.body.id_usuario,
+    id_pos: req.body.id_pos,
+  };
+  console.log(datos);
+  VentaModel.getCorte(datos, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      let venta = rows.rows;
+      res.status(200).send(rows.rows[0].ft_json_arqueo);
+    }
+  });
+};
+
 VentaController.detallePorEncabezado = (req, res, next) => {
   let enc = req.params.enc;
   console.log(enc);

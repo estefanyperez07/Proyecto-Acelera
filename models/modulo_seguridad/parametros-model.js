@@ -32,11 +32,12 @@ ParametroModel.save = (data, cb) => {
               cb
             )
           : conn.query(
-            "SELECT seguridad.sp_insert_parametros($1,$2,$3)",
+            "SELECT seguridad.sp_insert_parametros($1,$2,$3,$4)",
               [
                 data.parametro,
                 data.valor,
                 data.creado_por,
+                data.fecha_creacion,
               ],
               cb
             );

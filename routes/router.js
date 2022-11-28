@@ -108,7 +108,7 @@ router
   .delete("/impuesto/eliminar/:cod_impuesto", ImpuestoController.delete)
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
-  .get(
+  .post(
     "/articulo/movimientosporarticulo/",
     ArticuloController.getMovimientosPorArticulo
   )
@@ -230,7 +230,7 @@ router
   .delete("/mesa/eliminar/:cod_mesa", MesaController.delete)
   //****LISTA MATERIALES****
   .get("/lista_materiales/getall", ListaMaterialesController.getAll)
-  .get("/lista_materiales/getone", ListaMaterialesController.getOne)
+  .post("/lista_materiales/getone", ListaMaterialesController.getOne)
   .get(
     "/lista_materiales/padregetone/:id_articulo_padre",
     ListaMaterialesController.padreGetAll
@@ -248,6 +248,7 @@ router
   .get("/venta/secuencia_enc_getone/", VentaController.secuencia_enc_getone)
   .get("/venta/secuencia_det_getone/", VentaController.secuencia_det_getone)
   .post("/venta/venta_por_fecha/", VentaController.facturasPorFecha)
+  .post("/venta/getcorte/", VentaController.getCorte)
   .get(
     "/venta/detalle_por_encabezado/:enc",
     VentaController.detallePorEncabezado
@@ -257,7 +258,12 @@ router
   .post("/compras/insertar/", ComprasController.post)
   .get("/compras/secuencia_enc_getone/", ComprasController.secuencia_enc_getone)
   .get("/compras/secuencia_det_getone/", ComprasController.secuencia_det_getone)
+  .get("/compras/jsonasiento/:enc", ComprasController.jsonAsientoCompras)
   .get("/compras/compras_por_fecha/", ComprasController.comprasPorFecha)
+  .get(
+    "/compras/detalle_por_encabezado/:enc",
+    ComprasController.detallePorEncabezado
+  )
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   //Login
@@ -286,8 +292,11 @@ router
   //Preguntas
   .get("/ms_pregunta/getall", PreguntasController.getAll)
   .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
-  .put( "/ms_pregunta/actualizar-insertar/:id_pregunta", PreguntasController.save)
-  .put( "/ms_pregunta/actualizar/:id_pregunta", PreguntasController.actualizar)
+  .put(
+    "/ms_pregunta/actualizar-insertar/:id_pregunta",
+    PreguntasController.save
+  )
+  .put("/ms_pregunta/actualizar/:id_pregunta", PreguntasController.actualizar)
   .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
   //Preguntas Usuario
   .get("/ms_pregunta_usuario/getall", PreguntasUsuarioController.getAll)

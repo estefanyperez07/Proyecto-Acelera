@@ -3,10 +3,15 @@
 var conn = require("../db-connection"),
   CatalogoModel = () => {};
 
-CatalogoModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.ft_select_catalogo_cuenta()", cb);
+CatalogoModel.getAll = (cb) =>
+  conn.query("SELECT * FROM contabilidad.ft_select_catalogo_cuenta()", cb);
 
 CatalogoModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_catalago_cuenta WHERE codigo_cuenta= $1", [cod], cb);
+  conn.query(
+    "SELECT * FROM contabilidad.tbl_catalogo_cuenta WHERE codigo_cuenta= $1",
+    [cod],
+    cb
+  );
 
 CatalogoModel.save = (data, cb) => {
   conn.query(
@@ -15,7 +20,7 @@ CatalogoModel.save = (data, cb) => {
     (err, rows) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
- //FUNCIONA------------------
+      //FUNCIONA------------------
       if (err) {
         return err;
       } else {

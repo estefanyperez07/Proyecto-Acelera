@@ -423,7 +423,7 @@ router
   )
   //CATALOGO DE CUENTAS
   .get("/mc_catalogo/getall", CatalogoController.getAll)
-  .get("/mc_catalogo/getone/:id_cuenta", CatalogoController.getOne)
+  .get("/mc_catalogo/getone/:codigo_cuenta", CatalogoController.getOne)
   .put("/mc_catalogo/actualizar-insertar/:id_cuenta", CatalogoController.save)
   .delete("/mc_catalogo/eliminar/:id_cuenta", CatalogoController.delete)
   //DESTINO DE CUENTAS

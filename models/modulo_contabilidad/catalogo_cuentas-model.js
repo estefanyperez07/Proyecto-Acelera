@@ -6,7 +6,7 @@ var conn = require("../db-connection"),
 CatalogoModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.ft_select_catalogo_cuenta()", cb);
 
 CatalogoModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.ft_getone_catalago_cuenta($1)", [cod], cb);
+  conn.query("SELECT * FROM contabilidad.tbl_catalago_cuenta WHERE codigo_cuenta= $1", [cod], cb);
 
 CatalogoModel.save = (data, cb) => {
   conn.query(

@@ -25,14 +25,14 @@ CatalogoController.getAll = (req, res, next) => {
 };
 
 CatalogoController.getOne = (req, res, next) => {
-  let id_cuenta = req.params.id_cuenta;
-  console.log(id_cuenta);
+  let codigo_cuenta = req.params.codigo_cuenta;
+  console.log(codigo_cuenta);
 
-  CatalogoModel.getOne(id_cuenta, (err, rows) => {
+  CatalogoModel.getOne(codigo_cuenta, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_cuenta}`,
+        title: `Error al buscar el registro con el id: ${codigo_cuenta}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

@@ -230,7 +230,7 @@ router
   .delete("/mesa/eliminar/:cod_mesa", MesaController.delete)
   //****LISTA MATERIALES****
   .get("/lista_materiales/getall", ListaMaterialesController.getAll)
-  .get("/lista_materiales/getone", ListaMaterialesController.getOne)
+  .post("/lista_materiales/getone", ListaMaterialesController.getOne)
   .get(
     "/lista_materiales/padregetone/:id_articulo_padre",
     ListaMaterialesController.padreGetAll

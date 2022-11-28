@@ -12,6 +12,9 @@ ComprasModel.comprasPorFecha = (fecha, cb) =>
 ComprasModel.detallePorEncabezado = (sec, cb) =>
   conn.query("SELECT * FROM public.ft_json_compras($1)", [sec], cb);
 
+ComprasModel.jsonAsientoCompras = (sec, cb) =>
+  conn.query("SELECT * FROM public.ft_json_compras_asiento($1)", [sec], cb);
+
 ComprasModel.secuencia_enc_getone = (cb) =>
   conn.query("SELECT public.ft_secuencia_enc_compras_getone()", cb);
 

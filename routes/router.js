@@ -258,6 +258,7 @@ router
   .post("/compras/insertar/", ComprasController.post)
   .get("/compras/secuencia_enc_getone/", ComprasController.secuencia_enc_getone)
   .get("/compras/secuencia_det_getone/", ComprasController.secuencia_det_getone)
+  .get("/compras/jsonasiento/:enc", ComprasController.jsonAsientoCompras)
   .get("/compras/compras_por_fecha/", ComprasController.comprasPorFecha)
   .get(
     "/compras/detalle_por_encabezado/:enc",

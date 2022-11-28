@@ -70,6 +70,29 @@ ComprasController.detallePorEncabezado = (req, res, next) => {
   });
 };
 
+ComprasController.jsonAsientoCompras = (req, res, next) => {
+  let enc = req.params.enc;
+  console.log(enc);
+  ComprasModel.jsonAsientoCompras(enc, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      let venta = rows.rows;
+      res.status(200).send(rows.rows[0].ft_json_compras_asiento);
+    }
+  });
+};
+
 ComprasController.secuencia_enc_getone = (req, res, next) => {
   ComprasModel.secuencia_enc_getone((err, rows) => {
     console.log(err, "---", rows);

@@ -108,7 +108,7 @@ router
   .delete("/impuesto/eliminar/:cod_impuesto", ImpuestoController.delete)
   //****ARTICULO****
   .get("/articulo/getall", ArticuloController.getAll)
-  .get(
+  .post(
     "/articulo/movimientosporarticulo/",
     ArticuloController.getMovimientosPorArticulo
   )

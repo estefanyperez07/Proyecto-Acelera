@@ -718,9 +718,6 @@ LoginController.validatecurrentpassword = async (req, res, next) => {
   try {
     if (bodyParams.id_usuario && bodyParams.contrasena) {
       const regex_texto = new RegExp(regexText);
-      //= =======
-      // console.log('asdasd')
-
       let usuario = {
         id_usuario: bodyParams.id_usuario,
         contrasena: bodyParams.contrasena,
@@ -792,4 +789,58 @@ LoginController.validatecurrentpassword = async (req, res, next) => {
     });
   }
 };
+
+LoginController.validatePIN = async (req, res, next) => {
+  let response = null;
+  console.log("Linea 795", req.body);
+
+  const bodyParams = req.body;
+  try {
+    if (bodyParams.id_usuario && bodyParams.pin) {
+      const regex_texto = new RegExp(regexText);
+      let usuario = {
+        id_usuario: bodyParams.id_usuario,
+        pin: bodyParams.pin,
+      };
+      console.log(usuario);
+
+      LoginModel.validatePIN(usuario, (err, row) => {
+        if (err) {
+          res.status(300).send({
+            status: false,
+            code: 300,
+            message: "usuario y/o contrasena incorrectos",
+            object: [],
+          });
+        }
+        // console.log('rows.rows',row.rows)
+        let dataUser = row.rows[0].ft_validate_pin;
+        console.log(dataUser);
+        if (dataUser) {
+          res.status(200).send({
+            status: true,
+            code: 200,
+            message: "PIN Valido",
+          });
+        } else {
+          res.status(400).send({
+            status: false,
+            code: 400,
+            message: "PIN Invalido",
+          });
+        }
+      });
+
+      return response;
+    }
+  } catch (e) {
+    return res.status(500).send({
+      ok: false,
+      code: 500,
+      message: "error en el servidor",
+      object: e,
+    });
+  }
+};
+
 module.exports = LoginController;

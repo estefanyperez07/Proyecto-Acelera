@@ -72,4 +72,10 @@ LoginModel.validatecurrentpassword = (data, cb) => {
   conn.query(text, values, cb);
 };
 
+LoginModel.validatePIN = (data, cb) => {
+  const text = "SELECT seguridad.ft_validate_pin($1,$2)";
+  const values = [data.id_usuario, data.pin];
+  conn.query(text, values, cb);
+};
+
 module.exports = LoginModel;

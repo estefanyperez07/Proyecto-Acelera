@@ -25,9 +25,12 @@ ComprasController.getAll = (req, res, next) => {
 };
 
 ComprasController.comprasPorFecha = (req, res, next) => {
-  let fecha = req.body.fecha;
-  console.log(fecha);
-  ComprasModel.comprasPorFecha(fecha, (err, rows) => {
+  let fechas = {
+    fecha_inicial: req.body.fecha_inicial,
+    fecha_final: req.body.fecha_final,
+  };
+  console.log(fechas);
+  ComprasModel.comprasPorFecha(fechas, (err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",

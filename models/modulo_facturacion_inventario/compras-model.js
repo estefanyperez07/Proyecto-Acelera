@@ -6,8 +6,12 @@ var conn = require("../db-connection"),
 ComprasModel.getAll = (cb) =>
   conn.query("SELECT * FROM ft_sucursal_getall()", cb);
 
-ComprasModel.comprasPorFecha = (fecha, cb) =>
-  conn.query("SELECT * FROM public.ft_compras_por_fecha($1)", [fecha], cb);
+ComprasModel.comprasPorFecha = (fechas, cb) =>
+  conn.query(
+    "SELECT * FROM public.ft_compras_por_fecha($1,$2)",
+    [fechas.fecha_inicial, fechas.fecha_final],
+    cb
+  );
 
 ComprasModel.detallePorEncabezado = (sec, cb) =>
   conn.query("SELECT * FROM public.ft_json_compras($1)", [sec], cb);

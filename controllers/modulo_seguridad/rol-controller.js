@@ -55,14 +55,14 @@ RolController.traerroles = (req, res, next) => {
 
 //Obtener un registro específico
 RolController.getOne = (req, res, next) => {
-  let id_rol = req.params.id_rol;
-  console.log(id_rol);
+  let rol = req.params.rol;
+  console.log(rol);
 
-  RolModel.getOne(id_rol, (err, rows) => {
+  RolModel.getOne(rol, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_rol}`,
+        title: `Error al buscar el registro con el id: ${rol}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

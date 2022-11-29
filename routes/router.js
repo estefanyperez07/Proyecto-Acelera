@@ -291,7 +291,7 @@ router
   .delete("/ms_estado/eliminar/:id", EstadoUserController.delete)
   //Preguntas
   .get("/ms_pregunta/getall", PreguntasController.getAll)
-  .get("/ms_pregunta/getone/:id_pregunta", PreguntasController.getOne)
+  .get("/ms_pregunta/getone/:pregunta", PreguntasController.getOne)
   .put("/ms_pregunta/actualizar-insertar/:id_pregunta",PreguntasController.save)
   .put("/ms_pregunta/actualizar/:id_pregunta", PreguntasController.actualizar)
   .delete("/ms_pregunta/eliminar/:id_pregunta", PreguntasController.delete)
@@ -303,7 +303,7 @@ router
   .delete("/ms_pregunta_usuario/eliminar/:id_preguntas_usuario",PreguntasUsuarioController.delete)
   //Rol
   .get("/ms_rol/getall", RolController.getAll)
-  .get("/ms_rol/getone/:id_rol", RolController.getOne)
+  .get("/ms_rol/getone/:rol", RolController.getOne)
   .put("/ms_rol/actualizar-insertar/:id_rol", RolController.save)
   .delete("/ms_rol/eliminar/:id_rol", RolController.delete)
   .get("/ms_rol/traerrol", RolController.traerroles)
@@ -315,12 +315,12 @@ router
   .delete("/ms_permisos/eliminar/:id_permiso", PermisosController.delete)
   //Parámetros
   .get("/ms_parametros/getall", ParametroController.getAll)
-  .get("/ms_parametros/getone/:id_parametro", ParametroController.getOne)
+  .get("/ms_parametros/getone/:parametro", ParametroController.getOne)
   .put("/ms_parametros/actualizar-insertar/:id_parametro",ParametroController.save)
   .delete("/ms_parametros/eliminar/:id_parametro", ParametroController.delete)
   //Objetos
   .get("/ms_objetos/getall", ObjetoController.getAll)
-  .get("/ms_objetos/getone/:id_objeto", ObjetoController.getOne)
+  .get("/ms_objetos/getone/:objeto", ObjetoController.getOne)
   .put("/ms_objetos/actualizar-insertar/:id_objeto", ObjetoController.save)
   .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)
 

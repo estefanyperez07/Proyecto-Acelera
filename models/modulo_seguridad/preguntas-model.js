@@ -5,8 +5,8 @@ var conn = require("../db-connection"),
 
 PreguntaModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.tbl_ms_preguntas", cb);
 
-PreguntaModel.getOne = (id, cb) =>
-  conn.query("SELECT * FROM seguridad.tbl_ms_preguntas WHERE id_pregunta = $1", [id], cb);
+PreguntaModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM seguridad.tbl_ms_preguntas WHERE pregunta = $1", [cod], cb);
 
 PreguntaModel.save = (data, cb) => {
   conn.query(

@@ -1,6 +1,6 @@
 'use strict'
 var PreguntasModel = require('../../models/modulo_seguridad/preguntas-model'),
-	PreguntasController = () => {}
+	PreguntasController = () => {};
 
 	PreguntasController.getAll = (req, res, next) => {
 	PreguntasModel.getAll((err, rows) => {
@@ -35,15 +35,15 @@ var PreguntasModel = require('../../models/modulo_seguridad/preguntas-model'),
 };
 
 PreguntasController.getOne = (req, res, next) => {
-	let id_pregunta = req.params.id_pregunta;
-	console.log(id_pregunta);
+	let pregunta = req.params.pregunta;
+	console.log(pregunta);
 
-	PreguntasModel.getOne(id_pregunta, (err, rows) => {
+	PreguntasModel.getOne(pregunta, (err, rows) => {
 		console.log(err, '---', rows);
 		if(err)
 		{
 			let locals = {
-				title : `Error al buscar el registro con el id: ${id_pregunta}`,
+				title : `Error al buscar el registro con el id: ${pregunta}`,
 				description : "Error de Sintaxis SQL",
 				error : err,
 			};
@@ -159,7 +159,7 @@ PreguntasController.error404 = (req, res, next) => {
 	res.render('error', locals)
 
 	next()
-}
+};
 
 module.exports = PreguntasController;
 

@@ -49,6 +49,10 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   PasivosController = require("../controllers/modulo_contabilidad/pasivos-controller"),
   PatrimoniosController = require("../controllers/modulo_contabilidad/patrimonios-controller"),
   IngresosController = require("../controllers/modulo_contabilidad/ingresos-controller"),
+  TotalController = require("../controllers/modulo_contabilidad/total-controller"),
+  TotalPasivoController = require("../controllers/modulo_contabilidad/total_pasivo-controller"),
+  TotalPatrimonioController = require("../controllers/modulo_contabilidad/total_patrimonio-controller"),
+
   express = require("express"),
   router = express.Router();
 
@@ -477,6 +481,12 @@ router
   .get("/mc_patrimonios/getall", PatrimoniosController.getAll)
   //INGRESOS
   .get("/mc_ingresos/getall", IngresosController.getAll)
+  //TOTAL ACTIVO
+  .get("/mc_total_activo/getall", TotalController.getAll)
+  //TOTAL PASIVO
+  .get("/mc_total_pasivo/getall", TotalPasivoController.getAll)
+  //TOTAL PATRIMONIO
+  .get("/mc_total_patrimonio/getall", TotalPatrimonioController.getAll)
 
   .use(CategoriaController.error404);
 

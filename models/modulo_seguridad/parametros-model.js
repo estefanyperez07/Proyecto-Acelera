@@ -6,7 +6,7 @@ var conn = require("../db-connection"),
 ParametroModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.ft_select_parametros()", cb);
 
 ParametroModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM seguridad.tbl_ms_parametros WHERE id_parametro = $1", [cod], cb);
+  conn.query("SELECT * FROM seguridad.tbl_ms_parametros WHERE parametro = $1", [cod], cb);
 
 ParametroModel.save = (data, cb) => {
   conn.query(

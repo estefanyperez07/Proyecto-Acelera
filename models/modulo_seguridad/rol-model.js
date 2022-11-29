@@ -13,7 +13,7 @@ RolModel.traerroles = (cb) => conn.query("SELECT * FROM seguridad.ft_select_role
 //SELECT PARA UN REGISTRO ESPECIFICO DE LA TABLA ROLES
 RolModel.getOne = (id, cb) =>
   conn.query(
-    "SELECT * FROM seguridad.tbl_ms_roles WHERE id_rol = $1",
+    "SELECT * FROM seguridad.tbl_ms_roles WHERE rol = $1",
     [id],
     cb
   );

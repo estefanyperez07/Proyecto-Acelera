@@ -6,7 +6,7 @@ var conn = require("../db-connection"),
 ObjetoModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.ft_select_objetos()", cb);
 
 ObjetoModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM seguridad.tbl_ms_objetos WHERE id_objeto = $1", [cod], cb);
+  conn.query("SELECT * FROM seguridad.tbl_ms_objetos WHERE objeto = $1", [cod], cb);
 
 ObjetoModel.save = (data, cb) => {
   conn.query(

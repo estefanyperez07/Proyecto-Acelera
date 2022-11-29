@@ -315,7 +315,7 @@ router
   )
   //Rol
   .get("/ms_rol/getall", RolController.getAll)
-  .get("/ms_rol/getone/:id_rol", RolController.getOne)
+  .get("/ms_rol/getone/:rol", RolController.getOne)
   .put("/ms_rol/actualizar-insertar/:id_rol", RolController.save)
   .delete("/ms_rol/eliminar/:id_rol", RolController.delete)
   .get("/ms_rol/traerrol", RolController.traerroles)
@@ -338,7 +338,7 @@ router
   .delete("/ms_parametros/eliminar/:id_parametro", ParametroController.delete)
   //Objetos
   .get("/ms_objetos/getall", ObjetoController.getAll)
-  .get("/ms_objetos/getone/:id_objeto", ObjetoController.getOne)
+  .get("/ms_objetos/getone/:objeto", ObjetoController.getOne)
   .put("/ms_objetos/actualizar-insertar/:id_objeto", ObjetoController.save)
   .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)
 

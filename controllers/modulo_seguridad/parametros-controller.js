@@ -28,15 +28,15 @@ var ParametroModel = require('../../models/modulo_seguridad/parametros-model'),
 }
 
 ParametroController.getOne = (req, res, next) => {
-	let id_parametro = req.params.id_parametro
-	console.log(id_parametro)
+	let parametro = req.params.parametro
+	console.log(parametro)
 
-	ParametroModel.getOne(id_parametro, (err, rows) => {
+	ParametroModel.getOne(parametro, (err, rows) => {
 		console.log(err, '---', rows)
 		if(err)
 		{
 			let locals = {
-				title : `Error al buscar el registro con el id: ${id_parametro}`,
+				title : `Error al buscar el registro con el id: ${parametro}`,
 				description : "Error de Sintaxis SQL",
 				error : err
 			}

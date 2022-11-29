@@ -85,7 +85,7 @@ LoginController.login = async (req, res, next) => {
         nombre_usuario: bodyParams.nombre_usuario,
         contrasena: bodyParams.contrasena,
       };
-      console.log(usuario);
+      console.log("Usuario ", usuario);
 
       LoginModel.login(usuario, (err, row) => {
         if (err) {
@@ -195,7 +195,7 @@ LoginController.resetPassUser = async (req, res, next) => {
           return res.status(300).send({
             status: false,
             code: 300,
-            message: "ha ocurrido un error al buscar usaurio",
+            message: "ha ocurrido un error al buscar usuario",
             object: [],
           });
         }
@@ -208,8 +208,21 @@ LoginController.resetPassUser = async (req, res, next) => {
             object: [],
           });
         }
+
         let dataUsuario = row.rows[0];
         console.log("dataUsuario", dataUsuario);
+
+        if (
+          typeof req.query?.unlock !== "undefined" &&
+          dataUsuario.estado_usuario === 2
+        ) {
+          return res.status(404).send({
+            status: false,
+            code: 404,
+            message: "Este usuario no se encuentra bloqueado",
+            object: [],
+          });
+        }
 
         //el usuario existe y crear el link
         // const secret = JWT_SECRET + user.password;
@@ -625,6 +638,27 @@ LoginController.changePassUser = async (req, res, next) => {
       bodyParams.confirmPassword &&
       bodyParams.id_user
     ) {
+      let user = await LoginModel.getOne(bodyParams.id_user);
+
+      if (!user.rows || !user.rows.length) {
+        return res.status(300).send({
+          status: false,
+          code: 300,
+          message: "Ha ocurrido un error al ejecutar acción",
+          object: [],
+        });
+      }
+
+      //validar que no sea la misma contraseña anterior
+      if (user.rows[0].contrasena === bodyParams.newPassword) {
+        return res.status(300).send({
+          status: false,
+          code: 300,
+          message: "No puedes usar la misma contraseña",
+          object: [],
+        });
+      }
+
       LoginModel.changuePassById(
         bodyParams.newPassword,
         bodyParams.id_user,

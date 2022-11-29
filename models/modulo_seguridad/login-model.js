@@ -41,8 +41,9 @@ LoginModel.getByNameUser = (nameUser, cb) => {
 LoginModel.changuePassById = (newPassword, id_user, cb) => {
   const text = `
     UPDATE seguridad.tbl_ms_usuario
-	  SET estado_usuario=2, 
-    contrasena=$1
+	  SET estado_usuario=2,
+    contrasena=$1,
+    intentos_login=0
   	WHERE (id_usuario=$2)`;
   // aca dejo el estado del usuario en 2 (Activo)
   const values = [newPassword, id_user];

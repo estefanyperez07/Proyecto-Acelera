@@ -5,6 +5,20 @@ var conn = require("../db-connection"),
 
 PosModel.getAll = (cb) => conn.query("SELECT * FROM ft_pos_getall()", cb);
 
+PosModel.getAllBySucursal = (id_sucursal, cb) =>
+  conn.query(
+    `
+select 		a.id_pos 
+          ,a.cod_pos
+          ,a.descripcion
+          ,a.id_sucursal
+    from 		public.tbl_pos a
+    where		a.id_sucursal=$1
+    and			activo='1'`,
+    [id_sucursal],
+    cb
+  );
+
 PosModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM ft_pos_getone($1)", [cod], cb);
 

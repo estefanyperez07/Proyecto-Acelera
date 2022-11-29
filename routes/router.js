@@ -53,7 +53,6 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   TotalController = require("../controllers/modulo_contabilidad/total-controller"),
   TotalPasivoController = require("../controllers/modulo_contabilidad/total_pasivo-controller"),
   TotalPatrimonioController = require("../controllers/modulo_contabilidad/total_patrimonio-controller"),
-
   express = require("express"),
   router = express.Router();
 
@@ -341,6 +340,7 @@ router
   //Parámetros
   .get("/ms_parametros/getall", ParametroController.getAll)
   .get("/ms_parametros/getone/:id_parametro", ParametroController.getOne)
+  .get("/ms_parametros/getsucbod/:usuario", ParametroController.getSucBod)
   .put(
     "/ms_parametros/actualizar-insertar/:id_parametro",
     ParametroController.save

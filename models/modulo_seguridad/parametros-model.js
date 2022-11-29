@@ -3,10 +3,31 @@
 var conn = require("../db-connection"),
   ParametroModel = () => {};
 
-ParametroModel.getAll = (cb) => conn.query("SELECT * FROM seguridad.ft_select_parametros()", cb);
+ParametroModel.getAll = (cb) =>
+  conn.query("SELECT * FROM seguridad.ft_select_parametros()", cb);
 
 ParametroModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM seguridad.tbl_ms_parametros WHERE parametro = $1", [cod], cb);
+  conn.query(
+    "SELECT * FROM seguridad.tbl_ms_parametros WHERE parametro = $1",
+    [cod],
+    cb
+  );
+
+ParametroModel.getSucBod = (usuario, cb) =>
+  conn.query(
+    `select 		A.ID_SUCURSAL
+              ,B.COD_SUCURSAL
+              ,B.DESCRIPCION descripcion_sucursal 
+              ,c.id_centro_costo
+              ,c.cod_centro_costo
+              ,c.descripcion descripcion_centro_costo
+        from seguridad.tbl_ms_usuario A
+        INNER JOIN public.tbl_sucursal B ON A.id_sucursal = B.id_sucursal
+        LEFT JOIN public.tbl_centro_costo C ON C.id_centro_costo = B.id_centro_costo
+        where usuario = $1`,
+    [usuario],
+    cb
+  );
 
 ParametroModel.save = (data, cb) => {
   conn.query(
@@ -27,12 +48,12 @@ ParametroModel.save = (data, cb) => {
                 data.parametro,
                 data.valor,
                 data.modificado_por,
-                data.fecha_modificacion
+                data.fecha_modificacion,
               ],
               cb
             )
           : conn.query(
-            "SELECT seguridad.sp_insert_parametros($1,$2,$3,$4)",
+              "SELECT seguridad.sp_insert_parametros($1,$2,$3,$4)",
               [
                 data.parametro,
                 data.valor,

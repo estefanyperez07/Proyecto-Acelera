@@ -25,14 +25,14 @@ CategoriaContController.getAll = (req, res, next) => {
 };
 
 CategoriaContController.getOne = (req, res, next) => {
-  let id_categoria = req.params.id_categoria;
-  console.log(id_categoria);
+  let nombre_categoria = req.params.nombre_categoria;
+  console.log(nombre_categoria);
 
-  CategoriaContModel.getOne(id_categoria, (err, rows) => {
+  CategoriaContModel.getOne(nombre_categoria, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_categoria}`,
+        title: `Error al buscar el registro con el id: ${nombre_categoria}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

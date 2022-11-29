@@ -7,7 +7,7 @@ EstadoModel.getAll = (cb) =>
   conn.query("SELECT * FROM contabilidad.ft_select_estado()", cb);
 
 EstadoModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_estado WHERE id_estado = $1 ", [cod], cb);
+  conn.query("SELECT * FROM contabilidad.tbl_estado WHERE tipo_estado = $1 ", [cod], cb);
 
 
   //FUNCIONA-------------------------------

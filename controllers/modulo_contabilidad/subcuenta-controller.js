@@ -25,14 +25,14 @@ SubcuentaController.getAll = (req, res, next) => {
 };
 
 SubcuentaController.getOne = (req, res, next) => {
-  let id_subcuenta = req.params.id_subcuenta;
-  console.log(id_subcuenta);
+  let nombre_subcuenta = req.params.nombre_subcuenta;
+  console.log(nombre_subcuenta);
 
-  SubcuentaModel.getOne(id_subcuenta, (err, rows) => {
+  SubcuentaModel.getOne(nombre_subcuenta, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_subcuenta}`,
+        title: `Error al buscar el registro con el id: ${nombre_subcuenta}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

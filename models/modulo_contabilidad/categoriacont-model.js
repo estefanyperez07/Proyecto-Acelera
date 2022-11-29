@@ -6,7 +6,7 @@ var conn = require("../db-connection"),
 CategoriaContModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.ft_select_categoria()", cb);
 
 CategoriaContModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_categoria WHERE id_categoria = $1", [cod], cb);
+  conn.query("SELECT * FROM contabilidad.tbl_categoria WHERE nombre_categoria = $1", [cod], cb);
 
   //FUNCIONA-----------------
 CategoriaContModel.save = (data, cb) => {

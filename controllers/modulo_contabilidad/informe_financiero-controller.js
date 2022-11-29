@@ -25,14 +25,14 @@ InformeFinancieroController.getAll = (req, res, next) => {
 };
 
 InformeFinancieroController.getOne = (req, res, next) => {
-  let id_informe_financiero = req.params.id_informe_financiero;
-  console.log(id_informe_financiero);
+  let descripcion = req.params.descripcion;
+  console.log(descripcion);
 
-  InformeFinancieroModel.getOne(id_informe_financiero, (err, rows) => {
+  InformeFinancieroModel.getOne(descripcion, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_informe_financiero}`,
+        title: `Error al buscar el registro con el id: ${descripcion}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

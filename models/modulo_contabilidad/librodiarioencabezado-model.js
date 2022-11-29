@@ -12,7 +12,7 @@ LibroEncabezadoModel.getAllPorPeriodo = (id_periodo_contable, cb) =>
 
 LibroEncabezadoModel.getOne = (cod, cb) =>
   conn.query(
-    "SELECT * FROM contabilidad.ft_getone_libro_diario_enca($1) ",
+    "SELECT * FROM contabilidad.tbl_libro_diario_encabezado WHERE id_libro_diario_enca=$1 ",
     [cod],
     cb
   );

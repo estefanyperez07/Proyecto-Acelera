@@ -5,9 +5,8 @@ var conn = require("../db-connection"),
 
 InformeFinancieroModel.getAll = (cb) => conn.query("SELECT * FROM contabilidad.ft_select_informe_financiero()", cb);
 
-InformeFinancieroModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.tbl_informe_financiero WHERE id_informe_financiero = $1", [cod], cb);
-
+  InformeFinancieroModel.getOne = (cod, cb) =>
+  conn.query("SELECT * FROM contabilidad.tbl_informe_financiero WHERE descripcion = $1", [cod], cb);
 
   //FUNCIONA----------------
 InformeFinancieroModel.save = (data, cb) => {

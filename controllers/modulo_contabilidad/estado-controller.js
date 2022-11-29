@@ -25,14 +25,14 @@ EstadoController.getAll = (req, res, next) => {
 };
 
 EstadoController.getOne = (req, res, next) => {
-  let id_estado = req.params.id_estado;
-  console.log(id_estado);
+  let tipo_estado = req.params.tipo_estado;
+  console.log(tipo_estado);
 
-  EstadoModel.getOne(id_estado, (err, rows) => {
+  EstadoModel.getOne(tipo_estado, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
-        title: `Error al buscar el registro con el id: ${id_estado}`,
+        title: `Error al buscar el registro con el id: ${tipo_estado}`,
         description: "Error de Sintaxis SQL",
         error: err,
       };

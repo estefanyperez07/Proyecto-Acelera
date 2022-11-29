@@ -166,6 +166,7 @@ router
   //****POS****
   .get("/pos/getall", PosController.getAll)
   .get("/pos/getone/:cod_pos", PosController.getOne)
+  .get("/pos/getallbysucursal/:id_sucursal", PosController.getAllBySucursal)
   .put("/pos/actualizar-insertar/:cod_pos", PosController.save)
   .delete("/pos/eliminar/:cod_pos", PosController.delete)
   //****PROMO LISTA****

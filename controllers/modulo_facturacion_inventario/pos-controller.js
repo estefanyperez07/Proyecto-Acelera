@@ -24,6 +24,28 @@ PosController.getAll = (req, res, next) => {
   });
 };
 
+PosController.getAllBySucursal = (req, res, next) => {
+  let id_sucursal = req.params.id_sucursal;
+  PosModel.getAllBySucursal(id_sucursal, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      res.status(200).send(rows.rows);
+      //res.render('index', locals)
+    }
+  });
+};
+
 PosController.getOne = (req, res, next) => {
   let cod_pos = req.params.cod_pos;
   console.log(cod_pos);

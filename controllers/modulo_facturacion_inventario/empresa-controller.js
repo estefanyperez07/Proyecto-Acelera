@@ -1,6 +1,6 @@
 "use strict";
 
-var EmpresaModel = require("../../models/modulo_facturacion_inventario/sucursal-model"),
+var EmpresaModel = require("../../models/modulo_facturacion_inventario/empresa-model"),
   EmpresaController = () => {};
 
 EmpresaController.getAll = (req, res, next) => {
@@ -25,18 +25,9 @@ EmpresaController.getAll = (req, res, next) => {
 };
 
 EmpresaController.getOne = (req, res, next) => {
-  let cod_empresa = req.params.cod_empresa;
-  console.log(cod_empresa);
-
-  EmpresaModel.getOne(cod_empresa, (err, rows) => {
+  EmpresaModel.getOne((err, rows) => {
     console.log(err, "---", rows);
     if (err) {
-      let locals = {
-        title: `Error al buscar el registro con el id: ${cod_empresa}`,
-        description: "Error de Sintaxis SQL",
-        error: err,
-      };
-
       res.status(520).json(err);
     } else {
       let locals = {
@@ -51,7 +42,7 @@ EmpresaController.getOne = (req, res, next) => {
 
 EmpresaController.save = (req, res, next) => {
   let empresa = {
-    cod_empresa: req.body.cod_sucursal,
+    id_empresa: req.params.id_empresa,
     descripcion: req.body.descripcion,
     direccion: req.body.direccion,
     telefono: req.body.telefono,

@@ -13,6 +13,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   PromoController = require("../controllers/promo-controller"),
   SocioNegocioController = require("../controllers/modulo_facturacion_inventario/socio_negocio-controller"),
   SucursalController = require("../controllers/modulo_facturacion_inventario/sucursal-controller"),
+  EmpresaController = require("../controllers/modulo_facturacion_inventario/empresa-controller"),
   UnidadMedidaController = require("../controllers/modulo_facturacion_inventario/unidad_medida-controller"),
   MapaController = require("../controllers/mapa-controller"),
   MesaController = require("../controllers/mesa-controller"),
@@ -203,6 +204,11 @@ router
   .get("/sucursal/getone/:cod_sucursal", SucursalController.getOne)
   .put("/sucursal/actualizar-insertar/:cod_sucursal", SucursalController.save)
   .delete("/sucursal/eliminar/:cod_sucursal", SucursalController.delete)
+
+  //****EMPRESA****
+  .get("/empresa/getone/", EmpresaController.getOne)
+  .put("/empresa/actualizar-insertar/:id_empresa", EmpresaController.save)
+
   //****UNIDAD MEDIDA****
   .get("/unidad_medida/getall", UnidadMedidaController.getAll)
 

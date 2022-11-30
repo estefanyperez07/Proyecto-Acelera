@@ -23,11 +23,11 @@ module.exports = function takePGBackup() {
   )
     .then(async () => {
       console.log(`Backup created successfully`);
-      return "BackupCreado";
     })
     .catch((err) => {
       console.log(err);
     });
+  return "BackupCreado";
 };
 
 // calling postgresql backup function

@@ -6,3 +6,5 @@ var databaseBackup = require("../../backups/databaseBackup"),
 BackupController.save = (req, res, next) => {
   res.satatus(200).json(databaseBackup());
 };
+
+module.exports = BackupController;

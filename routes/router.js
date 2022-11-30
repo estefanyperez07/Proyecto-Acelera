@@ -32,6 +32,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   ObjetoController = require("../controllers/modulo_seguridad/objeto-controller"),
   LoginController = require("../controllers/modulo_seguridad/login-controller"),
   LogsController = require("../controllers/modulo_seguridad/logs-controller"),
+  BackupController = require("../controllers/modulo_seguridad/backup-controller"),
   //⮊⮊⮊⮊ CONTABILIDAD ⮈⮈⮈⮈ 🖐
   SubcuentaController = require("../controllers/modulo_contabilidad/subcuenta-controller"),
   EstadoController = require("../controllers/modulo_contabilidad/estado-controller"),
@@ -355,6 +356,8 @@ router
   .get("/ms_objetos/getone/:objeto", ObjetoController.getOne)
   .put("/ms_objetos/actualizar-insertar/:id_objeto", ObjetoController.save)
   .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)
+
+  .get("/backup", BackupController.save)
 
   //⮊⮊⮊⮊ CONTABILIDAD ⮈⮈⮈⮈ 🖐
   //SUBCUENTA

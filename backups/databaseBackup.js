@@ -2,7 +2,7 @@
 // importing required modules
 const { execute } = require("@getvim/execute");
 const dotenv = require("dotenv").config();
-const conf = require("./models/db-conf.json");
+const conf = require("../models/db-conf.json");
 
 // getting db connection parameters from environment file
 const username = conf.user;
@@ -17,12 +17,13 @@ const today = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 const backupFile = `pg-backup-${today}.tar`;
 
 // writing postgresql backup function
-const takePGBackup = () => {
+module.exports = function takePGBackup() {
   execute(
     `PGPASSWORD="${dbpassword}" pg_dump -U ${username} -h ${dbHost} -p ${dbPort} -f ${backupFile} -F t -d ${database}`
   )
     .then(async () => {
       console.log(`Backup created successfully`);
+      return "BackupCreado";
     })
     .catch((err) => {
       console.log(err);
@@ -30,4 +31,3 @@ const takePGBackup = () => {
 };
 
 // calling postgresql backup function
-takePGBackup();

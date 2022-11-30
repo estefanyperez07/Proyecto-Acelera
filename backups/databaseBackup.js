@@ -33,14 +33,13 @@ BackupController.takePGBackup = (req, res, next) => {
         if (err) {
           res.status(500).json(err);
         } else {
-          res.status(200).json();
+          res.status(200).json("Entre al model");
         }
       });
     })
     .catch((err) => {
       console.log(err);
     });
-  return "BackupCreado";
 };
 
 module.exports = BackupController;

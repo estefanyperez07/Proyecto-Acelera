@@ -4,7 +4,8 @@ var databaseBackup = require("../../backups/databaseBackup"),
   BackupController = () => {};
 
 BackupController.save = (req, res, next) => {
-  res.status(200).json(databaseBackup());
+  let respuesta = databaseBackup();
+  res.status(200).json(respuesta);
 };
 
 module.exports = BackupController;

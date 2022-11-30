@@ -55,8 +55,6 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   IngresosController = require("../controllers/modulo_contabilidad/ingresos-controller"),
   TotalIngresosController = require("../controllers/modulo_contabilidad/total_ingresos-controller"),
   GastosController = require("../controllers/modulo_contabilidad/gastos-controller"),
-
-
   express = require("express"),
   router = express.Router();
 
@@ -411,6 +409,7 @@ router
     "/mc_periodo/getone/:id_periodo_contable",
     PeriodoContableController.getOne
   )
+  .get("/mc_periodo/validar/:fecha", PeriodoContableController.validar)
   .put(
     "/mc_periodo/actualizar-insertar/:id_periodo_contable",
     PeriodoContableController.save
@@ -500,11 +499,10 @@ router
 
   //INGRESOS
   .get("/mc_ingresos/getall", IngresosController.getAll)
-   //TOTAL INGRESOS
+  //TOTAL INGRESOS
   .get("/mc_total_ingresos/getall", TotalIngresosController.getAll)
-   //GASTOS
+  //GASTOS
   .get("/mc_gastos/getall", GastosController.getAll)
-
 
   .use(CategoriaController.error404);
 

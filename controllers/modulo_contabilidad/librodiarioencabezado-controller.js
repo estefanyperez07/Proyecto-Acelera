@@ -113,7 +113,7 @@ LibroEncabezadoController.post = (req, res, next) => {
     detalle: req.body.detalle,
   };
 
-  console.log(JSON.stringify(librodiarioencabezado));
+  console.log(librodiarioencabezado);
 
   LibroEncabezadoModel.post(librodiarioencabezado, (err, rows) => {
     if (err) {
@@ -143,19 +143,13 @@ LibroEncabezadoController.update = (req, res, next) => {
     detalle: req.body.detalle,
   };
 
-  console.log(JSON.stringify(librodiarioencabezado));
+  console.log(librodiarioencabezado);
 
   LibroEncabezadoModel.update(librodiarioencabezado, (err, rows) => {
     if (err) {
-      let locals = {
-        title: `Error al salvar el registro con el id: ${librodiarioencabezado}`,
-        description: "Error de Sintaxis SQL",
-        error: err,
-      };
       res.status(520).json(err);
     } else {
       res.status(200).json(rows.rows[0].fcn_diario_update);
-      //res.redirect('/')
     }
   });
 };

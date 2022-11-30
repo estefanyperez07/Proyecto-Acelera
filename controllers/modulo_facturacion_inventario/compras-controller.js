@@ -1,6 +1,7 @@
 "use strict";
 
 var ComprasModel = require("../../models/modulo_facturacion_inventario/compras-model"),
+  LibroEncabezadoModel = require("../../models/modulo_contabilidad/librodiarioencabezado-model"),
   ComprasController = () => {};
 
 ComprasController.getAll = (req, res, next) => {
@@ -141,6 +142,22 @@ ComprasController.secuencia_det_getone = (req, res, next) => {
 };
 
 ComprasController.post = (req, res, next) => {
+  let responseAsiento = null;
+  let responsePost = null;
+  let asiento = null;
+  let monto_debe_enc = null;
+  let monto_haber_enc = null;
+  //Inicio Objeto Libro Diario
+  let librodiarioencabezado = {
+    id_estado: req.body.id_estado,
+    descripcion: req.body.referencia,
+    fecha: req.body.fecha,
+    monto_debe: null,
+    monto_haber: null,
+    id_usuario: req.body.id_usuario,
+    detalle: [],
+  };
+  //Fin Objeto Libro Diario
   let compras = {
     secuencia_enc: req.body.secuencia_enc,
     id_socio_negocio: req.body.id_socio_negocio,
@@ -161,15 +178,46 @@ ComprasController.post = (req, res, next) => {
 
   ComprasModel.post(compras, (err, rows) => {
     if (err) {
-      let locals = {
-        title: `Error al salvar el registro con el id: ${compras}`,
-        description: "Error de Sintaxis SQL",
-        error: err,
-      };
       res.status(520).json(err);
     } else {
-      res.status(200).json(rows.rows[0].fcn_compras_enca_insert[0]);
-      //res.redirect('/')
+      responsePost = rows.rows[0].fcn_compras_enca_insert[0];
+      //res.status(200).json(rows.rows[0].fcn_compras_enca_insert[0]);
+      ComprasModel.jsonAsientoCompras(compras.secuencia_enc, (err, rows) => {
+        if (err) {
+          res.status(520).json(err);
+        } else {
+          responseAsiento = rows.rows[0].ft_json_compras_asiento;
+          console.log("responseAsiento", responseAsiento);
+          responseAsiento.forEach(function (asiento) {
+            monto_debe_enc += asiento.monto_debe;
+            monto_haber_enc += asiento.monto_haber;
+            librodiarioencabezado.detalle.push({
+              id_subcuenta: asiento.id_subcuenta,
+              id_estado: 1,
+              parcial: 0,
+              monto_debe: asiento.monto_debe,
+              monto_haber: asiento.monto_haber,
+              sinopsis: "",
+              id_sucursal: null,
+              id_centro_costo: compras.id_centro_costo,
+            });
+          });
+          console.log("responsePost", responsePost);
+          console.log(monto_debe_enc, monto_haber_enc);
+          librodiarioencabezado.id_estado = 1;
+          librodiarioencabezado.monto_debe = monto_debe_enc;
+          librodiarioencabezado.monto_haber = monto_haber_enc;
+          console.log(librodiarioencabezado);
+          //res.status(200).send(rows.rows[0].ft_json_compras_asiento);
+          LibroEncabezadoModel.post(librodiarioencabezado, (err, rows) => {
+            if (err) {
+              res.status(520).json(err);
+            } else {
+              res.status(200).json(responsePost);
+            }
+          });
+        }
+      });
     }
   });
 };

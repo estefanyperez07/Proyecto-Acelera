@@ -49,6 +49,20 @@ PeriodoContableController.getOne = (req, res, next) => {
   });
 };
 
+PeriodoContableController.validar = (req, res, next) => {
+  let fecha = req.params.fecha;
+  console.log(fecha);
+
+  PeriodoContableModel.validar(fecha, (err, rows) => {
+    console.log(err, "---", rows);
+    if (err) {
+      res.status(520).json(err);
+    } else {
+      res.status(200).send(rows.rows[0].fcn_valida_fecha_periodo);
+    }
+  });
+};
+
 PeriodoContableController.save = (req, res, next) => {
   let periodo = {
     id_periodo_contable: req.params.id_periodo_contable,
@@ -99,7 +113,5 @@ PeriodoContableController.delete = (req, res, next) => {
     }
   });
 };
-
-
 
 module.exports = PeriodoContableController;

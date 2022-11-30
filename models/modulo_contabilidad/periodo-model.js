@@ -7,7 +7,13 @@ PeriodoContableModel.getAll = (cb) =>
   conn.query("SELECT * FROM contabilidad.ft_select_periodo_contable()", cb);
 
 PeriodoContableModel.getOne = (cod, cb) =>
-  conn.query("SELECT * FROM contabilidad.ft_select_one_periodo_contable($1)", [cod], cb);
+  conn.query(
+    "SELECT * FROM contabilidad.ft_select_one_periodo_contable($1)",
+    [cod],
+    cb
+  );
+PeriodoContableModel.validar = (fecha, cb) =>
+  conn.query("SELECT contabilidad.fcn_valida_fecha_periodo($1)", [fecha], cb);
 
 PeriodoContableModel.save = (data, cb) => {
   conn.query(
@@ -17,7 +23,7 @@ PeriodoContableModel.save = (data, cb) => {
       console.log(`Número de registros: ${rows.rows.length}`);
       console.log(`Número de registros: ${err}`);
 
-      if (err) { 
+      if (err) {
         return err;
       } else {
         return rows.rows.length === 1
@@ -35,7 +41,7 @@ PeriodoContableModel.save = (data, cb) => {
               ],
               cb
             )
-          : conn.query( 
+          : conn.query(
               "select contabilidad.sp_insert_periodo_contable ($1,$2,$3,$4,$5,$6,$7)",
               [
                 data.descripcion_periodo,

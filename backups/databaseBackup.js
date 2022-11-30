@@ -25,7 +25,7 @@ BackupController.takePGBackup = (req, res, next) => {
   )
     .then(async () => {
       res.status(200).json(backupFile);
-      console.log(`Directory name is ${__dirname}`);
+      console.log(`Directory name is ${__dirname}/${backupFile}`);
       console.log(`Backup created successfully`);
     })
     .catch((err) => {

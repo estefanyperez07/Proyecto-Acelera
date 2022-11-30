@@ -17,7 +17,7 @@ const today = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 const backupFile = `pg-backup-${today}.tar`;
 
 // writing postgresql backup function
-module.exports = async function takePGBackup() {
+module.exports = function takePGBackup() {
   execute(
     `PGPASSWORD="${dbpassword}" pg_dump -U ${username} -h ${dbHost} -p ${dbPort} -f ${backupFile} -F t -d ${database}`
   )

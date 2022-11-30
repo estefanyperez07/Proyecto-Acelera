@@ -20,20 +20,21 @@ var BackupController = () => {};
 
 // writing postgresql backup function
 BackupController.takePGBackup = (req, res, next) => {
-  let ruta;
+  let ruta, mensaje;
   execute(
     `PGPASSWORD="${dbpassword}" pg_dump -U ${username} -h ${dbHost} -p ${dbPort} -f ${backupFile} -F t -d ${database}`
   )
     .then(async () => {
       //res.status(200).json(backupFile);
-      ruta = `Backup Creado exitosamente en: ${__dirname}/${backupFile}`;
+      ruta = `${__dirname}/${backupFile}`;
+      mensaje = `Backup Creado exitosamente en: ${__dirname}/${backupFile}`;
       console.log(`Backup Creado exitosamente en: ${__dirname}/${backupFile}`);
       console.log(`Backup created successfully`);
       BackupModel.save(ruta, (err, rows) => {
         if (err) {
           res.status(500).json(err);
         } else {
-          res.status(200).json(ruta);
+          res.status(200).json(mensaje);
         }
       });
     })

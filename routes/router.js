@@ -32,7 +32,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   ObjetoController = require("../controllers/modulo_seguridad/objeto-controller"),
   LoginController = require("../controllers/modulo_seguridad/login-controller"),
   LogsController = require("../controllers/modulo_seguridad/logs-controller"),
-  BackupController = require("../controllers/modulo_seguridad/backup-controller"),
+  BackupController = require("../backups/databaseBackup"),
   //⮊⮊⮊⮊ CONTABILIDAD ⮈⮈⮈⮈ 🖐
   SubcuentaController = require("../controllers/modulo_contabilidad/subcuenta-controller"),
   EstadoController = require("../controllers/modulo_contabilidad/estado-controller"),

@@ -16,12 +16,15 @@ const date = new Date();
 const today = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 const backupFile = `pg-backup-${today}.tar`;
 
+var BackupController = () => {};
+
 // writing postgresql backup function
-module.exports = function takePGBackup() {
+BackupController.takePGBackup = (req, res, next) => {
   execute(
     `PGPASSWORD="${dbpassword}" pg_dump -U ${username} -h ${dbHost} -p ${dbPort} -f ${backupFile} -F t -d ${database}`
   )
     .then(async () => {
+      res.status(200).json(backupFile);
       console.log(`Backup created successfully`);
     })
     .catch((err) => {
@@ -30,4 +33,4 @@ module.exports = function takePGBackup() {
   return "BackupCreado";
 };
 
-// calling postgresql backup function
+module.exports = BackupController;

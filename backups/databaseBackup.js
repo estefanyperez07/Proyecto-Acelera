@@ -15,18 +15,27 @@ const dbpassword = conf.password;
 const date = new Date();
 const today = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 const backupFile = `pg-backup-${today}.tar`;
-
+var BackupModel = require("../models/modulo_seguridad/backup-model");
 var BackupController = () => {};
 
 // writing postgresql backup function
 BackupController.takePGBackup = (req, res, next) => {
+  let ruta;
   execute(
     `PGPASSWORD="${dbpassword}" pg_dump -U ${username} -h ${dbHost} -p ${dbPort} -f ${backupFile} -F t -d ${database}`
   )
     .then(async () => {
       res.status(200).json(backupFile);
+      ruta = `${__dirname}/${backupFile}`;
       console.log(`Directory name is ${__dirname}/${backupFile}`);
       console.log(`Backup created successfully`);
+      BackupModel.save(ruta, (err, rows) => {
+        if (err) {
+          res.status(500).json(err);
+        } else {
+          res.status(200).json();
+        }
+      });
     })
     .catch((err) => {
       console.log(err);

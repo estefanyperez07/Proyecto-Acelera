@@ -56,6 +56,9 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   IngresosController = require("../controllers/modulo_contabilidad/ingresos-controller"),
   TotalIngresosController = require("../controllers/modulo_contabilidad/total_ingresos-controller"),
   GastosController = require("../controllers/modulo_contabilidad/gastos-controller"),
+  TotalGastosController = require("../controllers/modulo_contabilidad/total_gastos-controller"),
+  TotalIngresosGastosController = require("../controllers/modulo_contabilidad/total_ingresos_gastos-controller"),
+
   express = require("express"),
   router = express.Router();
 
@@ -506,6 +509,10 @@ router
   .get("/mc_total_ingresos/getall", TotalIngresosController.getAll)
   //GASTOS
   .get("/mc_gastos/getall", GastosController.getAll)
+  //TOTAL GASTOS
+  .get("/mc_total_gastos/getall", TotalGastosController.getAll)
+  //TOTAL INGRESOS GASTOS
+  .get("/mc_total_ingresos_gastos/getall", TotalIngresosGastosController.getAll)
 
   .use(CategoriaController.error404);
 

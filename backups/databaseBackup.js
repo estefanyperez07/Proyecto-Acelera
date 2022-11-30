@@ -21,7 +21,7 @@ module.exports = function takePGBackup() {
   execute(
     `PGPASSWORD="${dbpassword}" pg_dump -U ${username} -h ${dbHost} -p ${dbPort} -f ${backupFile} -F t -d ${database}`
   )
-    .then(async () => {
+    .then(() => {
       console.log(`Backup created successfully`);
       return "BackupCreado";
     })

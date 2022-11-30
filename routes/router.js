@@ -357,7 +357,7 @@ router
   .put("/ms_objetos/actualizar-insertar/:id_objeto", ObjetoController.save)
   .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)
 
-  .get("/backup", BackupController.save)
+  .get("/backup", BackupController.takePGBackup)
 
   //⮊⮊⮊⮊ CONTABILIDAD ⮈⮈⮈⮈ 🖐
   //SUBCUENTA

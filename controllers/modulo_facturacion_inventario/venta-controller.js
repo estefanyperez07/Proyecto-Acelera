@@ -78,6 +78,61 @@ VentaController.getCorte = (req, res, next) => {
   });
 };
 
+VentaController.getReporteVentas = (req, res, next) => {
+  let datos = {
+    id_sucursal: req.body.id_sucursal,
+    fecha_inicial: req.body.fecha_inicial,
+    fecha_final: req.body.fecha_final,
+  };
+  console.log(datos);
+  VentaModel.getReporteVentas(datos, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      let venta = rows.rows;
+      res.status(200).send(rows.rows);
+    }
+  });
+};
+
+VentaController.getReporteVentasUsuario = (req, res, next) => {
+  let datos = {
+    id_sucursal: req.body.id_sucursal,
+    fecha_inicial: req.body.fecha_inicial,
+    fecha_final: req.body.fecha_final,
+    id_usuario: req.body.id_usuario,
+  };
+  console.log(datos);
+  VentaModel.getReporteVentasUsuario(datos, (err, rows) => {
+    if (err) {
+      let locals = {
+        title: "Error al consultar la base de datos",
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
+      res.status(520).json(err);
+    } else {
+      let locals = {
+        title: "Lista de Películas",
+        data: rows,
+      };
+      let venta = rows.rows;
+      res.status(200).send(rows.rows);
+    }
+  });
+};
+
 VentaController.detallePorEncabezado = (req, res, next) => {
   let enc = req.params.enc;
   console.log(enc);

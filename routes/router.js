@@ -267,6 +267,10 @@ router
     VentaController.getReporteVentasUsuario
   )
   .post("/venta/getreporteventas/", VentaController.getReporteVentas)
+  .post(
+    "/venta/getreporteventasporarticulo/",
+    VentaController.getReporteVentasPorProducto
+  )
   .get(
     "/venta/detalle_por_encabezado/:enc",
     VentaController.detallePorEncabezado

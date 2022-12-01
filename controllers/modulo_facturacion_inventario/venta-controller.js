@@ -105,6 +105,23 @@ VentaController.getReporteVentas = (req, res, next) => {
   });
 };
 
+VentaController.getReporteVentasPorProducto = (req, res, next) => {
+  let datos = {
+    id_sucursal: req.body.id_sucursal,
+    fecha_inicial: req.body.fecha_inicial,
+    fecha_final: req.body.fecha_final,
+  };
+  console.log(datos);
+  VentaModel.getReporteVentasPorProducto(datos, (err, rows) => {
+    if (err) {
+      res.status(520).json(err);
+    } else {
+      let venta = rows.rows;
+      res.status(200).json(rows.rows);
+    }
+  });
+};
+
 VentaController.getReporteVentasUsuario = (req, res, next) => {
   let datos = {
     id_sucursal: req.body.id_sucursal,

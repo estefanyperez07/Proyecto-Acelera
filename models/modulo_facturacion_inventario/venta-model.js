@@ -27,6 +27,13 @@ VentaModel.getReporteVentas = (datos, cb) =>
     cb
   );
 
+VentaModel.getReporteVentasPorProducto = (datos, cb) =>
+  conn.query(
+    "SELECT * FROM public.ft_venta_por_articulos($1,$2,$3)",
+    [datos.id_sucursal, datos.fecha_inicial, datos.fecha_final],
+    cb
+  );
+
 VentaModel.getReporteVentasUsuario = (datos, cb) =>
   conn.query(
     "SELECT * FROM public.ft_venta_remumen_usuario($1,$2,$3,$4)",

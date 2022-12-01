@@ -105,6 +105,23 @@ VentaController.getReporteVentas = (req, res, next) => {
   });
 };
 
+VentaController.getReporteVentasPorProducto = (req, res, next) => {
+  let datos = {
+    id_sucursal: req.body.id_sucursal,
+    fecha_inicial: req.body.fecha_inicial,
+    fecha_final: req.body.fecha_final,
+  };
+  console.log(datos);
+  VentaModel.getReporteVentasPorProducto(datos, (err, rows) => {
+    if (err) {
+      res.status(520).json(err);
+    } else {
+      let venta = rows.rows;
+      res.status(200).json(rows.rows);
+    }
+  });
+};
+
 VentaController.getReporteVentasUsuario = (req, res, next) => {
   let datos = {
     id_sucursal: req.body.id_sucursal,
@@ -242,22 +259,15 @@ VentaController.post = (req, res, next) => {
   });
 };
 
-VentaController.delete = (venta) => {
-  console.log(venta);
+VentaController.anular = (req, res, next) => {
+  let enc = req.params.enc;
 
-  VentaModel.delete(venta, (err, rows) => {
+  VentaModel.anular(enc, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
-      let locals = {
-        title: `Error al eliminar el registro con el id: ${venta}`,
-        description: "Error de Sintaxis SQL",
-        error: err,
-      };
-
       res.status(520).json(err);
     } else {
       res.status(200).send("Success");
-      //res.redirect('/')
     }
   });
 };

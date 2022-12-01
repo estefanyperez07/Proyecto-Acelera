@@ -27,6 +27,13 @@ VentaModel.getReporteVentas = (datos, cb) =>
     cb
   );
 
+VentaModel.getReporteVentasPorProducto = (datos, cb) =>
+  conn.query(
+    "SELECT * FROM public.ft_venta_por_articulos($1,$2,$3)",
+    [datos.id_sucursal, datos.fecha_inicial, datos.fecha_final],
+    cb
+  );
+
 VentaModel.getReporteVentasUsuario = (datos, cb) =>
   conn.query(
     "SELECT * FROM public.ft_venta_remumen_usuario($1,$2,$3,$4)",
@@ -52,10 +59,10 @@ VentaModel.post = (data, cb) => {
   conn.query("select public.fcn_venta_enca_insert($1)", [data], cb);
 };
 
-VentaModel.delete = (venta, cb) =>
+VentaModel.anular = (enc, cb) =>
   conn.query(
-    "call public.prc_venta_delete($1,$2)",
-    [venta.secuencia_enc, venta.detalle.secuencia_det],
+    "update public.tbl_venta_encabezado set estado='2' where secuencia_enc=$1",
+    [enc],
     cb
   );
 

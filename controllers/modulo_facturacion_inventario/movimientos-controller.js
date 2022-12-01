@@ -1,11 +1,11 @@
 "use strict";
 
-var ComprasModel = require("../../models/modulo_facturacion_inventario/compras-model"),
+var MovimientosModel = require("../../models/modulo_facturacion_inventario/movimientos-model"),
   LibroEncabezadoModel = require("../../models/modulo_contabilidad/librodiarioencabezado-model"),
-  ComprasController = () => {};
+  MovimientosController = () => {};
 
-ComprasController.getAll = (req, res, next) => {
-  ComprasModel.getAll((err, rows) => {
+MovimientosController.getAll = (req, res, next) => {
+  MovimientosModel.getAll((err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -25,13 +25,13 @@ ComprasController.getAll = (req, res, next) => {
   });
 };
 
-ComprasController.comprasPorFecha = (req, res, next) => {
+MovimientosController.comprasPorFecha = (req, res, next) => {
   let fechas = {
     fecha_inicial: req.body.fecha_inicial,
     fecha_final: req.body.fecha_final,
   };
   console.log(fechas);
-  ComprasModel.comprasPorFecha(fechas, (err, rows) => {
+  MovimientosModel.comprasPorFecha(fechas, (err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -51,10 +51,10 @@ ComprasController.comprasPorFecha = (req, res, next) => {
   });
 };
 
-ComprasController.detallePorEncabezado = (req, res, next) => {
+MovimientosController.detallePorEncabezado = (req, res, next) => {
   let enc = req.params.enc;
   console.log(enc);
-  ComprasModel.detallePorEncabezado(enc, (err, rows) => {
+  MovimientosModel.detallePorEncabezado(enc, (err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -74,10 +74,10 @@ ComprasController.detallePorEncabezado = (req, res, next) => {
   });
 };
 
-ComprasController.jsonAsientoCompras = (req, res, next) => {
+MovimientosController.jsonAsientoCompras = (req, res, next) => {
   let enc = req.params.enc;
   console.log(enc);
-  ComprasModel.jsonAsientoCompras(enc, (err, rows) => {
+  MovimientosModel.jsonAsientoCompras(enc, (err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",
@@ -97,8 +97,8 @@ ComprasController.jsonAsientoCompras = (req, res, next) => {
   });
 };
 
-ComprasController.secuencia_enc_getone = (req, res, next) => {
-  ComprasModel.secuencia_enc_getone((err, rows) => {
+MovimientosController.secuencia_enc_getone = (req, res, next) => {
+  MovimientosModel.secuencia_enc_getone((err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
@@ -119,8 +119,8 @@ ComprasController.secuencia_enc_getone = (req, res, next) => {
   });
 };
 
-ComprasController.secuencia_det_getone = (req, res, next) => {
-  ComprasModel.secuencia_det_getone((err, rows) => {
+MovimientosController.secuencia_det_getone = (req, res, next) => {
+  MovimientosModel.secuencia_det_getone((err, rows) => {
     console.log(err, "---", rows);
     if (err) {
       let locals = {
@@ -141,7 +141,7 @@ ComprasController.secuencia_det_getone = (req, res, next) => {
   });
 };
 
-ComprasController.post = (req, res, next) => {
+MovimientosController.post = (req, res, next) => {
   let responseAsiento = null;
   let responsePost = null;
   let asiento = null;
@@ -176,69 +176,79 @@ ComprasController.post = (req, res, next) => {
 
   console.log(compras);
 
-  ComprasModel.post(compras, (err, rows) => {
+  MovimientosModel.post(compras, (err, rows) => {
     if (err) {
       res.status(520).json(err);
     } else {
       responsePost = rows.rows[0].fcn_compras_enca_insert[0];
       //res.status(200).json(rows.rows[0].fcn_compras_enca_insert[0]);
-      ComprasModel.jsonAsientoCompras(compras.secuencia_enc, (err, rows) => {
-        if (err) {
-          res.status(520).json(err);
-        } else {
-          responseAsiento = rows.rows[0].ft_json_compras_asiento;
-          console.log("responseAsiento", responseAsiento);
-          responseAsiento.forEach(function (asiento) {
-            monto_debe_enc += asiento.monto_debe;
-            monto_haber_enc += asiento.monto_haber;
-            librodiarioencabezado.detalle.push({
-              id_subcuenta: asiento.id_subcuenta,
-              id_estado: 1,
-              parcial: 0,
-              monto_debe: asiento.monto_debe,
-              monto_haber: asiento.monto_haber,
-              sinopsis: "",
-              id_sucursal: null,
-              id_centro_costo: compras.id_centro_costo,
+      MovimientosModel.jsonAsientoCompras(
+        compras.secuencia_enc,
+        (err, rows) => {
+          if (err) {
+            res.status(520).json(err);
+          } else {
+            responseAsiento = rows.rows[0].ft_json_compras_asiento;
+            console.log("responseAsiento", responseAsiento);
+            responseAsiento.forEach(function (asiento) {
+              monto_debe_enc += asiento.monto_debe;
+              monto_haber_enc += asiento.monto_haber;
+              librodiarioencabezado.detalle.push({
+                id_subcuenta: asiento.id_subcuenta,
+                id_estado: 1,
+                parcial: 0,
+                monto_debe: asiento.monto_debe,
+                monto_haber: asiento.monto_haber,
+                sinopsis: "",
+                id_sucursal: null,
+                id_centro_costo: compras.id_centro_costo,
+              });
             });
-          });
-          console.log("responsePost", responsePost);
-          console.log(monto_debe_enc, monto_haber_enc);
-          librodiarioencabezado.id_estado = 1;
-          librodiarioencabezado.monto_debe = monto_debe_enc;
-          librodiarioencabezado.monto_haber = monto_haber_enc;
-          console.log(librodiarioencabezado);
-          //res.status(200).send(rows.rows[0].ft_json_compras_asiento);
-          LibroEncabezadoModel.post(librodiarioencabezado, (err, rows) => {
-            if (err) {
-              res.status(520).json(err);
-            } else {
-              res.status(200).json(responsePost);
-            }
-          });
+            console.log("responsePost", responsePost);
+            console.log(monto_debe_enc, monto_haber_enc);
+            librodiarioencabezado.id_estado = 1;
+            librodiarioencabezado.monto_debe = monto_debe_enc;
+            librodiarioencabezado.monto_haber = monto_haber_enc;
+            console.log(librodiarioencabezado);
+            //res.status(200).send(rows.rows[0].ft_json_compras_asiento);
+            LibroEncabezadoModel.post(librodiarioencabezado, (err, rows) => {
+              if (err) {
+                res.status(520).json(err);
+              } else {
+                res.status(200).json(responsePost);
+              }
+            });
+          }
         }
-      });
+      );
     }
   });
 };
 
-ComprasController.anular = (req, res, next) => {
+MovimientosController.anular = (req, res, next) => {
   let enc = req.params.enc;
 
-  ComprasModel.anular(enc, (err, rows) => {
+  MovimientosModel.anular(enc, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
+      let locals = {
+        title: `Error al eliminar el registro con el id: ${venta}`,
+        description: "Error de Sintaxis SQL",
+        error: err,
+      };
+
       res.status(520).json(err);
     } else {
       res.status(200).send("Success");
+      //res.redirect('/')
     }
   });
 };
 
-ComprasController.addForm = (req, res, next) =>
+MovimientosController.addForm = (req, res, next) =>
   res.render("add-movie", { title: "Agregar Película" });
 
-ComprasController.error404 = (req, res, next) => {
+MovimientosController.error404 = (req, res, next) => {
   let error = new Error(),
     locals = {
       title: "Error 404",
@@ -253,4 +263,4 @@ ComprasController.error404 = (req, res, next) => {
   next();
 };
 
-module.exports = ComprasController;
+module.exports = MovimientosController;

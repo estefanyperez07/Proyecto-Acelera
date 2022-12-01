@@ -259,22 +259,15 @@ VentaController.post = (req, res, next) => {
   });
 };
 
-VentaController.delete = (venta) => {
-  console.log(venta);
+VentaController.anular = (req, res, next) => {
+  let enc = req.params.enc;
 
-  VentaModel.delete(venta, (err, rows) => {
+  VentaModel.anular(enc, (err, rows) => {
     console.log(err, "---", rows);
     if (err) {
-      let locals = {
-        title: `Error al eliminar el registro con el id: ${venta}`,
-        description: "Error de Sintaxis SQL",
-        error: err,
-      };
-
       res.status(520).json(err);
     } else {
       res.status(200).send("Success");
-      //res.redirect('/')
     }
   });
 };

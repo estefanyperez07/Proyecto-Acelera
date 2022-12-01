@@ -59,10 +59,10 @@ VentaModel.post = (data, cb) => {
   conn.query("select public.fcn_venta_enca_insert($1)", [data], cb);
 };
 
-VentaModel.delete = (venta, cb) =>
+VentaModel.anular = (enc, cb) =>
   conn.query(
-    "call public.prc_venta_delete($1,$2)",
-    [venta.secuencia_enc, venta.detalle.secuencia_det],
+    "update public.tbl_venta_encabezado set estado='2' where secuencia_enc=$1",
+    [enc],
     cb
   );
 

@@ -21,6 +21,7 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   BitacoraController = require("../controllers/modulo_facturacion_inventario/bitacora-controller"),
   VentaController = require("../controllers/modulo_facturacion_inventario/venta-controller"),
   ComprasController = require("../controllers/modulo_facturacion_inventario/compras-controller"),
+  MovimientosController = require("../controllers/modulo_facturacion_inventario/movimientos-controller"),
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐
   UsuarioController = require("../controllers/modulo_seguridad/registro-controller"),
   EstadoUserController = require("../controllers/modulo_seguridad/estado-controller"),
@@ -58,7 +59,6 @@ var CategoriaController = require("../controllers/modulo_facturacion_inventario/
   GastosController = require("../controllers/modulo_contabilidad/gastos-controller"),
   TotalGastosController = require("../controllers/modulo_contabilidad/total_gastos-controller"),
   TotalIngresosGastosController = require("../controllers/modulo_contabilidad/total_ingresos_gastos-controller"),
-
   express = require("express"),
   router = express.Router();
 
@@ -264,6 +264,7 @@ router
   .get("/venta/secuencia_enc_getone/", VentaController.secuencia_enc_getone)
   .get("/venta/secuencia_det_getone/", VentaController.secuencia_det_getone)
   .post("/venta/venta_por_fecha/", VentaController.facturasPorFecha)
+  .post("/venta/anular/:enc", VentaController.anular)
   .post("/venta/getcorte/", VentaController.getCorte)
   .post(
     "/venta/getreporteventasusuario/",
@@ -285,9 +286,34 @@ router
   .get("/compras/secuencia_det_getone/", ComprasController.secuencia_det_getone)
   .get("/compras/jsonasiento/:enc", ComprasController.jsonAsientoCompras)
   .post("/compras/compras_por_fecha/", ComprasController.comprasPorFecha)
+  .post("/compras/anular/:enc", ComprasController.anular)
   .get(
     "/compras/detalle_por_encabezado/:enc",
     ComprasController.detallePorEncabezado
+  )
+
+  //******MOVIMIENTOS*******/
+  .post("/movimientos/insertar/", MovimientosController.post)
+  .get(
+    "/movimientos/secuencia_enc_getone/",
+    MovimientosController.secuencia_enc_getone
+  )
+  .get(
+    "/movimientos/secuencia_det_getone/",
+    MovimientosController.secuencia_det_getone
+  )
+  .get(
+    "/movimientos/jsonasiento/:enc",
+    MovimientosController.jsonAsientoCompras
+  )
+  .post(
+    "/movimientos/compras_por_fecha/",
+    MovimientosController.comprasPorFecha
+  )
+  .post("/movimientos/anular/:enc", MovimientosController.anular)
+  .get(
+    "/compras/detalle_por_encabezado/:enc",
+    MovimientosController.detallePorEncabezado
   )
 
   //⮊⮊⮊⮊ SEGURIDAD SEGURIDAD SEGURIDAD ⮈⮈⮈⮈ 🖐

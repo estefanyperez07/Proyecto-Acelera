@@ -33,10 +33,6 @@ ComprasModel.post = (data, cb) => {
 };
 
 ComprasModel.anular = (enc, cb) =>
-  conn.query(
-    "update public.tbl_compras_enc set estado='2' where secuencia_enc=$1",
-    [enc],
-    cb
-  );
+  conn.query("select public.fcn_compras_anular($1)", [enc], cb);
 
 module.exports = ComprasModel;

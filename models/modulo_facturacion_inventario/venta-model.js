@@ -60,10 +60,6 @@ VentaModel.post = (data, cb) => {
 };
 
 VentaModel.anular = (enc, cb) =>
-  conn.query(
-    "update public.tbl_venta_encabezado set estado='2' where secuencia_enc=$1",
-    [enc],
-    cb
-  );
+  conn.query("select public.fcn_ventas_anular($1)", [enc], cb);
 
 module.exports = VentaModel;

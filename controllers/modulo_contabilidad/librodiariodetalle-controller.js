@@ -60,8 +60,8 @@ LibroDetalleController.save = (req, res, next) => {
     monto_debe: req.body.monto_debe,
     monto_haber: req.body.monto_haber,
     sinopsis: req.body.sinopsis,
-    sucursal: req.body.sucursal,
-    centro_costo: req.body.centro_costo,
+    id_sucursal: req.body.id_sucursal,
+    id_centro_costo: req.body.id_centro_costo,
   };
 
   console.log(librodiariodetalle);

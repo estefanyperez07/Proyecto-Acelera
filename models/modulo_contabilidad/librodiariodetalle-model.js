@@ -37,8 +37,8 @@ LibroDetalleModel.save = (data, cb) => {
                 data.monto_debe,
                 data.monto_haber,
                 data.sinopsis,
-                data.sucursal,
-                data.centro_costo,
+                data.id_sucursal,
+                data.id_centro_costo,
               ],
               cb
             )
@@ -52,8 +52,8 @@ LibroDetalleModel.save = (data, cb) => {
                 data.monto_debe,
                 data.monto_haber,
                 data.sinopsis,
-                data.sucursal,
-                data.centro_costo,
+                data.id_sucursal,
+                data.id_centro_costo,
               ],
               cb
             );

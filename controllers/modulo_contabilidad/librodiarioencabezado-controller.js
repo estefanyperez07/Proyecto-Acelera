@@ -122,6 +122,7 @@ LibroEncabezadoController.post = (req, res, next) => {
         description: "Error de Sintaxis SQL",
         error: err,
       };
+      console.log(err);
       res.status(520).json(err);
     } else {
       res.status(200).json(rows.rows[0].fcn_diario_insert);

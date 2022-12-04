@@ -69,16 +69,20 @@ ArticuloModel.getAllActiveInv = (cb) =>
 			,c.tipo
 			,c.porcentaje
 			,a.id_categoria
+			,a.id_unidad_medida
+			,d.cod_unidad_medida
+			,d.descripcion descripcion_unidad_medida
 			,a.precio
-      ,a.inventario_minimo
-      ,a.inventario_maximo
+      		,a.inventario_minimo
+      		,a.inventario_maximo
 			,a.codigo_barra
   FROM 		tbl_articulo a 
   inner join 	tbl_categoria b on a.id_categoria=b.id_categoria and b.activo='1'
   inner join 	tbl_impuesto c on a.id_impuesto=c.id_impuesto
+  left join		public.tbl_unidades_medida d on d.id_unidad_medida = a.id_unidad_medida
   where 		a.activo = '1'
   and			b.activo = '1'
-  and   a.tipo = 'I' `,
+  and   a.tipo = 'I'`,
     cb
   );
 

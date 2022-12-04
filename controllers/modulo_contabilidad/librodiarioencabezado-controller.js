@@ -106,10 +106,7 @@ LibroEncabezadoController.post = (req, res, next) => {
     id_estado: req.body.id_estado,
     descripcion: req.body.descripcion,
     fecha: req.body.fecha,
-    monto_debe: req.body.monto_debe,
-    monto_haber: req.body.monto_haber,
     id_usuario: req.body.id_usuario,
-    nombre_usuario: req.body.nombre_usuario,
     detalle: req.body.detalle,
   };
 

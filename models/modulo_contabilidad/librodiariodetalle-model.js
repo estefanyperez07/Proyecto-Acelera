@@ -43,12 +43,11 @@ LibroDetalleModel.save = (data, cb) => {
               cb
             )
           : conn.query(
-              "select contabilidad.sp_insert_libro_diario_detalle ($1,$2,$3,$4,$5,$6,$7,$8,$9)",
+              "select contabilidad.sp_insert_libro_diario_detalle ($1,$2,$3,$4,$5,$6,$7,$8)",
               [
                 data.id_libro_diario_enca,
                 data.id_subcuenta,
                 data.id_estado,
-                data.parcial,
                 data.monto_debe,
                 data.monto_haber,
                 data.sinopsis,

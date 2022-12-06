@@ -50,6 +50,20 @@ LibroEncabezadoController.getOne = (req, res, next) => {
   });
 };
 
+LibroEncabezadoController.getDiarioPorEnca = (req, res, next) => {
+  let id_libro_diario_enca = req.params.id_libro_diario_enca;
+  console.log(id_libro_diario_enca);
+
+  LibroEncabezadoModel.getDiarioPorEnca(id_libro_diario_enca, (err, rows) => {
+    console.log(err, "---", rows);
+    if (err) {
+      res.status(520).json(err);
+    } else {
+      res.status(200).send(rows.rows[0].ft_json_diario);
+    }
+  });
+};
+
 LibroEncabezadoController.save = (req, res, next) => {
   //REVISAR TABLA EN BASE DE DATOS
   let librodiarioencabezado = {

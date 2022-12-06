@@ -414,8 +414,12 @@ router
   //LIBRO DIARIO DETALLE
   .get("/mc_librodetalle/getall", LibroDetalleController.getAll)
   .get(
-    "/mc_librodetalle/getDetPorI/:id_libro_diario_enca",
+    "/mc_librodetalle/getDetPorID/:id_libro_diario_enca",
     LibroDetalleController.getOne
+  )
+  .get(
+    "/mc_librodetalle/getdiarioporenca/:id_libro_diario_enca",
+    LibroEncabezadoController.getDiarioPorEnca
   )
   .put(
     "/mc_librodetalle/actualizar-insertar/:id_libro_diario_deta",

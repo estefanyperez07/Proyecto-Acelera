@@ -17,6 +17,9 @@ LibroEncabezadoModel.getOne = (cod, cb) =>
     cb
   );
 
+LibroEncabezadoModel.getDiarioPorEnca = (cod, cb) =>
+  conn.query("select contabilidad.ft_json_diario($1)", [cod], cb);
+
 LibroEncabezadoModel.post = (data, cb) => {
   conn.query("select contabilidad.fcn_diario_insert($1)", [data], cb);
 };

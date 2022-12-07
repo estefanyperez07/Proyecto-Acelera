@@ -8,7 +8,7 @@ const uploadFile = require("../middleware/upload");
 
 const fs = require("fs").promises;
 
-const oldPath = `/`;
+const oldPath = ``;
 const newPath = `/resources/static/assets/uploads/`;
 
 const baseUrl = "http://localhost:3001/files/";
@@ -37,7 +37,7 @@ BackupController.takePGBackup = (req, res, next) => {
       //res.status(200).json(backupFile);
       try {
         // Top level await is available without a flag since Node.js v14.8
-        await fs.rename(`${oldPath}/backupFile`, newPath);
+        await fs.rename(`${oldPath}/${backupFile}`, newPath);
         // Handle success (fs.rename resolves with `undefined` on success)
         console.log("File moved successfully");
       } catch (error) {

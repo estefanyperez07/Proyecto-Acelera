@@ -6,7 +6,8 @@ const dotenv = require("dotenv").config();
 const conf = require("../models/db-conf.json");
 const uploadFile = require("../middleware/upload");
 
-const fs = require("fs").promises;
+const fsp = require("fs").promises;
+const fs = require("fs");
 
 const oldPath = `/home/acelera/ApiRESTPostgres/`;
 const newPath = `/home/acelera/ApiRESTPostgres/resources/static/assets/uploads/`;
@@ -37,7 +38,7 @@ BackupController.takePGBackup = (req, res, next) => {
       //res.status(200).json(backupFile);
       try {
         // Top level await is available without a flag since Node.js v14.8
-        await fs.rename(`${oldPath}${backupFile}`, `${newPath}${backupFile}`);
+        await fsp.rename(`${oldPath}${backupFile}`, `${newPath}${backupFile}`);
         // Handle success (fs.rename resolves with `undefined` on success)
         console.log("File moved successfully");
       } catch (error) {

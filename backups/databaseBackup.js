@@ -91,6 +91,7 @@ BackupController.upload = async (req, res) => {
 
 BackupController.getListFiles = (req, res) => {
   const directoryPath = __basedir + "/resources/static/assets/uploads/";
+  console.log(directoryPath);
 
   fs.readdir(directoryPath, function (err, files) {
     if (err) {

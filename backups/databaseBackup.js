@@ -1,5 +1,5 @@
 "use strict";
-import fs from "node:fs/promises";
+
 // importing required modules
 const { execute } = require("@getvim/execute");
 const dotenv = require("dotenv").config();

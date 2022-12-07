@@ -55,7 +55,7 @@ BackupController.takePGBackup = (req, res, next) => {
         if (err) {
           res.status(500).json(err);
         } else {
-          res.download(directoryPath + fileName, fileName, (err) => {
+          res.download(`${directoryPath}/` + fileName, fileName, (err) => {
             if (err) {
               res.status(500).send({
                 message: "Could not download the file. " + err,

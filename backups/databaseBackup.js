@@ -1,11 +1,13 @@
 "use strict";
+import fs from "node:fs/promises";
 // importing required modules
 const { execute } = require("@getvim/execute");
 const dotenv = require("dotenv").config();
 const conf = require("../models/db-conf.json");
 const uploadFile = require("../middleware/upload");
 
-const fs = require("fs");
+const fs = require("fs").promises;
+
 const oldPath = `/`;
 const newPath = `/resources/static/assets/uploads/`;
 

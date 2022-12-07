@@ -8,8 +8,8 @@ const uploadFile = require("../middleware/upload");
 
 const fs = require("fs").promises;
 
-const oldPath = `/`;
-const newPath = `/resources/static/assets/uploads/`;
+const oldPath = `/home/acelera/ApiRESTPostgres/`;
+const newPath = `/home/acelera/ApiRESTPostgres/resources/static/assets/uploads/`;
 
 const baseUrl = "http://localhost:3001/files/";
 

@@ -396,6 +396,9 @@ router
   .delete("/ms_objetos/eliminar/:id_objeto", ObjetoController.delete)
 
   .get("/backup", BackupController.takePGBackup)
+  .post("/upload", BackupController.upload)
+  .get("/files", BackupController.getListFiles)
+  .get("/files/:name", BackupController.download)
 
   //⮊⮊⮊⮊ CONTABILIDAD ⮈⮈⮈⮈ 🖐
   //SUBCUENTA

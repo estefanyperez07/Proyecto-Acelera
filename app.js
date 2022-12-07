@@ -12,7 +12,7 @@ var express = require("express"),
   viewDir = `${__dirname}/views`,
   port = process.env.PORT || 3001,
   app = express();
-
+global.__basedir = __dirname;
 app
   .set("views", viewDir)
   .set("view engine", "jade")

@@ -3,8 +3,12 @@
 var conn = require("../db-connection"),
   LibroMayorModel = () => {};
 
-LibroMayorModel.getAll = (cb) =>
-  conn.query("SELECT * FROM contabilidad.ft_select_libro_mayor()", cb);
+LibroMayorModel.getAllPorPeriodo = (id_periodo, cb) =>
+  conn.query(
+    "SELECT * FROM contabilidad.ft_select_libro_mayor_por_periodo($1)",
+    [id_periodo],
+    cb
+  );
 
 LibroMayorModel.getOne = (cod, cb) =>
   conn.query("SELECT * FROM contabilidad.ft_getone_libro_mayor($1)", [cod], cb);

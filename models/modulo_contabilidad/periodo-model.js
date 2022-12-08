@@ -6,6 +6,12 @@ var conn = require("../db-connection"),
 PeriodoContableModel.getAll = (cb) =>
   conn.query("SELECT * FROM contabilidad.ft_select_periodo_contable()", cb);
 
+PeriodoContableModel.getAllActivos = (cb) =>
+  conn.query(
+    "SELECT * FROM contabilidad.ft_select_periodo_contable_activos()",
+    cb
+  );
+
 PeriodoContableModel.getOne = (cod, cb) =>
   conn.query(
     "SELECT * FROM contabilidad.ft_select_one_periodo_contable($1)",

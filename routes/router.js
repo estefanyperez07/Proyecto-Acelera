@@ -453,6 +453,7 @@ router
   .post("/mc_libroencabezado/update", LibroEncabezadoController.update)
   //PERIODO CONTABLE
   .get("/mc_periodo/getall", PeriodoContableController.getAll)
+  .get("/mc_periodo/getallActivos", PeriodoContableController.getAllActivos)
   .get(
     "/mc_periodo/getone/:id_periodo_contable",
     PeriodoContableController.getOne
@@ -467,7 +468,10 @@ router
     PeriodoContableController.delete
   )
   //LIBRO MAYOR
-  .get("/mc_libromayor/getall", LibroMayorController.getAll)
+  .get(
+    "/mc_libromayor/getallporperiodo/:id_periodo",
+    LibroMayorController.getAllPorPeriodo
+  )
   .get("/mc_libromayor/getone/:id_libro_mayor", LibroMayorController.getOne)
   .put(
     "/mc_libromayor/actualizar-insertar/:id_libro_mayor",

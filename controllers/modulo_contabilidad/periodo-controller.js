@@ -24,6 +24,16 @@ PeriodoContableController.getAll = (req, res, next) => {
   });
 };
 
+PeriodoContableController.getAllActivos = (req, res, next) => {
+  PeriodoContableModel.getAllActivos((err, rows) => {
+    if (err) {
+      res.status(520).json(err);
+    } else {
+      res.status(200).send(rows.rows);
+    }
+  });
+};
+
 PeriodoContableController.getOne = (req, res, next) => {
   let id_periodo_contable = req.params.id_periodo_contable;
   console.log(id_periodo_contable);

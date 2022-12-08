@@ -3,8 +3,10 @@
 var LibroMayorModel = require("../../models/modulo_contabilidad/libromayor-model"),
   LibroMayorController = () => {};
 
-LibroMayorController.getAll = (req, res, next) => {
-  LibroMayorModel.getAll((err, rows) => {
+LibroMayorController.getAllPorPeriodo = (req, res, next) => {
+  let id_periodo = req.params.id_periodo;
+  console.log(id_periodo);
+  LibroMayorModel.getAllPorPeriodo(id_periodo, (err, rows) => {
     if (err) {
       let locals = {
         title: "Error al consultar la base de datos",

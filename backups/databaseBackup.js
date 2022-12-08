@@ -33,6 +33,12 @@ BackupController.takePGBackup = (req, res, next) => {
   let ruta, mensaje;
   const fileName = backupFile; /*req.params.name*/
   const directoryPath = __basedir; /*+ "/resources/static/assets/uploads/"*/
+  try {
+    fs.unlinkSync(`${directoryPath}/${fileName}`);
+    console.log(`successfully deleted ${directoryPath}/${fileName}`);
+  } catch (err) {
+    console.log(err);
+  }
   execute(
     `PGPASSWORD="${dbpassword}" pg_dump -U ${username} -h ${dbHost} -p ${dbPort} -f ${backupFile} -F t -d ${database}`
   )
@@ -60,14 +66,6 @@ BackupController.takePGBackup = (req, res, next) => {
               res.status(500).send({
                 message: "Could not download the file. " + err,
               });
-              try {
-                fs.unlinkSync(`${directoryPath}/${fileName}`);
-                console.log(
-                  `successfully deleted ${directoryPath}/${fileName}`
-                );
-              } catch (err) {
-                // handle the error
-              }
             }
           });
         }

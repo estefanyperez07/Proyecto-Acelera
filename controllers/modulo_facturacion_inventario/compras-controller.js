@@ -208,14 +208,14 @@ ComprasController.post = (req, res, next) => {
           librodiarioencabezado.monto_debe = monto_debe_enc;
           librodiarioencabezado.monto_haber = monto_haber_enc;
           console.log(librodiarioencabezado);
-          res.status(200).json(responsePost);
-          /*LibroEncabezadoModel.post(librodiarioencabezado, (err, rows) => {
+          //res.status(200).json(responsePost);
+          LibroEncabezadoModel.post(librodiarioencabezado, (err, rows) => {
             if (err) {
               res.status(520).json(err);
             } else {
               res.status(200).json(responsePost);
             }
-          });*/
+          });
         }
       });
     }

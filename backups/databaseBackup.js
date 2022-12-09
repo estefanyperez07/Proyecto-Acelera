@@ -77,7 +77,7 @@ BackupController.takePGBackup = (req, res, next) => {
     });
 };
 BackupController.upload = async (req, res) => {
-  console.log(req);
+  console.log(req.file);
   try {
     await uploadFile(req, res);
 

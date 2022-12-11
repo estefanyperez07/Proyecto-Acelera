@@ -531,7 +531,7 @@ router
     InformeFinancieroController.delete
   )
   //BALANCE GENERAL
-  .get("/mc_balance/getall", BalanceController.getAll)
+  .get("/mc_balance/getall/:id_periodo", BalanceController.getAll)
   //INGRESOS Y EGRESOS
   .get("/mc_ingresos/getall", IGController.getAll)
   //ESTADO DE RESULTADO

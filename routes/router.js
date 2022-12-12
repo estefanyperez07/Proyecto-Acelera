@@ -534,7 +534,10 @@ router
   .get("/mc_balance/getall/:id_periodo", BalanceController.getAll)
   //INGRESOS Y EGRESOS
   .get("/mc_ingresos/getall", IGController.getAll)
-  .get("/mc_ingresos_gastos/getall/:id_periodo", IGController.getAll)
+  .get(
+    "/mc_ingresos_gastos/getall/:id_periodo",
+    IGController.ingresosGastosPorPeriodo
+  )
   //ESTADO DE RESULTADO
   .get(
     "/mc_estado_resultado/getall/:id_periodo",

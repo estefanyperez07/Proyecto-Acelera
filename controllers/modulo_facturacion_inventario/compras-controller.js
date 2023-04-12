@@ -144,6 +144,7 @@ ComprasController.secuencia_det_getone = (req, res, next) => {
 ComprasController.post = (req, res, next) => {
   let responseAsiento = null;
   let responsePost = null;
+  let secuencia_enc = null;
   let asiento = null;
   let monto_debe_enc = null;
   let monto_haber_enc = null;
@@ -174,15 +175,18 @@ ComprasController.post = (req, res, next) => {
     detalle: req.body.detalle,
   };
 
-  console.log(compras);
+  //console.log(compras);
 
   ComprasModel.post(compras, (err, rows) => {
     if (err) {
       res.status(520).json(err);
     } else {
       responsePost = rows.rows[0].fcn_compras_enca_insert[0];
+      secuencia_enc = rows.rows[0].fcn_compras_enca_insert[0].secuencia_enc;
+      //console.log(secuencia_enc);
+      //console.log("linea 184", responsePost);
       //res.status(200).json(rows.rows[0].fcn_compras_enca_insert[0]);
-      ComprasModel.jsonAsientoCompras(compras.secuencia_enc, (err, rows) => {
+      ComprasModel.jsonAsientoCompras(secuencia_enc, (err, rows) => {
         if (err) {
           res.status(520).json(err);
         } else {
@@ -202,7 +206,7 @@ ComprasController.post = (req, res, next) => {
               id_centro_costo: compras.id_centro_costo,
             });
           });
-          console.log("responsePost", responsePost);
+          //console.log("responsePost", responsePost);
           console.log(monto_debe_enc, monto_haber_enc);
           librodiarioencabezado.id_estado = 1;
           librodiarioencabezado.monto_debe = monto_debe_enc;
